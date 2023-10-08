@@ -1,0 +1,33 @@
+#sidebar{
+    background-color: lightblue;
+    position: fixed;
+    max-width: 20%;
+    top: 4.5rem;
+}
+
+#friendbar{
+    background-color: tomato;
+    position: fixed;
+    max-width: 20%;
+    right: 0;
+    top: 4.5rem;
+}
+
+#main-content{
+    position: relative;
+    width: 50%;
+    top: 4.5rem;
+}
+@media all and (max-width: 970px) {
+   #sidebar{
+    display: none;
+   }
+
+   #main-content{
+    width: 100%;
+   }
+
+   #friendbar{
+    display: none;
+   }
+}

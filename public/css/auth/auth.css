@@ -1,0 +1,76 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.login-container{
+    bottom: 0;
+}
+
+.bg-container{
+    background-image: url('/socmed/public/images/bg-login7.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+}
+
+.center-column {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+}
+
+.custom-input:focus{
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.0);
+}
+.custom-input{
+    background-color: rgba(0, 0, 0, 0.0);
+    background-color: rgba(0, 0, 0, 0.0); /* Adjust the alpha value for transparency */
+    border: none;
+    color: white;
+}
+
+.custom-input::placeholder{
+    color: white;
+}
+
+.horizontal-line {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #fff; /* Set the line color */
+  }
+  
+  .text {
+    margin: 0 10px; /* Adjust the spacing between the line and text */
+    color: white;
+  }
+  
+  .icon-label{
+    background-color: transparent;
+    border: none;
+    color: white;
+  }
+  .icon-label ion-icon{
+    color: white;
+  }
+
+  .user-container img{
+    max-width: 30%; /* Make the image responsive */
+    height: auto; /* Allow the height to adjust proportionally */
+    }
+
+.user-container h4{
+  color: white;
+}
