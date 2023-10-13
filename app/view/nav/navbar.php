@@ -1,4 +1,13 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="public/css/nav/navbar.css">
+  <title>Document</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" id="navbar">
   <div class="container-fluid">
     <a class="navbar-brand" href="#home">
         <img src="public/images/logo.jpg" alt="" style="width:40px;" class="rounded-pill">
@@ -32,4 +41,8 @@
     </ul>
   </div>
 </nav>
+
+</body>
+</html>
+
 <!-- Black background with white text -->

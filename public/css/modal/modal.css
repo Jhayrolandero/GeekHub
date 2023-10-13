@@ -1,0 +1,29 @@
+#content{
+    background-color: #141414;
+}
+
+#modal-header, #modal-footer{
+    background-color: #282828;
+}
+
+#modal-header{
+    border-bottom: solid #3BD16F .5px;
+}
+
+#modal-footer{
+    border-top: solid #3BD16F 1px;
+}
+
+#modal-header h4{
+    color: #74E39A;
+}
+
+#post-btn{
+    background-color: #3BD16F;
+}
+
+#post-form{
+    background-color: #141414;
+    border: none;
+    color: #74E39A;
+}
