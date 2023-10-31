@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="public/css/home/home.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="public/js/home/home.js"></script>
+    <script src="public/js/post/post.js"></script>
+    <link rel="stylesheet" href="public/css/postCard/postCard.css">
+
+
+
 </head>
 <body>
 <div class="container-fluid">
@@ -63,10 +68,8 @@
                     </div>
                 </div>
                  
-
                 <!-- Main Post diplay -->
                 <div class="post-container row" id="post-container">
-                    <?php include "postCard.php"?>
                 </div>
             </main>
 

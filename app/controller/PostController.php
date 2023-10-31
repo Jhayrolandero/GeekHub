@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "../model/PostModel.php";
+include "../view/postCard.php";
 
 class PostController{
 
@@ -20,11 +21,14 @@ class PostController{
 
     }
     public function get_post(){
-
+        try{
+            return $this->model->get_post();
+        }catch(PDOException $e){
+            echo "Error retrieving" . $e;
+        }
     }
 
 }
-
 
 $post = new PostController();
 
@@ -41,4 +45,17 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $post->add_post($user_id, $content);
         die();
     }
+}
+
+if($_SERVER["REQUEST_METHOD"] === "GET") {
+    if( isset($_GET["action"]) && $_GET["action"] === "getPost" ) {
+       // Assuming $post->get_post() retrieves data and returns an associative array
+       $result = $post->get_post();
+
+       foreach ($result as $items) {
+        $name = $items["username"];
+        $content = $items["content"];
+        echo template_post($name, $content);
+    }
+}
 }

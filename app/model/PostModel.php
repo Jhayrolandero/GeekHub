@@ -13,7 +13,16 @@ class Post extends Database{
 
 
     public function get_post(){
-        
+        $sql = "SELECT users.username, posts.content
+                FROM users 
+                INNER JOIN posts on users.user_id = posts.user_id"; 
+
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+
+        return $result;
     }
 
 }

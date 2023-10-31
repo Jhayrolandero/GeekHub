@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="public/css/postCard/postCard.css">
-    <title>Document</title>
-</head>
-<body>
+<?php
+
+function template_post($name, $content){
+?>
 <div class="container post">
   <div class="card">
     <div class="card-header p-3" id="card-header">
@@ -16,7 +10,7 @@
                 <img src="public/images/you.png" alt="" style="width:45px;" class="rounded-pill">
             </div>
             <div class="col-10">
-                <div class="col-12">Name</div>
+                <div class="col-12 username"><?=$name?></div>
                 <div class="col-12">Date</div>
             </div>
             <div class="col">
@@ -25,7 +19,7 @@
         </div>
     </div>
     <div class="card-body" id="card-body">
-        <div>content</div>
+        <div class="content"><?=$content?></div>
         <div>metainfo</div>
     </div> 
     <div class="card-footer" id="card-footer">
@@ -52,5 +46,8 @@
     </div>
   </div>
 </div>
-</body>
-</html>
+</div>
+
+<?php
+}
+?>

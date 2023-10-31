@@ -10,5 +10,17 @@ $(document).ready(function(){
         },function(data, success){
             alert(data);
         });
+        
+    });
+
+
+    $.get("app/controller/PostController.php?action=getPost", function(data, status){
+        if(status === "success") {
+            try{
+                $(".post-container").html(data);
+            } catch(error) {
+                alert(error);
+            }
+        }
     });
 });
