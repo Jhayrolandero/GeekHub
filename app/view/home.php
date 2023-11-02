@@ -10,8 +10,6 @@
     <script src="public/js/post/post.js"></script>
     <link rel="stylesheet" href="public/css/postCard/postCard.css">
 
-
-
 </head>
 <body>
 <div class="container-fluid">

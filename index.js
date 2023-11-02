@@ -14,39 +14,5 @@ $(document).ready(function(){
                 loadPage(route);
             });
 
-
-
-
-
-
-
-
-
-
-
-    // $.get("app/controller/AuthController.php?action=login", function(data, status){
-
-
-    //     // if(data === "login"){
-    //     //     alert("Successfully Login");
-    //     //     return;
-    //     // }
-
-    //     if (status === "success") {
-    //         try {
-    //             var response = JSON.parse(data);
-
-    //             if (response && response.url) {
-    //                 window.location.href = response.url; // Redirect to the register page
-    //             } else {
-    //                 alert("Error occurred: Invalid response from the server.");
-    //             }
-    //         } catch (error) {
-    //             alert("Error occurred: " + error);
-    //         }
-    //     } else {
-    //         alert("Error occurred: Unable to fetch data from the server.");
-    //     }
-    // });
 });
 
