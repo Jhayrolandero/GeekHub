@@ -27,6 +27,21 @@ class PostController{
             echo "Error retrieving" . $e;
         }
     }
+    
+     // Check if user already liked the post
+     public function has_liked($post_id, $user_id){
+        try{
+            $hasLiked = false;
+
+            if($this->model->has_liked($post_id, $user_id)){
+                $hasLiked = true;
+            }
+    
+            return $hasLiked;
+        }catch (Exception $e){
+            return $e->getMessage();
+        }
+    }
 
 }
 
@@ -53,9 +68,19 @@ if($_SERVER["REQUEST_METHOD"] === "GET") {
        $result = $post->get_post();
 
        foreach ($result as $items) {
+
         $name = $items["username"];
         $content = $items["content"];
-        echo template_post($name, $content);
+        $date = $items["created_at"];
+        $post_id = $items["post_id"];
+        $user_id = $_SESSION["user"];
+        $like_count = $items["like_count"];
+        $hasLiked = $post->has_liked($post_id, $user_id);
+
+
+        echo template_post($name, $content, $date, $post_id, $like_count, $hasLiked);
     }
+
+   
 }
 }
