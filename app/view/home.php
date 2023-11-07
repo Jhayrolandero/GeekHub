@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,12 +24,12 @@
                
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link" href="#profile" id="you">
                             Profile
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link active" href="#friend">
                             Friends
                         </a>
                     </li>
@@ -91,7 +95,10 @@
         </div>
         
         <!-- Include the modal for posting -->
-        <?php include "modalPost.php"?>
+        <?php include "home/modalPost.php"?>
+
+        <!-- For image previewing -->
+        <?php include "home/imageModal.php"?>
 </div>
 </body>
 </html>

@@ -14,7 +14,7 @@ class User extends Database{
     
             return $stmt->fetchAll();
         }catch(PDOException $e){
-            echo "Error retrieving user";
+            return $e;
         }
     }
 

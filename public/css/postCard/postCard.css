@@ -43,3 +43,25 @@
 .username{
     font-size: 1.2rem;
 }
+
+.image-container {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+}
+
+.container{
+    border-radius: 10px;
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+    /* You can add other styles or properties as needed */
+}
+
+
+.post .image-container{
+    cursor: pointer;
+}

@@ -1,14 +1,20 @@
 $(document).ready(function(){
     
-    // Use to get the user's data
+// Render contents to the home
     $.get("app/controller/UserController.php?action=getID", function(data, status){
         $("#profile-preview").html(data);
     });
     
-    // $.get("app/view/modelPost.php", function(data, status){
-    //     $("#model-content-container").html(data);
-    // });
-    
-
-
+   window.onhashchange = function () {
+    if (window.location.hash === "#profile") {
+        $.get("app/controller/UserController.php?action=getProfile&userProfile=you", 
+        function(data, status){
+            if(status === "success") {
+                $('#content').html(data);
+            } else {
+                alert("Error! try again");
+            }
+        });    }
+};
 });
+

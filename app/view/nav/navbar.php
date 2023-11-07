@@ -21,7 +21,7 @@
             <button class="btn btn-primary" type="button">Search</button>
         </form>
     </div>
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="#friend">
         <ion-icon name="person-add-outline"></ion-icon>
     </a>
     <a class="navbar-brand" href="#">
@@ -34,7 +34,7 @@
             <img src="public/images/you.png" alt="" style="width:40px;" class="rounded-pill">
             </a>
           <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">profile</a></li>
+              <li><a class="dropdown-item" href="#profile">profile</a></li>
               <li><a class="dropdown-item" href="#logout">logout</a></li>
           </ul>
           </li>

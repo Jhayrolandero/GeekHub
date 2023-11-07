@@ -15,6 +15,7 @@ body{
     color: white;
     margin-top: 1rem;
 }
+
 #sidebar{
     position: fixed;
     max-width: 20%;
@@ -29,7 +30,7 @@ body{
 
 #main-content{
     position: relative;
-    width: 50%;
+    width: 35%;
 }
 @media all and (max-width: 970px) {
    #sidebar{

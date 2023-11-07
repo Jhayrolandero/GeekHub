@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "../model/PostModel.php";
-include "../view/postCard.php";
+include "../view/home/postCard.php";
 
 class PostController{
 
@@ -10,15 +10,13 @@ class PostController{
         $this->model = new Post();
     }
 
-    public function add_post($user_id, $content){
-        
+    public function add_post($user_id, $content, $image){
         try{
-            $this->model->add_post($user_id, $content);
-            echo "Added Successfully!";
-        }catch(PDOException $e){
-            echo "Error posting" . $e;
-        }
+            return $this->model->add_post($user_id, $content, $image);
 
+        } catch(Exception $e){
+            return $e->getMessage();
+        }
     }
     public function get_post(){
         try{
@@ -43,6 +41,14 @@ class PostController{
         }
     }
 
+    public function get_img($post_id) {
+        try{
+            return $this->model->get_img($post_id);
+        } catch (Exception $e){
+            return $e->getMessage();
+        }
+    }
+
 }
 
 $post = new PostController();
@@ -50,15 +56,25 @@ $post = new PostController();
 if($_SERVER["REQUEST_METHOD"] === "POST"){
     if(isset($_POST["action"]) && $_POST["action"] === "addPost"){
 
-        if(empty($_POST["content"])){
-            echo "No empty homie";
-            die();
-        }
+        try {
+            if(empty($_POST["content"])){
+                echo 0;
+                die();
+            }
 
-        $content = $_POST["content"];
-        $user_id = $_SESSION["user"];
-        $post->add_post($user_id, $content);
-        die();
+            $content = $_POST["content"];
+            $image = (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) ? file_get_contents($_FILES['image']['tmp_name']) : null;
+            $user_id = $_SESSION["user"];
+            
+            echo $image;
+
+            $post->add_post($user_id, $content, $image);
+
+            echo "Successfully Added!";
+        } catch(Exception $e) {
+            echo "". $e;
+        }
+       
     }
 }
 
@@ -75,12 +91,17 @@ if($_SERVER["REQUEST_METHOD"] === "GET") {
         $post_id = $items["post_id"];
         $user_id = $_SESSION["user"];
         $like_count = $items["like_count"];
+        $post_image = $items["post_image"];
         $hasLiked = $post->has_liked($post_id, $user_id);
 
-
-        echo template_post($name, $content, $date, $post_id, $like_count, $hasLiked);
+        echo template_post($name, $content, $date, $post_id, $like_count, $hasLiked, $post_image);
     }
 
-   
+    if(isset($_GET["id"])){
+        $id = $_GET["id"];
+        $img = $post->get_img($id);
+        echo $img["post_image"];
+    }
+
 }
 }

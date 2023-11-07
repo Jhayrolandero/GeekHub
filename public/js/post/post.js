@@ -1,19 +1,48 @@
 $(document).ready(function(){
+    $(".image-modal").hide();
+
+    // Make a post
     $("#post-btn").click(function(event){
         event.preventDefault(); // Prevent the default form submission
-        
         var content = $("#post-form").val();
-        $.post("app/controller/PostController.php",
-        {
-            action: "addPost",
-            content: content
-        },function(data, success){
-            alert(data);
+        // Create a FormData object
+        var formData = new FormData();
+
+        // Append the content and image to the FormData
+        formData.append("action", "addPost");
+        formData.append("content", content);
+        formData.append("image", $("#image-input")[0].files[0]);
+
+        $.ajax({
+            type: "POST",
+            url: "app/controller/PostController.php",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data, status) {
+                alert(data);
+                if (status === "success") {
+                    if (data == 0) {
+                        alert("No Empty Homie!");
+                    }
+
+                    $.get("app/controller/PostController.php?action=getPost", function (data, status) {
+                        $(".post-container").html(data);
+                    });
+                } else {
+                    alert("Error occurred! Try again later.");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+                alert("An error occurred while sending the data.");
+            },
         });
         
     });
 
 
+    // Render the newsfeed
     $.get("app/controller/PostController.php?action=getPost", function(data, status){
         if(status === "success") {
             try{
@@ -71,4 +100,21 @@ $(document).ready(function(){
         }
         });
     });
+
+    // Image preview
+    $(".post-container").on("click", ".post .image-container", function () {
+        var imageSrc = $(this).attr("src");
+        $(".image-modal .modal-content").attr("src", imageSrc);
+        $(".image-modal").show();
+
+    });
+    
+    $(".close-button").click(function() {
+        $(".image-modal").hide();
+    });
+    
+    $(".post-container").on("click", ".post .hide-post", function () {
+        $(this).closest(".post").hide();
+    });
+   
 });
