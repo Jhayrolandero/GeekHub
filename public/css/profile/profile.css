@@ -1,0 +1,53 @@
+body{
+    background-color: #141414;
+}
+
+#main{
+    position: relative;
+    top: 5.5rem;
+}
+
+#profile-header{
+    background-image: url('../images/background.jpg');
+}
+
+.bg-img {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    border-radius: 10px;
+}
+
+.profile-container{
+    position: relative;
+    background-color: #282828;
+    padding: 0.5em;
+}
+
+.profile {
+    text-align: center;
+    width: 100%;
+    height: 150px;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid #282828;
+
+}
+
+.profile-info{
+    position: relative;
+    color: white;
+    top: 5rem;
+}
+
+/* Add some padding to keep text below the profile image */
