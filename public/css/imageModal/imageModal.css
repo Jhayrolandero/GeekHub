@@ -1,0 +1,48 @@
+.modal-header{
+    background-color: #282828;
+}
+
+.modal-body{
+    background-color: #141414;
+}
+
+/* Add custom CSS to center the enlarged modal */
+.image-modal {
+    background-color: #141414;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+    padding: 0 !important; /* Remove padding */
+
+}
+
+.modal-content {
+    border: none; /* Remove the border */
+}
+
+.modal-content {
+    min-width: 40em; /* Set your desired width */
+    min-height: 20rem; /* Set your desired height */
+}
+
+.modal-content img {
+    /* min-width: 500px; */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Scale the image to cover the entire modal */
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+}
+
+.close-button{
+    font-size: 3rem;
+    position: fixed;
+    top: 0;
+    right: 10px;
+    color: white;
+    cursor: pointer;
+
+
+}
