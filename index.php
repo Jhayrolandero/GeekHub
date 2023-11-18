@@ -21,6 +21,8 @@ if(empty($_SESSION["user"])){
     <link rel="stylesheet" href="public/css/home/home.css">
     <link rel="stylesheet" href="public/css/postCard/postCard.css">
     <link rel="stylesheet" href="public/css/profile/profile.css">
+    <link rel="stylesheet" href="public/css/comment/comment.css">
+    
 
 </head>
 <body>

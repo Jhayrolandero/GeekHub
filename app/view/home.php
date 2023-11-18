@@ -4,6 +4,7 @@ session_start();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,48 +13,63 @@ session_start();
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="public/js/home/home.js"></script>
     <script src="public/js/post/post.js"></script>
+    <script src="public/js/comment/comment.js"></script>
     <link rel="stylesheet" href="public/css/postCard/postCard.css">
 
 </head>
+
 <body>
-<div class="container-fluid">
+    <div class="container-fluid">
         <div class="row">
 
             <!-- Sidebar Navigation-->
             <nav id="sidebar">
-               
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#profile" id="you">
-                            Profile
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#friend">
-                            Friends
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Timeline
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Flag
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Community
-                        </a>
-                    </li>
-                    <!-- Add more sidebar links as needed -->
-                </ul>
-                -----------------------------------
-                <br>
-                Shortcuts
-                <p>Your groups here</p>
+                <section class="shortcut-nav">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#home" id="you">
+                                <ion-icon name="home-sharp"></ion-icon> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#profile#<?= $_SESSION["user"] ?>" id="you">
+                                <ion-icon name="person-sharp"></ion-icon> Profile
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#friend">
+                                <ion-icon name="people-sharp"></ion-icon> Buddies
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#discover">
+                                <ion-icon name="people"></ion-icon> Communities
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" id="nav-drop-btn">
+                                    <ion-icon name="notifications"></ion-icon> Notifications</button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Link 1</a></li>
+                                    <li><a class="dropdown-item" href="#">Link 2</a></li>
+                                    <li><a class="dropdown-item" href="#">Link 3</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <ion-icon name="menu-sharp"></ion-icon> Menu
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#logout">
+                                <ion-icon name="log-out"></ion-icon> Logout
+                            </a>
+                        </li>
+
+                    </ul>
+                </section>
             </nav>
 
             <!-- Main Content -->
@@ -64,41 +80,59 @@ session_start();
                         <img src="public/images/you.png" alt="" style="width: 40px;">
                     </div>
                     <div class="col">
-                        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myModal">
+                        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myModal" id="add-post-btn">
                             What's on your mind?
                         </button>
                     </div>
                 </div>
-                 
+
                 <!-- Main Post diplay -->
                 <div class="post-container row" id="post-container">
                 </div>
             </main>
 
             <!-- FriendBar navigation -->
-            <nav id="friendbar">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                            Friends
-                        </a>
-                    </li>
-                    show friendlist
-                    <br>
-                    <!-- Add more sidebar links as needed -->
-                    -----------------------------------
-                    <br>
-                    chats probably
-                </ul>
+            <nav id="rightbar">
+                <nav id="friendbar">
+                    <h4>Buddies</h4>
+                    <!-- Render friend side nav -->
+                    <ul class="nav flex-column" id="friend-side-nav">
+
+                    </ul>
+                </nav>
+                <nav id="communitybar">
+                    <div class="row">
+                        <div class="col-8">
+                            <h4>Communities</h4>
+                        </div>
+                        <div class="col-4">
+                            <button id="community-btn">Create +</button>
+                        </div>
+                    </div>
+                    <!-- For communities -->
+                    <ul class="nav flex-column" id="community-side-nav">
+
+                    </ul>
+                </nav>
             </nav>
-        
+
         </div>
-        
+
         <!-- Include the modal for posting -->
-        <?php include "home/modalPost.php"?>
+        <?php include "home/modalPost.php" ?>
 
         <!-- For image previewing -->
-        <?php include "home/imageModal.php"?>
-</div>
+        <?php include "home/imageModal.php" ?>
+
+        <!-- For comment to show -->
+        <?php include "home/commentModal.php" ?>
+
+        <!-- For updating Post -->
+        <?php include "home/updateModalPost.php" ?>
+
+        <!-- For creating Community -->
+        <?php include "home/communityModal.php" ?>
+    </div>
 </body>
+
 </html>

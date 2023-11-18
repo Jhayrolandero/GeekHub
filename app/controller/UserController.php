@@ -1,56 +1,110 @@
 <?php
 session_start();
 include "../model/UserModel.php";
-include "../view/profile.php";
-class UserController{
+include "../view/profile/profileCard.php";
+include "../view/searchbar/searchbar.php";
+class UserController
+{
 
     private $model;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->model = new User();
     }
-    public function get_ID(){
-        if(empty($_SESSION["user"])){
+    public function get_ID()
+    {
+        if (empty($_SESSION["user"])) {
             echo "User isn't log on!";
-        }else{
+        } else {
             echo $_SESSION["user"];
         }
     }
 
-    public function get_user($id){
-        try{
+    public function get_user($id)
+    {
+        try {
             return $this->model->get_user($id);
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return $e->getMessage();
         }
     }
 
+    public function show_profile($username, $userBio)
+    {
+        return profile_Template($username, $userBio);
+    }
 
+    public function add_bio($userID, $userBio)
+    {
+        return $this->model->add_bio($userID, $userBio);
+    }
+
+    public function search_user($username)
+    {
+        return $this->model->search_user($username);
+    }
+
+    // Show results
+    public function show_search_user($username, $userID)
+    {
+        return template_search($username, $userID);
+    }
 }
 
 $user = new UserController();
 
-if($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["action"]) && $_GET["action"] === "getID"){
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST["action"]) && $_POST["action"] === "addBio") {
+        try {
+
+            $userID = $_POST["userID"];
+            $userBio = $_POST["bio"];
+
+            echo $user->add_bio($userID, $userBio);
+        } catch (Exception $e) {
+            echo "Error";
+        }
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["action"]) && $_GET["action"] === "getID") {
     $user->get_ID();
 }
 
-if($_SERVER["REQUEST_METHOD"] === "GET"){
+if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
     // For viewing other profile
-    if(isset($_GET["action"]) && $_GET["action"] === "getProfile" && isset($_GET["buddyID"])){
-        $id = $_GET["buddyID"];
+    // if (isset($_GET["action"]) && $_GET["action"] === "getProfile" && isset($_GET["buddyID"])) {
+    //     $id = $_GET["buddyID"];
+
+    //     // echo $id;
+    //     $result = $user->get_user($id);
+
+    //     $username = $result[0]["username"];
+    //     $userBio = isset($result[0]["user_bio"]) ? $result[0]["user_bio"] : "Nothing to see here";
+
+    //     echo profile_Template($username, $userBio);
+    // }
+
+    // Get your profile
+    if (isset($_GET["action"]) && $_GET["action"] === "getProfile" && $_GET["userProfile"]) {
+        $id = $_GET["userProfile"];
         $result = $user->get_user($id);
-        echo profile_Template($result[0]["username"]);
+
+        $username = $result[0]["username"];
+        $userBio = isset($result[0]["user_bio"]) ? $result[0]["user_bio"] : "Nothing to see here";
+        echo $user->show_profile($username, $userBio);
     }
 
-    if(isset($_GET["action"]) && $_GET["action"] === "getProfile" && $_GET["userProfile"]){
-        $id = $_SESSION["user"];
-        $result = $user->get_user($id);
-        echo profile_Template($result[0]["username"]);
+    // Search User
+    if (isset($_GET["action"]) && $_GET["action"] === "searchUser") {
+        $username = $_GET["username"];
 
-        // echo $id;
-        // var_dump($result);
-        // echo "hello";
+        $results = $user->search_user($username);
+
+        foreach ($results as $result) {
+            echo $user->show_search_user($result["username"], $result["user_id"]);
+        }
     }
-
 }

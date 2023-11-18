@@ -1,47 +1,98 @@
-body{
-    background-color: #141414;
+body {
+  background-color: #141414;
 }
 
-#sidebar, #friendbar, #main-content{
-    top: 5.5rem;
+/* All */
+#sidebar,
+#rightbar,
+#main-content {
+  top: 4rem;
 }
 
-#post-bar{
-    background-color: #282828;
-    border-radius: 5px;
+/* Main Content */
+#main-content {
+  position: relative;
+  width: 35%;
 }
 
-#post-container{
-    color: white;
-    margin-top: 1rem;
+#main-content #post-bar #add-post-btn {
+  background: transparent;
+  border: white solid 1px;
+  border-radius: 10px;
 }
 
-#sidebar{
-    position: fixed;
-    max-width: 20%;
-    color: red;
+#main-content #post-bar #add-post-btn:hover {
+  background: white;
+  border: black solid 1px;
+  border-radius: 10px;
+  color: black;
 }
 
-#friendbar{
-    position: fixed;
-    max-width: 20%;
-    right: 0;
+/* Post Bar */
+#post-bar {
+  background-color: #282828;
+  border-radius: 10px;
 }
 
-#main-content{
-    position: relative;
-    width: 35%;
+#post-container {
+  color: white;
 }
+
+/* Side Bar */
+#sidebar {
+  position: fixed;
+  max-width: fit-content;
+  border-right: rgba(255, 255, 255, 0.2) solid 1px;
+  height: 100vh;
+  padding-right: 2em;
+}
+
+#sidebar .nav-item a {
+  font-size: 1.3rem;
+  color: var(--text-clr);
+}
+
+#sidebar .nav-item a:hover {
+  font-weight: bold;
+}
+
+/* Right bar */
+#rightbar {
+  position: fixed;
+  width: 20%;
+  right: 0;
+  color: #fff;
+}
+
+/* Friend Bar And Community*/
+
+#rightbar #communitybar {
+  border-top: rgba(255, 255, 255, 0.3) solid 1px;
+  padding: 0.8em;
+}
+
+#friendbar #friend-side-nav,
+#communitybar #community-side-nav {
+  padding: 0.8em;
+}
+
+/* FriendBar */
+
+#rightbar #friendbar {
+  padding: 0.8em;
+}
+
+/* Media Query */
 @media all and (max-width: 970px) {
-   #sidebar{
+  #sidebar {
     display: none;
-   }
+  }
 
-   #main-content{
+  #main-content {
     width: 100%;
-   }
+  }
 
-   #friendbar{
+  #rightbar {
     display: none;
-   }
+  }
 }

@@ -1,53 +1,63 @@
-body{
-    background-color: #141414;
+body {
+  background-color: #141414;
 }
 
-#main{
-    position: relative;
-    top: 5.5rem;
+#main {
+  position: relative;
+  top: 4rem;
 }
 
-#profile-header{
-    background-image: url('../images/background.jpg');
+#profile-header {
+  background-image: url("../images/background.jpg");
 }
 
-.bg-img {
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    height: 400px;
-    border-radius: 10px;
+.bg-img img {
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  border-radius: 10px;
 }
 
-.profile-container{
-    position: relative;
-    background-color: #282828;
-    padding: 0.5em;
+.profile-container {
+  position: relative;
+  background-color: #282828;
+  padding: 0.5em;
 }
 
 .profile {
-    text-align: center;
-    width: 100%;
-    height: 150px;
+  text-align: center;
+  width: 100%;
+  height: 8rem;
+  min-height: fit-content;
+  position: relative;
 }
 
+/* The user Icon */
 .profile-img {
-    width: 150px;
-    height: 150px;
-    border: 3px solid #fff;
-    border-radius: 50%;
-    display: inline-block;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 5px solid #282828;
-
+  width: 150px;
+  height: 150px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  left: 10%;
+  transform: translate(-50%, -50%);
+  border: 5px solid #282828;
 }
 
-.profile-info{
-    position: relative;
-    color: white;
-    top: 5rem;
+.profile-info {
+  display: inline-block;
+  position: absolute;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  color: white;
+  top: 5rem;
 }
 
-/* Add some padding to keep text below the profile image */
+.content-section {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}

@@ -1,22 +1,35 @@
+:root{
+    --text-clr: #fff;
+    --text-font: .875rem;
+}
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 .post{
+    position: relative;
     background-color: #282828;
-    color: #74E39A;
+    color: var(--text-clr);
     margin-top: 1rem;
 }
 
 #card-header {
     background-color: #282828;
-    color: #74E39A;
+    color: var(--text-clr);
     border: none !important; /* Add !important to ensure your custom style takes precedence */
 }
 
 #card-body{
     background-color: #282828;
-    border-bottom: solid #3BD16F 1px;
 }
 
 #card-footer{
     background-color: #282828;
+}
+
+#card-footer .like-btn:hover, #card-footer .unlike-btn:hover, #card-footer .comment-btn:hover{
+    font-weight: bolder;
+    color: white;
 }
 .card{
     border: none;
@@ -26,17 +39,17 @@
 .meta-btn{
     background-color: transparent;
     border: none;
-    color: #74E39A;
+    color: var(--text-clr);
     
 }
 
 .content{
-    color: #74E39A;
+    color: var(--text-clr);
     font-size: 1rem;
 }
 
 .meta-info{
-    color: #74E39A;
+    color: var(--text-clr);
     font-size: 1rem;
 }
 
@@ -64,4 +77,36 @@
 
 .post .image-container{
     cursor: pointer;
+}
+
+.option-btn{
+    background-color: transparent;
+    border: none;
+    color: var(--text-clr);
+}
+
+.post-menu-delete, .post-menu-update{
+    width: 100%;
+}
+
+.hide-post{
+    font-size: 1.5rem;
+    background-color: transparent;
+    border: none;
+    color: var(--text-clr);
+}
+
+#card-header .username{
+    font-size: var(--text-font);
+    font-weight: bold;
+}
+
+#card-header .date{
+    font-size: var(--text-font);
+    font-weight: 100;
+}
+
+#card-body .post-content{
+    font-size: var(--text-font);
+
 }

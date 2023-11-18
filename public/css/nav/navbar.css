@@ -1,4 +1,168 @@
-#navbar{
-    background-color: #282828;
-    border-bottom: solid #3BD16F .5px;
+:root {
+  --dark-color: #282828;
+  --text-color: $fff;
+}
+
+#navbar {
+  background-color: var(--dark-color);
+}
+
+.nav-header {
+  display: flex;
+}
+.nav-header #right-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropbtn {
+  background-color: #3498db;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: #2980b9;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+
+.dropdown #nav-drop-btn {
+  background: transparent;
+  border: none;
+  text-decoration: none;
+}
+
+.dropdown #nav-drop-btn::before {
+  content: none;
+}
+.dropdown #nav-drop-btn ion-icon {
+  font-size: 1.5rem;
+  color: white;
+}
+
+#right-section .dropdown .dropdown-menu {
+  width: 20vw;
+  min-width: 349px;
+  padding: 0.5em 1em;
+  background-color: var(--dark-color);
+  color: white;
+  height: auto;
+}
+
+#right-section .dropdown .dropdown-menu .notif-header {
+  border-bottom: white solid 1px;
+  font-size: 2rem;
+}
+
+#right-section .dropdown .dropdown-menu .notif-card {
+  padding: 1em;
+}
+
+#right-section .dropdown .dropdown-menu section {
+  width: auto;
+}
+
+#right-section .dropdown .dropdown-menu .notif-container .notif-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#left-section {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+/* Style for the searchbar container */
+.searchbar-container {
+  position: relative;
+  display: inline-block;
+}
+
+.searchbar-container input {
+  background: transparent;
+  border: white solid 1px;
+  color: white;
+}
+
+.searchbar-container input::placeholder {
+  color: white;
+}
+
+.searchbar-container input:focus {
+  background: transparent;
+  border: white solid 1px;
+  color: white;
+}
+
+/* Style for the searchbar content */
+.searchbar-content {
+  display: none;
+  position: absolute;
+  background-color: #282828;
+  color: white;
+  width: 100%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.searchbar-content ul {
+  list-style: none;
+  padding: 0.5em;
+}
+
+.searchbar-content ul li {
+  width: 100%;
+  padding: 0.5em;
+  cursor: pointer;
+}
+
+.searchbar-content ul li:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Style for the searchbar items */
+.searchbar-item {
+  display: block;
+}
+
+/* Show the searchbar content when the input is focused */
+.searchbar-container:focus-within .searchbar-content {
+  display: block;
 }

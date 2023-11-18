@@ -10,14 +10,14 @@
 <body>
     
     <!-- The Modal -->
-    <div class="modal" id="myModal">
+    <div class="modal create-post-modal" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content" id="content">
     
             <!-- Modal Header -->
             <div class="modal-header" id="modal-header">
                 <h4 class="modal-title">Create Post</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" id="close-create-post"></button>
             </div>
     
             <!-- Modal body -->

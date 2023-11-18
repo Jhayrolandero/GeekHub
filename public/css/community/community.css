@@ -1,0 +1,33 @@
+.community-header {
+  background-color: #282828;
+  color: white;
+  padding: 0.5em;
+}
+
+.community-header .community-info {
+  padding: 0.5em;
+  margin: 0;
+}
+
+.community-info {
+  position: relative;
+}
+
+.community-profile {
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  position: absolute;
+  left: 10%;
+  transform: translate(-50%, -50%);
+}
+
+.community-post {
+  display: flex;
+  justify-content: center;
+}
+
+.community-post .row {
+  display: flex;
+  justify-content: center;
+}
