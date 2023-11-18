@@ -18,4 +18,4 @@ A facebook clone inspired site created by yours truly
 
 # Goal
 
-- Finished it ON or BEFORE November 11
+- Finish it ON or BEFORE November 11
