@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(empty($_SESSION["user"])){
+if (empty($_SESSION["user"])) {
     echo '<script>window.location.href = "app/view/authpage.php";</script>';
     die();
 }
@@ -8,6 +8,7 @@ if(empty($_SESSION["user"])){
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,11 +21,11 @@ if(empty($_SESSION["user"])){
     <script src="index.js"></script>
     <link rel="stylesheet" href="public/css/home/home.css">
     <link rel="stylesheet" href="public/css/postCard/postCard.css">
-    <link rel="stylesheet" href="public/css/profile/profile.css">
     <link rel="stylesheet" href="public/css/comment/comment.css">
-    
+
 
 </head>
+
 <body>
     <header>
         <?php include("app/view/nav/navbar.php"); ?>
@@ -35,4 +36,5 @@ if(empty($_SESSION["user"])){
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>

@@ -6,6 +6,7 @@ function template_community($groupName, $desc, $hasJoined)
 ?>
 
     <body>
+        <!-- Header -->
         <header class="community-header">
             <div class="row">
                 <div class="bg-img">
@@ -63,21 +64,23 @@ function template_community($groupName, $desc, $hasJoined)
                     <?php
                     if ($hasJoined == 1) {
                     ?>
-                        <div class="row">
-                            <button id="create-community-post">Create Post</button>
+                        <div class="container">
+                            <div class="row">
+                                <button id="create-community-post">Create Post</button>
+                            </div>
                         </div>
                     <?php
                     }
                     ?>
                     <div class="row">
-                        <section class="content-section bg-success">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, inventore perferendis. At adipisci omnis rerum. Blanditiis, quibusdam eaque repellat, cupiditate dicta delectus error enim dolor labore velit quo odit necessitatibus aliquid illo ipsa nulla illum molestias! Harum sequi iure non!
+                        <section class="community-content-section">
                         </section>
                     </div>
                 </div>
                 <div class="col-4">
-                    <section class="desc-container bg-primary">
-                        <textarea name="" cols="30" rows="10" class="form-control" id="bio-form"><?= $desc ?></textarea>
+                    <section class="desc-container ">
+                        <h4>Description</h4>
+                        <textarea name="" class="form-control" id="bio-form"><?= $desc ?></textarea>
                     </section>
                 </div>
             </div>

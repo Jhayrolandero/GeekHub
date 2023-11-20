@@ -9,6 +9,7 @@ class CommentController
         $this->model = new Comment();
     }
 
+    // Adding Comment
     public function add_comment($user_id, $post_id, $comment)
     {
         try {
@@ -19,6 +20,7 @@ class CommentController
         }
     }
 
+    // Showing Comment
     public function show_comment($post_id)
     {
         try {
@@ -28,6 +30,7 @@ class CommentController
         }
     }
 
+    // Template for comment box component
     public function template_commentBox($username, $time, $content, $userID, $comment_id, $post_id)
     {
         return template_commentBox($username, $time, $content, $userID, $comment_id, $post_id);
@@ -41,7 +44,7 @@ class CommentController
         }
     }
 
-    // JUst to convert time into more readable format
+    // Just to convert time into more readable format
     public static function time_elapsed_string($datetime, $full = false)
     {
         $now = new DateTime("", new DateTimeZone('Asia/Manila'));
@@ -96,6 +99,7 @@ class CommentController
 
 $comment = new CommentController();
 
+// Add comment
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST["action"]) && $_POST["action"] === "addComment") {
 
@@ -115,6 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
+    // Delete a Comment
     if (isset($_POST["action"]) && $_POST["action"] === "deleteComment") {
         try {
             $commentID = $_POST["commentID"];
@@ -127,6 +132,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
+
+    // Get comment info
     if (isset($_GET["action"]) && $_GET["action"] === "showComment") {
         try {
 

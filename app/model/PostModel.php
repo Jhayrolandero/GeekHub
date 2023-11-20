@@ -75,9 +75,6 @@ class Post extends Database
         JOIN
             posts ON users.user_id = posts.user_id";
 
-        // ORDER BY
-        //     posts.created_at DESC";
-
         // Add this query when ID is given
         if ($UserID != null) {
             $sql .= " WHERE posts.user_id = ?";

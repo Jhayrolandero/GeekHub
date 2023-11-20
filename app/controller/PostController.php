@@ -22,6 +22,8 @@ class PostController
             return $e->getMessage();
         }
     }
+
+    //Fetch Post info
     public function get_post($profileID = null)
     {
         try {
@@ -191,6 +193,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
+
+    // For showing Post
     if (isset($_GET["action"]) && $_GET["action"] === "getPost") {
 
         if (empty($_GET["profileID"])) {
