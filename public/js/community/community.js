@@ -38,6 +38,17 @@ $(document).ready(function () {
 
           $(".community-id").val(communityID);
 
+          $.get(
+            "app/controller/CommunityController.php",
+            {
+              action: "showCommunityNav",
+            },
+            function (data, status) {
+              if (status === "success") {
+                $("#community-side-nav").html(data);
+              }
+            }
+          );
           renderCommunityTimeline(communityID);
         }
       }

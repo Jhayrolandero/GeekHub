@@ -1,116 +1,116 @@
-:root{
-    --text-clr: #fff;
-    --text-font: .875rem;
+:root {
+  --text-clr: #fff;
+  --text-font: 0.875rem;
 }
 
-body{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-.post{
-    position: relative;
-    background-color: #282828;
-    color: var(--text-clr);
-    margin-top: 1rem;
+.post {
+  position: relative;
+  background-color: #282828;
+  color: var(--text-clr);
+  margin-top: 1rem;
 }
 
 #card-header {
-    background-color: #282828;
-    color: var(--text-clr);
-    border: none !important; /* Add !important to ensure your custom style takes precedence */
+  background-color: #282828;
+  color: var(--text-clr);
+  border: none !important; /* Add !important to ensure your custom style takes precedence */
 }
 
-#card-body{
-    background-color: #282828;
+#card-body {
+  background-color: #282828;
 }
 
-#card-footer{
-    background-color: #282828;
+#card-footer {
+  background-color: #282828;
 }
 
-#card-footer .like-btn:hover, #card-footer .unlike-btn:hover, #card-footer .comment-btn:hover{
-    font-weight: bolder;
-    color: white;
+#card-footer .like-btn:hover,
+#card-footer .unlike-btn:hover,
+#card-footer .comment-btn:hover {
+  font-weight: bolder;
+  color: white;
 }
-.card{
-    border: none;
-    background-color: none;
-}
-
-.meta-btn{
-    background-color: transparent;
-    border: none;
-    color: var(--text-clr);
-    
-}
-
-.content{
-    color: var(--text-clr);
-    font-size: 1rem;
-}
-
-.meta-info{
-    color: var(--text-clr);
-    font-size: 1rem;
-}
-
-.username{
-    font-size: 1.2rem;
-}
-
-.image-container {
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    border-radius: 10px;
-}
-
-.container{
-    border-radius: 10px;
-}
-
-.btn:focus {
-    outline: none;
-    box-shadow: none;
-    /* You can add other styles or properties as needed */
-}
-
-
-.post .image-container{
-    cursor: pointer;
-}
-
-.option-btn{
-    background-color: transparent;
-    border: none;
-    color: var(--text-clr);
-}
-
-.post-menu-delete, .post-menu-update{
-    width: 100%;
-}
-
-.hide-post{
-    font-size: 1.5rem;
-    background-color: transparent;
-    border: none;
-    color: var(--text-clr);
-}
-
-#card-header .username{
-    font-size: var(--text-font);
-    font-weight: bold;
-}
-
-#card-header .date{
-    font-size: var(--text-font);
-    font-weight: 100;
-}
-
-#card-body .post-content{
-    font-size: var(--text-font);
-
+.card {
+  border: none;
+  background-color: none;
 }
 
 .meta-btn {
-    font-size: .875rem;
+  background-color: transparent;
+  border: none;
+  color: var(--text-clr);
+}
+
+.content {
+  color: var(--text-clr);
+  font-size: 1rem;
+}
+
+.meta-info {
+  color: var(--text-clr);
+  font-size: 1rem;
+}
+
+.username {
+  font-size: 1.2rem;
+}
+
+.image-container {
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+}
+
+.container {
+  border-radius: 10px;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+  /* You can add other styles or properties as needed */
+}
+
+.post .image-container {
+  cursor: pointer;
+}
+
+.option-btn {
+  background-color: transparent;
+  border: none;
+  color: var(--text-clr);
+}
+
+.post-menu-delete,
+.post-menu-update {
+  width: 100%;
+}
+
+.hide-post {
+  font-size: 1.5rem;
+  background-color: transparent;
+  border: none;
+  color: var(--text-clr);
+}
+
+#card-header .username {
+  font-size: var(--text-font);
+  font-weight: bold;
+}
+
+#card-header .date {
+  font-size: var(--text-font);
+  font-weight: 100;
+}
+
+#card-body .post-content {
+  font-size: var(--text-font);
+}
+
+.meta-btn {
+  font-size: 0.875rem;
 }

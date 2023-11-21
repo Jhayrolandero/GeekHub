@@ -1,8 +1,6 @@
-:root{
-
-  --text-color: #F5FEFD;
+:root {
+  --text-color: #f5fefd;
 }
-
 
 body {
   background-color: #141414;
@@ -97,26 +95,27 @@ body {
 }
 
 #friendbar #friend-side-nav .buddy-name-container,
-#communitybar #community-side-nav .community-name-container{
+#communitybar #community-side-nav .community-name-container {
   display: flex;
   align-items: center;
 }
 
 #friendbar #friend-side-nav .buddy-name,
-#communitybar #community-side-nav .community-name{
+#communitybar #community-side-nav .community-name {
   color: var(--text-color);
-  font-size: .875rem;
+  font-size: 0.875rem;
   font-weight: 400;
   margin: 0;
 }
 
 #friendbar #friend-side-nav .buddy-name:hover,
-#communitybar #community-side-nav .community-name:hover{
+#communitybar #community-side-nav .community-name:hover {
   font-weight: bold;
 }
 
-#friend-bar-title, #community-bar-title {
-  color: #F5FEFD;
+#friend-bar-title,
+#community-bar-title {
+  color: #f5fefd;
   font-size: 1rem;
   font-weight: 500;
   margin: 0;
@@ -130,12 +129,11 @@ body {
 
 /* COmmunity Bar */
 
-#communitybar #community-btn{
+#communitybar #community-btn {
   background-color: transparent;
   color: blue;
   font-size: 0.875rem;
   border: none;
-
 }
 
 /* Media Query */

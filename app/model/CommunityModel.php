@@ -26,26 +26,87 @@ class Community extends Database
     public function get_community($communityID = null)
     {
         try {
-            $sql = "SELECT * FROM groups";
+
+            $sql = "SELECT groups.* ";
 
             if ($communityID != null) {
-                $sql .= " WHERE group_id = ?";
+                $sql = "SELECT groups.*, ";
+            }
+
+            if ($communityID != null) {
+                $sql .= "(
+                    SELECT COUNT(user_group.user_id)
+                    FROM user_group
+                    WHERE user_group.group_id = :group_id
+                ) AS member_count,
+                (
+                    SELECT COUNT(group_posts.group_post_id)
+                    FROM group_posts
+                    WHERE group_posts.group_id = :group_id
+                ) AS post_count,
+                (
+                    SELECT COUNT(group_post_likes.like_id)
+                    FROM group_post_likes
+                    WHERE group_post_likes.group_post_id IN (
+                        SELECT group_posts.group_post_id
+                        FROM group_posts
+                        WHERE group_posts.group_id = :group_id
+                    )
+                ) AS like_count";
+            }
+
+            $sql .= " FROM groups";
+
+            if ($communityID != null) {
+                $sql .= " WHERE groups.group_id = :group_id";
             }
 
             $stmt = $this->connect()->prepare($sql);
 
             if ($communityID != null) {
-                $stmt->execute([$communityID]);
-            } else {
-                $stmt->execute();
+                $stmt->bindParam(':group_id', $communityID, PDO::PARAM_INT);
             }
+
+            $stmt->execute();
 
             return $stmt->fetchAll();
         } catch (PDOException $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 
+    /*
+SELECT
+    groups.*,
+    COUNT(user_group.user_id) AS member_count,
+    (
+    SELECT COUNT(group_posts.group_post_id)
+FROM 
+ 	groups
+LEFT JOIN
+	 group_posts ON groups.group_id = group_posts.group_id
+WHERE groups.group_id = 3
+) AS post_count,
+(
+	SELECT COUNT(group_post_likes.like_id)
+   	FROM
+    group_post_likes
+    LEFT JOIN 
+    	group_posts ON group_posts.group_post_id = group_post_likes.group_post_id
+    WHERE  group_posts.group_id = 3
+    	
+) AS like_count
+FROM
+    groups
+LEFT JOIN
+    user_group ON groups.group_id = user_group.group_id
+WHERE groups.group_id = 3;
+
+
+
+
+
+*/
     // Join community
     public function join_community($user_id, $community_id, $role)
     {

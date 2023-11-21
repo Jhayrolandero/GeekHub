@@ -33,9 +33,9 @@ class CommunityController
     }
 
     // Render it
-    public function show_community($communityName, $desc, $hasJoined)
+    public function show_community($communityName, $desc, $hasJoined, $memberCount, $likeCount, $postContent, $createdAt)
     {
-        return template_community($communityName, $desc, $hasJoined);
+        return template_community($communityName, $desc, $hasJoined, $memberCount, $likeCount, $postContent, $createdAt);
     }
 
     // Join community
@@ -170,6 +170,19 @@ class CommunityController
         }
 
         return $diff_str;
+    }
+
+    // Covert into MOnth Dat
+    public static function month_day($date)
+    {
+        // Create a DateTime object from the string
+        $dateTime = new DateTime($date);
+
+        // Format the DateTime object as "F j" (Month Day)
+        $formattedDate = $dateTime->format("F j");
+
+        // Output the result
+        return $formattedDate;
     }
 }
 
@@ -309,7 +322,14 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
                 $groupName = $result["group_name"];
                 $groupDesc = $result["description"];
-                echo $community->show_community($groupName, $groupDesc, $hasJoined);
+                $memberCount = $result["member_count"];
+                $likeCount = $result["like_count"];
+                $postCount = $result["post_count"];
+                $createdAt = $result["created_at"];
+
+                $date = $community::month_day($createdAt);
+
+                echo $community->show_community($groupName, $groupDesc, $hasJoined, $memberCount, $likeCount, $postCount, $date);
             }
         } catch (Exception $e) {
             echo $e->getMessage();
