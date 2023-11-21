@@ -46,7 +46,7 @@ session_start();
                                 <ion-icon name="people"></ion-icon> Communities
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item disable">
                             <div class="dropdown">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" id="nav-drop-btn">
                                     <ion-icon name="notifications"></ion-icon> Notifications</button>
@@ -76,10 +76,10 @@ session_start();
             <main class="col-md-9 col-lg-8 main-content mx-auto" id="main-content">
                 <!-- For posting -->
                 <div class="row p-3" id="post-bar">
-                    <div class="col-1">
+                    <div class="col-md-2">
                         <img src="public/images/you.png" alt="" style="width: 40px;">
                     </div>
-                    <div class="col">
+                    <div class="col-md-10">
                         <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myModal" id="add-post-btn">
                             What's on your mind?
                         </button>
@@ -94,7 +94,7 @@ session_start();
             <!-- FriendBar navigation -->
             <nav id="rightbar">
                 <nav id="friendbar">
-                    <h4>Buddies</h4>
+                    <p id="friend-bar-title">Buddies</p>
                     <!-- Render friend side nav -->
                     <ul class="nav flex-column" id="friend-side-nav">
 
@@ -102,10 +102,10 @@ session_start();
                 </nav>
                 <nav id="communitybar">
                     <div class="row">
-                        <div class="col-8">
-                            <h4>Communities</h4>
+                        <div class="col-6">
+                            <p id="community-bar-title">Communities</p>
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <button id="community-btn">Create +</button>
                         </div>
                     </div>

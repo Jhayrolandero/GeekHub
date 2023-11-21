@@ -8,13 +8,13 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
             <div class="card-header p-3" id="card-header">
                 <div class="row">
                     <!-- Profile -->
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <a href="#profile#" class="mx-auto">
                             <img src="public/images/you.png" alt="" style="width:45px" class="rounded-pill">
                         </a>
                     </div>
                     <!-- Username and Community Name -->
-                    <div class="col-md-9">
+                    <div class="col-md-7">
                         <div class="row">
                             <div class="col-12">
                                 <?= $groupName ?>
@@ -28,7 +28,7 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                         </div>
                     </div>
                     <!-- Del and Update Dropdown -->
-                    <div class="col-md-2 option-col text-end">
+                    <div class="col-md-3 option-col text-end">
                         <button data-bs-toggle="dropdown" class="option-btn">
                             <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                         </button>

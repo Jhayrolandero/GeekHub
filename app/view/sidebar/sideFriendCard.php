@@ -6,11 +6,11 @@ function template_friend_nav($username, $userID)
     <li class="nav-item">
         <a href="#profile#<?= $userID ?>">
             <div class="row">
-                <div class="col-md-3 p-1 col-6 text-center">
-                    <img src="public\images\you.png" alt="" style="width: 50px">
+                <div class="col-md-3 p-1  text-center">
+                    <img src="public\images\you.png" alt="" style="width: 100%; max-width: 42px">
                 </div>
-                <div class="col-md-9 col-6 p-1">
-                    <p>
+                <div class="col-md-9 p-1 buddy-name-container">
+                    <p class="buddy-name">
                         <?= $username ?>
                     </p>
                 </div>

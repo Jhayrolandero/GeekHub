@@ -110,3 +110,7 @@ body{
     font-size: var(--text-font);
 
 }
+
+.meta-btn {
+    font-size: .875rem;
+}

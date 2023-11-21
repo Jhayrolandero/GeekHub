@@ -51,7 +51,7 @@
                         </form>
                     </div>
 
-                    <svg class="blobs" width="800" height="800" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="blobs" width="650" height="650" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                         <path fill-opacity=".6" class="blob" fill="#FF0066" d="M49.4,-52.9C57.5,-41.2,53.3,-20.6,52.8,-0.6C52.2,19.5,55.3,38.9,47.1,52.3C38.9,65.7,19.5,73,-0.2,73.2C-19.8,73.4,-39.7,66.5,-52.7,53.1C-65.8,39.7,-72,19.8,-72.5,-0.5C-73,-20.8,-67.7,-41.6,-54.7,-53.3C-41.6,-65.1,-20.8,-67.7,-0.1,-67.6C20.6,-67.5,41.2,-64.6,49.4,-52.9Z" transform="translate(100 100)" />
                         <path fill-opacity=".8" class="blob" fill="#FCAF3C" d="M769 615q-39 115-154 249.5t-286 56Q158 842 135.5 671t2-340Q162 162 331 130.5T651.5 148q151.5 49 154 200.5T769 615Z" transform="translate(100 100)" />
                     </svg>
@@ -89,7 +89,7 @@
                         </form>
                     </div>
 
-                    <svg class="blobs" width="800" height="800" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="blobs" width="650" height="650" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                         <path fill-opacity=".6" class="blob" fill="#FF0066" d="M49.4,-52.9C57.5,-41.2,53.3,-20.6,52.8,-0.6C52.2,19.5,55.3,38.9,47.1,52.3C38.9,65.7,19.5,73,-0.2,73.2C-19.8,73.4,-39.7,66.5,-52.7,53.1C-65.8,39.7,-72,19.8,-72.5,-0.5C-73,-20.8,-67.7,-41.6,-54.7,-53.3C-41.6,-65.1,-20.8,-67.7,-0.1,-67.6C20.6,-67.5,41.2,-64.6,49.4,-52.9Z" transform="translate(100 100)" />
                         <path fill-opacity=".8" class="blob" fill="#FCAF3C" d="M769 615q-39 115-154 249.5t-286 56Q158 842 135.5 671t2-340Q162 162 331 130.5T651.5 148q151.5 49 154 200.5T769 615Z" transform="translate(100 100)" />
                     </svg>

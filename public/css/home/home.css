@@ -1,5 +1,14 @@
+:root{
+
+  --text-color: #F5FEFD;
+}
+
+
 body {
   background-color: #141414;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* All */
@@ -48,7 +57,7 @@ body {
 }
 
 #sidebar .nav-item a {
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: var(--text-clr);
 }
 
@@ -76,10 +85,57 @@ body {
   padding: 0.8em;
 }
 
+#friendbar #friend-side-nav .nav-item,
+#communitybar #community-side-nav .nav-item {
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+}
+
+#friendbar #friend-side-nav a,
+#communitybar #community-side-nav a {
+  text-decoration: none;
+}
+
+#friendbar #friend-side-nav .buddy-name-container,
+#communitybar #community-side-nav .community-name-container{
+  display: flex;
+  align-items: center;
+}
+
+#friendbar #friend-side-nav .buddy-name,
+#communitybar #community-side-nav .community-name{
+  color: var(--text-color);
+  font-size: .875rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+#friendbar #friend-side-nav .buddy-name:hover,
+#communitybar #community-side-nav .community-name:hover{
+  font-weight: bold;
+}
+
+#friend-bar-title, #community-bar-title {
+  color: #F5FEFD;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
 /* FriendBar */
 
 #rightbar #friendbar {
   padding: 0.8em;
+}
+
+/* COmmunity Bar */
+
+#communitybar #community-btn{
+  background-color: transparent;
+  color: blue;
+  font-size: 0.875rem;
+  border: none;
+
 }
 
 /* Media Query */
