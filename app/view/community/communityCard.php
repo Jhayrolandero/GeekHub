@@ -60,7 +60,7 @@ function template_community($groupName, $desc, $hasJoined, $memberCount, $likeCo
 
         <main class="community-post p-3">
             <div class="row">
-                <div class="col-4 ">
+                <div class="col-5 ">
                     <?php
                     if ($hasJoined == 1) {
                     ?>

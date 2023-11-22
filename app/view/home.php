@@ -43,7 +43,7 @@ session_start();
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="#discover">
-                                <ion-icon name="people"></ion-icon> Communities
+                                <ion-icon name="compass-sharp"></ion-icon> Discover
                             </a>
                         </li>
                         <li class="nav-item disable">

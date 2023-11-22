@@ -42,6 +42,7 @@ $(document).ready(function () {
     $(".create-community-modal").slideUp();
   });
 
+  // Rendercommunity Nav
   $.get(
     "app/controller/CommunityController.php",
     {

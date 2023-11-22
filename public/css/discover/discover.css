@@ -1,0 +1,50 @@
+:root {
+  --black-secondary: #282828;
+  --black-primary: #141414;
+  --text-clr: #f5fefd;
+}
+
+body {
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  background-color: var(--black-primary);
+}
+
+.community-post-card {
+  background-color: var(--black-secondary);
+  margin-top: 1rem;
+  min-width: min-content;
+}
+
+#discover-post {
+  position: relative;
+  top: 3.5em;
+}
+
+.post-author-date {
+  display: flex;
+  align-items: center;
+}
+
+.post-author-date > * {
+  margin-right: 0.5rem;
+}
+
+.card {
+  border: none !important;
+}
+
+#card-footer button {
+  color: var(--text-clr);
+}
+
+.community-name {
+  color: var(--text-clr);
+  text-decoration: none;
+}
+
+.author-name {
+  font-weight: 400;
+  font-size: 0.875rem;
+}

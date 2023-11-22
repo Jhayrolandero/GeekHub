@@ -12,6 +12,7 @@
   margin-top: 1rem;
   min-width: min-content;
 }
+
 .community-header {
   background-color: #282828;
   color: white;
@@ -137,11 +138,26 @@
 
 #community-nav .community-name {
   color: var(--text-clr);
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 400;
   margin: 0;
 }
 
 #community-nav a {
   text-decoration: none;
+}
+
+.community-name {
+  color: var(--text-clr);
+  text-decoration: none;
+}
+
+#rightbar {
+  position: relative;
+  right: 0;
+}
+
+.author-name {
+  font-weight: 400;
+  font-size: 0.875rem;
 }
