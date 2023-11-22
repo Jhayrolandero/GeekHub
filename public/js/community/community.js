@@ -38,18 +38,22 @@ $(document).ready(function () {
 
           $(".community-id").val(communityID);
 
-          $.get(
-            "app/controller/CommunityController.php",
-            {
-              action: "showCommunityNav",
-            },
-            function (data, status) {
-              if (status === "success") {
-                $("#community-side-nav").html(data);
-              }
-            }
-          );
           renderCommunityTimeline(communityID);
+          render_community_nav();
+        }
+      }
+    );
+  }
+
+  function render_community_nav() {
+    $.get(
+      "app/controller/CommunityController.php",
+      {
+        action: "showCommunityNav",
+      },
+      function (data, status) {
+        if (status === "success") {
+          $("#community-side-nav").html(data);
         }
       }
     );
@@ -221,6 +225,7 @@ $(document).ready(function () {
       function (data, status) {
         if (status === "success") {
           renderCommunityTimeline(communityID);
+          render_community_nav();
         } else {
           alert("Error!");
         }
@@ -250,6 +255,8 @@ $(document).ready(function () {
       function (data, status) {
         if (status === "success") {
           renderCommunityTimeline(communityID);
+          render_community_nav();
+          // loadPageFromHash();
         } else {
           alert("Error!");
         }

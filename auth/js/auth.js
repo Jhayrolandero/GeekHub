@@ -18,7 +18,11 @@ $(document).ready(function () {
           try {
             var response = JSON.parse(data);
 
-            if (response && response.url) {
+            if (response && response.url === "empty") {
+              alert("Empty Fields!");
+            } else if (response && response.url === "notFound") {
+              alert("User doesn't exist!");
+            } else if (response && response.url) {
               window.location.href = response.url; // Redirect to the register page
             } else {
               alert("Error occurred: Invalid response from the server.");

@@ -1,20 +1,24 @@
 <?php
 session_start();
 include "../model/AuthModel.php";
-class Auth{
+class Auth
+{
     private $model;
-    public function __construct(){
+    public function __construct()
+    {
         $this->model = new AuthModel();
     }
-    public function show_auth_page() {
-       // Construct the URL of the login page
-       $login_page_URL = "/socmed/app/view/authpage.php";
-       // Return the URL as a JSON response
-       echo json_encode(array("url" => $login_page_URL));
-       exit();
+    public function show_auth_page()
+    {
+        // Construct the URL of the login page
+        $login_page_URL = "/socmed/app/view/authpage.php";
+        // Return the URL as a JSON response
+        echo json_encode(array("url" => $login_page_URL));
+        exit();
     }
 
-    public function show_register_page() {
+    public function show_register_page()
+    {
         // Construct the URL of the register page
         $register_page_URL = "/socmed/app/view/registerpage.php";
 
@@ -23,17 +27,20 @@ class Auth{
         exit();
     }
 
-    public function add_user($username, $email, $password){
+    public function add_user($username, $email, $password)
+    {
         $this->model->add_user($username, $email, $password);
     }
 
-    public function check_email($email){
+    public function check_email($email)
+    {
         $result = $this->model->check_email($email);
 
         return $result;
     }
 
-    public function validate_user($email, $password){
+    public function validate_user($email, $password)
+    {
         $user_credentials = $this->model->validate_user($email);
 
         $user_password = $user_credentials[0]["password"];
@@ -60,18 +67,18 @@ if (empty($_SESSION["user"]) && $_SERVER["REQUEST_METHOD"] === "GET" && isset($_
 }
 
 // Adding user
-if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["request"]) && $_POST["request"] === "register"){
-   
-    if(empty($_POST["username"]) || empty($_POST["email"]) || empty($_POST["password"])){
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["request"]) && $_POST["request"] === "register") {
+
+    if (empty($_POST["username"]) || empty($_POST["email"]) || empty($_POST["password"])) {
         echo "Fill up the empty field/s!";
         die();
     }
 
-    if($auth->check_email($_POST["email"])){
+    if ($auth->check_email($_POST["email"])) {
         echo "Email already Exist!";
         die();
     }
-    
+
     $username = $_POST["username"];
     $email = $_POST["email"];
     $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
@@ -80,28 +87,27 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["request"]) && $_POST["
 }
 
 // Loggin in user
-if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["request"]) && $_POST["request"] === "login"){
-    if(empty($_POST["email"]) || empty($_POST["password"])){
-        echo "Fill up the empty field/s!";
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["request"]) && $_POST["request"] === "login") {
+    if (empty($_POST["email"]) || empty($_POST["password"])) {
+        echo json_encode(array("url" => "empty"));
         die();
     }
 
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    if(!$auth->check_email($email)){
-        echo "User doesn't exist!";
+    if (!$auth->check_email($email)) {
+        echo json_encode(array("url" => "notFound"));
         die();
     }
 
-    if($user_id = $auth->validate_user($email, $password)){
+    if ($user_id = $auth->validate_user($email, $password)) {
         $_SESSION["user"] = $user_id;
-        $url = "../../index.php";       
+        $url = "../../index.php";
         echo json_encode(array("url" => $url));
         exit();
-    }else{
+    } else {
         echo "Incorrect Password";
         die();
     }
-
 }

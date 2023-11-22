@@ -84,7 +84,7 @@
                                 <input type="password" class="form-control" placeholder="Password" id="r-password">
                             </div>
                             <div class="col-12 mt-4">
-                                <button class="btn" type="submit" id="register">Register</button>
+                                <button class="btn btn-light" type="submit" id="register">Register</button>
                             </div>
                         </form>
                     </div>
