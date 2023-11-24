@@ -1,5 +1,5 @@
 <?php
-function profile_Template($username, $userBio)
+function profile_Template($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount)
 {
 ?>
 
@@ -22,13 +22,53 @@ function profile_Template($username, $userBio)
             </div>
 
             <section class="row p-3 content-section">
-                <div class="col-md-4 col-sm-12 bg-secondary mt-3">
-                    <div class="bio-container">
-                        <textarea name="" cols="30" rows="10" class="form-control" id="bio-form"><?= $userBio ?></textarea>
+                <div class="col-md-3 col-sm-12  mt-3 bio-section ">
+                    <div class="row">
+                        <div class="col-6">
+                            <h4>Bio</h4>
+                        </div>
+                        <div class="col-6 text-end">
+                            <button id="add-bio-btn">Add Bio</button>
+                        </div>
                     </div>
-                    <button id="add-bio-btn">Add Bio</button>
+                    <div class="bio-container p-0">
+                        <textarea name="" class="form-control" id="bio-form"><?= $userBio ?></textarea>
+                    </div>
+                    <div class="row mt-4 date-container">
+                        <p>
+                            <ion-icon name="calendar" size="large"></ion-icon><?= $createdAt ?>
+                        </p>
+                    </div>
+
+                    <div class="row profile-stat">
+                        <div class="col-4 ">
+                            <div class="stat-value text-center">
+                                <?= $buddyCount ?>
+                            </div>
+                            <div class="stat text-center">
+                                Buddies
+                            </div>
+                        </div>
+                        <div class="col-4 ">
+                            <div class="stat-value text-center">
+                                <?= $postCount ?>
+                            </div>
+                            <div class="stat text-center">
+                                Posts
+                            </div>
+                        </div>
+                        <div class="col-4 ">
+                            <div class="stat-value text-center">
+                                <?= $likeCount ?>
+                            </div>
+                            <div class="stat text-center">
+                                Likes
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="col-md-4 col-sm-12 timeline-section">
+                <div class="col-md-5 col-sm-12 timeline-section">
 
                 </div>
             </section>

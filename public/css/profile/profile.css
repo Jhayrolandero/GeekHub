@@ -1,5 +1,12 @@
+:root {
+  --bg-color: #141414;
+  --bg-color1: #282828;
+  --text-color: #fff;
+}
+
 body {
   background-color: #141414;
+  color: var(--text-color);
 }
 
 #main {
@@ -60,4 +67,33 @@ body {
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
+}
+
+#bio-form {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.bio-section h4 {
+  color: var(--text-color);
+}
+
+.bio-section {
+  background-color: var(--bg-color1);
+  border-radius: 10px;
+  padding: 1.2em;
+}
+
+#add-bio-btn {
+  background-color: transparent;
+  color: var(--text-color);
+  border: none;
+}
+
+.profile-stat {
+  color: var(--text-color);
+  border-top: rgba(255, 255, 255, 0.5) solid 1px;
+  border-bottom: rgba(255, 255, 255, 0.5) solid 1px;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }

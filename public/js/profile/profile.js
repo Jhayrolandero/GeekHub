@@ -1,29 +1,4 @@
 $(document).ready(function () {
-  // default render your profile
-  // $.get(
-  //   "app/controller/UserController.php?action=getProfile&userProfile=you",
-  //   function (data, status) {
-  //     if (status === "success") {
-  //       $("#profile-container").html(data);
-
-  //       var userID = $("#userID").val();
-
-  //       $.get(
-  //         `app/controller/PostController.php?action=getPost&profileID=${userID}`,
-  //         function (data, status) {
-  //           if (status === "success") {
-  //             $(".timeline-section").html(data);
-  //           } else {
-  //             alert("Error! try again");
-  //           }
-  //         }
-  //       );
-  //     } else {
-  //       alert("Error! try again");
-  //     }
-  //   }
-  // );
-
   $("#profile-container").on("click", "#add-bio-btn", function () {
     // Now, the code will only run when the button is clicked
 
@@ -74,6 +49,7 @@ $(document).ready(function () {
       `app/controller/UserController.php?action=getProfile&userProfile=${userID}`,
       function (data, status) {
         if (status === "success") {
+          // console.log(data);
           $("#profile-container").html(data);
 
           $.get(

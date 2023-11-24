@@ -30,9 +30,9 @@ class UserController
         }
     }
 
-    public function show_profile($username, $userBio)
+    public function show_profile($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount)
     {
-        return profile_Template($username, $userBio);
+        return profile_Template($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount);
     }
 
     public function add_bio($userID, $userBio)
@@ -49,6 +49,18 @@ class UserController
     public function show_search_user($username, $userID)
     {
         return template_search($username, $userID);
+    }
+
+    public static function month_day($date)
+    {
+        // Create a DateTime object from the string
+        $dateTime = new DateTime($date);
+
+        // Format the DateTime object as "F j" (Month Day)
+        $formattedDate = $dateTime->format("F j");
+
+        // Output the result
+        return $formattedDate;
     }
 }
 
@@ -92,9 +104,16 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $id = $_GET["userProfile"];
         $result = $user->get_user($id);
 
+        // var_dump($result);
         $username = $result[0]["username"];
         $userBio = isset($result[0]["user_bio"]) ? $result[0]["user_bio"] : "Nothing to see here";
-        echo $user->show_profile($username, $userBio);
+        $date = $result[0]["create_date"];
+        $createdAt = $user::month_day($date);
+        $buddyCount = $result[0]["buddy_count"];
+        $postCount = $result[0]["post_count"];
+        $likeCount = $result[0]["like_count"];
+
+        echo $user->show_profile($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount);
     }
 
     // Search User

@@ -5,21 +5,59 @@ class User extends Database
 {
 
     // Get user's info
-    public function get_user($user_id)
+    public function get_user($user_id = null)
     {
         try {
-            $sql = "SELECT * FROM users
-                    WHERE user_id = ?";
+            $sql = "SELECT users.* ";
+
+            if ($user_id != null) {
+                $sql = "SELECT users.*, 
+                (
+                    SELECT 
+                    COUNT(friendships.friendship_id)
+                    FROM friendships
+                    WHERE (friendships.user_id = :user_id OR friendships.friend_id = :user_id)
+                    AND friendships.status = 'accepted'
+                ) AS buddy_count,
+                (
+                    SELECT
+                    COUNT(posts.post_id)
+                    FROM posts
+                    WHERE posts.user_id = :user_id
+                ) AS post_count,
+                (
+                    SELECT
+                    COUNT(likes.like_id)
+                    FROM likes
+                    WHERE likes.post_id IN(
+                    SELECT posts.post_id
+                    FROM posts
+                    WHERE posts.user_id = :user_id
+                )
+                ) AS like_count";
+            }
+
+            $sql .= " FROM users";
+
+            if ($user_id != null) {
+                $sql .= " WHERE users.user_id = :user_id";
+            }
 
             $stmt = $this->connect()->prepare($sql);
 
-            $stmt->execute([$user_id]);
+            if ($user_id != null) {
+                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            }
+
+            $stmt->execute();
 
             return $stmt->fetchAll();
         } catch (PDOException $e) {
             return $e;
         }
     }
+
+
 
     // Set BIO
     public function add_bio($userID, $userBio)
