@@ -8,10 +8,10 @@ function template_commentBox($username, $time, $content, $userID, $commentID, $p
         <input type="text" value="<?= $commentID ?>" class="comment-id" hidden>
         <input type="text" value="<?= $postID ?>" class="comment-post-id" hidden>
         <div class="row h-100">
-            <div class="col-1 .mx-auto comment-icon">
+            <div class="col-1 .mx-auto comment-icon p-0 text-center">
                 <img src="public\images\you.png" alt="" style="width: 50px">
             </div>
-            <div class="col-11 comment-paragraph">
+            <div class="col-11 comment-paragraph p-0">
                 <div class="row comment-info">
                     <div class="col-3"><?= $username ?></div>
                     <div class="col-6"><?= $time ?></div>

@@ -29,6 +29,78 @@ $(document).ready(function () {
     );
   }
 
+  /* 
+  =============
+  
+  Like System
+
+  =============
+  */
+
+  // Like
+  $("#discover-post").on("click", ".like-btn", function () {
+    var groupPostID = $(this)
+      .closest(".community-post-card")
+      .find(".community-post-id")
+      .val();
+    var userID = $(this).closest(".community-post-card").find(".user-id").val();
+    // var communityID = $(this)
+    //   .closest(".community-post-card")
+    //   .find(".community-id")
+    //   .val();
+
+    $.post(
+      "app/controller/CommunityController.php",
+      {
+        action: "likeCommmunityPost",
+        groupPostID: groupPostID,
+        userID: userID,
+      },
+      function (data, status) {
+        if (status === "success") {
+          render_dicover_page();
+        } else {
+          alert("Error!");
+        }
+      }
+    );
+  });
+
+  // Unlike
+  $("#discover-post").on("click", ".unlike-btn", function () {
+    var groupPostID = $(this)
+      .closest(".community-post-card")
+      .find(".community-post-id")
+      .val();
+    var userID = $(this).closest(".community-post-card").find(".user-id").val();
+    var communityID = $(this)
+      .closest(".community-post-card")
+      .find(".community-id")
+      .val();
+
+    $.post(
+      "app/controller/CommunityController.php",
+      {
+        action: "unlikeCommmunityPost",
+        groupPostID: groupPostID,
+        userID: userID,
+      },
+      function (data, status) {
+        if (status === "success") {
+          render_dicover_page();
+        } else {
+          alert("Error!");
+        }
+      }
+    );
+  });
+
+  /*
+  ====================
+  COMMENT
+  ====================
+  */
+
   function renderComment(groupPostID) {
     $.get(
       "app/controller/CommunityController.php",
@@ -43,12 +115,6 @@ $(document).ready(function () {
       }
     );
   }
-
-  /*
-  ===============
-      Comment
-  ===============
-  */
   // Open Comment
   $("#discover-post").on("click", ".comment-btn", function () {
     $(".community-comment-modal").slideDown();
@@ -86,7 +152,7 @@ $(document).ready(function () {
     var comment = $(".comment-input").val();
     var groupPostID = $(".comment-post-id").val();
     var userID = $(".comment-user-id").val();
-    var groupID = $(".comment-community-id").val();
+    // var groupID = $(".comment-community-id").val();
 
     $.post(
       "app/controller/CommunityController.php",
@@ -100,7 +166,7 @@ $(document).ready(function () {
         if (status === "success") {
           // Update contents dynamically
           renderComment(groupPostID);
-          renderCommunityTimeline(groupID);
+          console.log(data);
         } else {
           alert("Error! Try again");
         }
