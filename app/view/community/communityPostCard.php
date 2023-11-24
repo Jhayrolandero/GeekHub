@@ -5,10 +5,10 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
     <form action="" class="container community-post-card">
         <div class="card">
             <!-- Post Info like user -->
-            <div class="card-header p-3" id="card-header">
+            <div class="card-header p-2" id="card-header">
                 <div class="row">
                     <!-- Profile -->
-                    <div class="col-xl-2 col-lg-2 col-md-1 col-sm-1 col-2">
+                    <div class="col-xl-1 col-lg-2 col-md-1 col-sm-1 col-2 p-0">
                         <a href="#group#<?= $groupID ?>" class="mx-auto">
                             <img src="public/images/you.png" alt="" style="width:45px" class="rounded-pill">
                         </a>
@@ -24,7 +24,9 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                         </div>
                         <div class="post-author-date">
                             <div class="author-name">
-                                <?= $author ?>
+                                <a href="#profile#<?= $authorID ?>">
+                                    <?= $author ?>
+                                </a>
                             </div>
                             <small>
                                 &#8226;
@@ -33,7 +35,7 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                         </div>
                     </div>
                     <!-- Del and Update Dropdown -->
-                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-1 col-2 option-col text-end">
+                    <div class="col-xl-3 col-lg-2 col-md-3 col-sm-1 col-2 p-0 option-col text-end">
                         <button data-bs-toggle="dropdown" class="option-btn">
                             <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                         </button>

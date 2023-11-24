@@ -76,10 +76,10 @@ session_start();
             <main class="col-md-9 col-lg-8 main-content mx-auto" id="main-content">
                 <!-- For posting -->
                 <div class="row p-3" id="post-bar">
-                    <div class="col-lg-2 col-md-1 col-3">
+                    <div class="col-xl-1 col-lg-2 col-md-1 col-3 p-0">
                         <img src="public/images/you.png" alt="" style="width: 40px;">
                     </div>
-                    <div class="col-lg-10 col-md-11 col-9">
+                    <div class="col-xl-11 col-lg-10 col-md-11 col-9 p-0">
                         <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myModal" id="add-post-btn">
                             What's on your mind?
                         </button>
