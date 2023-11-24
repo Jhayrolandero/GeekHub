@@ -37,7 +37,6 @@ class Post extends Database
     public function delete_post($postID)
     {
         try {
-
             $sql = "DELETE FROM posts
                     WHERE post_id = ?";
 

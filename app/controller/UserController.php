@@ -30,9 +30,9 @@ class UserController
         }
     }
 
-    public function show_profile($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount)
+    public function show_profile($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID)
     {
-        return profile_Template($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount);
+        return profile_Template($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID);
     }
 
     public function add_bio($userID, $userBio)
@@ -86,20 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["action"]) && $_GET["act
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
-    // For viewing other profile
-    // if (isset($_GET["action"]) && $_GET["action"] === "getProfile" && isset($_GET["buddyID"])) {
-    //     $id = $_GET["buddyID"];
-
-    //     // echo $id;
-    //     $result = $user->get_user($id);
-
-    //     $username = $result[0]["username"];
-    //     $userBio = isset($result[0]["user_bio"]) ? $result[0]["user_bio"] : "Nothing to see here";
-
-    //     echo profile_Template($username, $userBio);
-    // }
-
-    // Get your profile
+    // Get profile
     if (isset($_GET["action"]) && $_GET["action"] === "getProfile" && $_GET["userProfile"]) {
         $id = $_GET["userProfile"];
         $result = $user->get_user($id);
@@ -112,8 +99,9 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $buddyCount = $result[0]["buddy_count"];
         $postCount = $result[0]["post_count"];
         $likeCount = $result[0]["like_count"];
+        $userID = $result[0]["user_id"];
 
-        echo $user->show_profile($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount);
+        echo $user->show_profile($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID);
     }
 
     // Search User

@@ -13,6 +13,8 @@ class Comment extends Database
 
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute([$user_id, $post_id, $comment]);
+
+            return "You commented!";
         } catch (PDOException $e) {
             return $e;
         }

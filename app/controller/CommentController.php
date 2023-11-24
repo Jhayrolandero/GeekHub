@@ -12,12 +12,7 @@ class CommentController
     // Adding Comment
     public function add_comment($user_id, $post_id, $comment)
     {
-        try {
-            $this->model->add_comment($user_id, $post_id, $comment);
-            return "You commented";
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
+        return $this->model->add_comment($user_id, $post_id, $comment);
     }
 
     // Showing Comment
@@ -112,8 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $userID = $_POST["userID"];
             $postID = $_POST["postID"];
 
-            $comment->add_comment($userID, $postID, $commentContent);
-            echo "Posted Successfully";
+            echo $comment->add_comment($userID, $postID, $commentContent);
         } catch (Exception $e) {
             echo $e->getMessage();
         }

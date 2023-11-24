@@ -1,5 +1,5 @@
 <?php
-function profile_Template($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount)
+function profile_Template($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID)
 {
 ?>
 
@@ -68,11 +68,26 @@ function profile_Template($username, $userBio, $createdAt, $buddyCount, $postCou
                     </div>
 
                 </div>
-                <div class="col-md-5 col-sm-12 timeline-section">
+                <div class="col-md-5 col-sm-12 ms-2">
+                    <?php
+                    if ($_SESSION["user"] == $userID) {
+                    ?>
+                        <div class="row mt-3">
+                            <button id="open-post-btn"> Create post </button>
+                        </div>
 
+                    <?php
+                    }
+
+                    ?>
+                    <div class="row timeline-section">
+
+
+                    </div>
                 </div>
             </section>
         </div>
+
     </body>
 <?php
 }
