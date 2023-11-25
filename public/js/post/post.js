@@ -7,6 +7,7 @@ $(document).ready(function () {
   $("#post-btn").click(function (event) {
     event.preventDefault(); // Prevent the default form submission
     var content = $("#post-form").val();
+    var userID = $("#user-id-post").val();
     // Create a FormData object
     var formData = new FormData();
 

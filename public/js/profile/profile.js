@@ -148,6 +148,8 @@ $(document).ready(function () {
     event.preventDefault(); // Prevent the default form submission
     var content = $("#post-form").val();
     // Create a FormData object
+    var userID = $("#user-id-post").val();
+
     var formData = new FormData();
 
     // Append the content and image to the FormData
@@ -167,12 +169,7 @@ $(document).ready(function () {
             alert("No Empty Homie!");
           }
 
-          $.get(
-            "app/controller/PostController.php?action=getPost",
-            function (data, status) {
-              $(".post-container").html(data);
-            }
-          );
+          render_timeline(userID);
         } else {
           alert("Error occurred! Try again later.");
         }

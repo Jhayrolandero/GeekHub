@@ -9,82 +9,68 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        body {
+            background-color: #141414;
+            color: #fff;
         }
 
-        /* Style for the searchbar container */
-        .searchbar-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Style for the searchbar content */
-        .searchbar-content {
-            display: none;
-            position: absolute;
+        .profile-header {
             background-color: #282828;
-            color: white;
+            height: fit-content;
+            border-radius: 10px;
+        }
+
+        .bg-img img {
             width: 100%;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            border-radius: 10px;
         }
 
-        .searchbar-content ul {
-            list-style: none;
-            padding: 1em;
+        .profile-info {
+            position: relative;
         }
 
-        .searchbar-content ul li {
-            width: 100%;
-            padding: .5em;
-            cursor: pointer;
-        }
-
-        .searchbar-content ul li:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Style for the searchbar items */
-        .searchbar-item {
-            display: block;
-        }
-
-        /* Show the searchbar content when the input is focused */
-        .searchbar-container:focus-within .searchbar-content {
-            display: block;
-        }
-
-        .username {
-            white-space: nowrap;
-            /* Prevent text from wrapping */
-            overflow: hidden;
-            /* Hide the overflowing content */
-            text-overflow: ellipsis;
-            /* Display an ellipsis (...) for overflow */
+        .profile-info .profile-img {
+            width: 150px;
+            height: 150px;
+            display: inline-block;
+            position: absolute;
+            left: 10%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
         }
     </style>
-    <script>
-        $(document).ready(function() {
 
-            $.get("app/controller/CommunityController.php", {
-                action: "showCommunityComment",
-                groupPostID: 15
-            }, function(data, status) {
-                if (status === "success") {
-                    $(".container").html(data);
-                }
-            });
-        });
-    </script>
 </head>
 
 <body>
 
-    <div class="container"></div>
+    <header class="container profile-header pb-5">
+        <div class="row">
+            <div class="bg-img">
+                <img src="public\images\pngtree-abstract-bg-image_914283.jpg" alt="background-image">
+            </div>
+        </div>
+        <div class="profile-info">
+            <div class="row">
+                <div class="col-2">
+                    <div class="row">
+                        <img src="public\images\zed.jpg" class="profile-img" alt="">
+                    </div>
+                </div>
+                <div class="col-7 profile-info-val">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4 class="profile-name">Cjay</h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 

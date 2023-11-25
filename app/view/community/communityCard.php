@@ -7,7 +7,7 @@ function template_community($groupName, $desc, $hasJoined, $memberCount, $likeCo
 
     <body>
         <!-- Header -->
-        <header class="community-header">
+        <header class="community-header container">
             <div class="row">
                 <div class="bg-img">
                     <img src="public\images\bg-login4.webp" alt="">
@@ -27,9 +27,9 @@ function template_community($groupName, $desc, $hasJoined, $memberCount, $likeCo
                             <div class="col-12">
                                 <h4><?= $groupName ?></h4>
                             </div>
-                            <div class="col-12">
+                            <!-- <div class="col-12">
                                 <p>Members</p>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="col-3">

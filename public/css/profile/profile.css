@@ -3,19 +3,15 @@
   --bg-color1: #282828;
   --text-color: #fff;
 }
-
 body {
   background-color: #141414;
-  color: var(--text-color);
+  color: #fff;
 }
 
-#main {
-  position: relative;
-  top: 4rem;
-}
-
-#profile-header {
-  background-image: url("../images/background.jpg");
+.profile-header {
+  background-color: #282828;
+  height: fit-content;
+  border-radius: 10px;
 }
 
 .bg-img img {
@@ -26,7 +22,38 @@ body {
   border-radius: 10px;
 }
 
-.profile-container {
+.profile-info {
+  position: relative;
+}
+
+.profile-info .profile-img {
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  position: absolute;
+  left: 10%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+/* body {
+  background-color: #141414;
+  color: var(--text-color);
+}
+
+#main {
+  position: relative;
+  top: 4rem;
+}
+
+#profile-header .bg-img img {
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  border-radius: 10px;
+}
+
+#profile-container {
   position: relative;
   background-color: #282828;
   padding: 0.5em;
@@ -41,26 +68,6 @@ body {
 }
 
 /* The user Icon */
-.profile-img {
-  width: 150px;
-  height: 150px;
-  border: 3px solid #fff;
-  border-radius: 50%;
-  display: inline-block;
-  position: absolute;
-  left: 10%;
-  transform: translate(-50%, -50%);
-  border: 5px solid #282828;
-}
-
-.profile-info {
-  display: inline-block;
-  position: absolute;
-  left: 20%;
-  transform: translate(-50%, -50%);
-  color: white;
-  top: 5rem;
-}
 
 .content-section {
   display: flex;
