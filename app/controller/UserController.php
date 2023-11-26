@@ -73,6 +73,8 @@ class UserController
 $user = new UserController();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    // For Bio
     if (isset($_POST["action"]) && $_POST["action"] === "addBio") {
         try {
 
@@ -85,6 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
+    // For Update Profile
     if (isset($_POST["action"]) && $_POST["action"] === "updateProfile") {
         try {
 

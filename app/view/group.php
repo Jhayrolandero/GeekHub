@@ -25,6 +25,9 @@ session_start();
 
     <!-- Modal Comment -->
     <?php include "community/communityCommentModal.php" ?>
+
+    <!-- Update Modal -->
+    <?php include "community/updateCommunityModal.php" ?>
 </body>
 
 </html>

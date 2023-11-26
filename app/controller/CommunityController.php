@@ -27,15 +27,15 @@ class CommunityController
     }
 
     // Community template
-    public function community_nav($communityName, $communityID)
+    public function community_nav($communityName, $communityID, $groupPic)
     {
-        return template_community_nav($communityName, $communityID);
+        return template_community_nav($communityName, $communityID, $groupPic);
     }
 
     // Render it
-    public function show_community($communityName, $desc, $hasJoined, $memberCount, $likeCount, $postContent, $createdAt)
+    public function show_community($communityName, $desc, $hasJoined, $memberCount, $likeCount, $postContent, $createdAt, $groupID, $groupPic, $groupBG)
     {
-        return template_community($communityName, $desc, $hasJoined, $memberCount, $likeCount, $postContent, $createdAt);
+        return template_community($communityName, $desc, $hasJoined, $memberCount, $likeCount, $postContent, $createdAt, $groupID, $groupPic, $groupBG);
     }
 
     // Join community
@@ -54,6 +54,12 @@ class CommunityController
     public function leave_community($user_id, $community_id)
     {
         return $this->model->leave_community($user_id, $community_id);
+    }
+
+    // Update Community
+    public function edit_community($groupID, $groupName, $communityProfile, $communityBG)
+    {
+        return $this->model->edit_community($groupID, $groupName, $communityProfile, $communityBG);
     }
 
     // Create Post
@@ -119,6 +125,7 @@ class CommunityController
     {
         return $this->model->show_comment($groupPostID);
     }
+
 
     // Time formatter
     public static function time_elapsed_string($datetime, $full = false)
@@ -199,6 +206,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo $community->create_community($groupName, $groupDesc);
         } catch (Exception $e) {
             echo $e->getMessage();
+        }
+    }
+
+    // For Updating Community
+    if (isset($_POST["action"]) && $_POST["action"] === "updateCommunity") {
+        try {
+
+            $communityID = $_POST["communityID"];
+            $communityName = $_POST["communityName"];
+            $image = (isset($_FILES["communityPic"]) && $_FILES["communityPic"]["error"] === 0) ? file_get_contents($_FILES['communityPic']['tmp_name']) : null;
+            $imageBG = (isset($_FILES["communityBG"]) && $_FILES["communityBG"]["error"] === 0) ? file_get_contents($_FILES['communityBG']['tmp_name']) : null;
+
+            echo $community->edit_community($communityID, $communityName, $image, $imageBG);
+            // echo $user->edit_profile($userID, $username, $image, $imageBG);
+        } catch (Exception $e) {
+            echo $e;
         }
     }
 
@@ -300,7 +323,9 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
                 $groupName = $result["group_name"];
                 $groupID = $result["group_id"];
-                echo $community->community_nav($groupName, $groupID);
+                $groupPic = $result["community_profile"];
+
+                echo $community->community_nav($groupName, $groupID, $groupPic);
             }
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -326,10 +351,14 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
                 $likeCount = $result["like_count"];
                 $postCount = $result["post_count"];
                 $createdAt = $result["created_at"];
+                $groupPic = $result["community_profile"];
+                $groupBG = $result["community_background"];
 
                 $date = $community::month_day($createdAt);
 
-                echo $community->show_community($groupName, $groupDesc, $hasJoined, $memberCount, $likeCount, $postCount, $date);
+                $groupID = $result["group_id"];
+
+                echo $community->show_community($groupName, $groupDesc, $hasJoined, $memberCount, $likeCount, $postCount, $date, $groupID, $groupPic, $groupBG);
             }
         } catch (Exception $e) {
             echo $e->getMessage();

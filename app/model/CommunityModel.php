@@ -75,38 +75,6 @@ class Community extends Database
         }
     }
 
-    /*
-SELECT
-    groups.*,
-    COUNT(user_group.user_id) AS member_count,
-    (
-    SELECT COUNT(group_posts.group_post_id)
-FROM 
- 	groups
-LEFT JOIN
-	 group_posts ON groups.group_id = group_posts.group_id
-WHERE groups.group_id = 3
-) AS post_count,
-(
-	SELECT COUNT(group_post_likes.like_id)
-   	FROM
-    group_post_likes
-    LEFT JOIN 
-    	group_posts ON group_posts.group_post_id = group_post_likes.group_post_id
-    WHERE  group_posts.group_id = 3
-    	
-) AS like_count
-FROM
-    groups
-LEFT JOIN
-    user_group ON groups.group_id = user_group.group_id
-WHERE groups.group_id = 3;
-
-
-
-
-
-*/
     // Join community
     public function join_community($user_id, $community_id, $role)
     {
@@ -302,6 +270,41 @@ WHERE groups.group_id = 3;
             return $stmt->fetchAll();
         } catch (PDOException $e) {
             return $e;
+        }
+    }
+
+    // Update Community
+    public function edit_community($groupID, $groupName, $communityProfile, $communityBG)
+    {
+        try {
+            $sql = "UPDATE groups
+                    SET group_name = ?";
+
+            if ($communityProfile != null) {
+                $sql .= ", community_profile = ?";
+            }
+
+            if ($communityBG != null) {
+                $sql .= ", community_background = ?";
+            }
+
+            $sql .= " WHERE group_id = ?";
+
+            $stmt = $this->connect()->prepare($sql);
+
+            if ($communityProfile != null && $communityBG != null) {
+                $stmt->execute([$groupName, $communityProfile, $communityBG, $groupID]);
+            } else if ($communityProfile != null) {
+                $stmt->execute([$groupName, $communityProfile, $groupID]);
+            } else if ($communityBG != null) {
+                $stmt->execute([$groupName, $communityBG, $groupID]);
+            } else {
+                $stmt->execute([$groupName, $groupID]);
+            }
+
+            return "Community Update Successfully!";
+        } catch (PDOException $e) {
+            return $e->getMessage();
         }
     }
 }

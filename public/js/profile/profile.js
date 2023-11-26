@@ -1,28 +1,4 @@
 $(document).ready(function () {
-  $("#profile-container").on("click", "#add-bio-btn", function () {
-    // Now, the code will only run when the button is clicked
-
-    // Access the bio-content inside the click event
-    var userID = $("#userID").val();
-    var bio = $("#bio-form").val();
-
-    $.post(
-      "app/controller/UserController.php",
-      {
-        action: "addBio",
-        userID: userID,
-        bio: bio,
-      },
-      function (data, status) {
-        if (status === "success") {
-          alert(data);
-        } else {
-          alert("Error");
-        }
-      }
-    );
-  });
-
   // Function to load a page based on the hash
   function loadPageFromHash() {
     var hash = window.location.hash.substring(1);
@@ -49,7 +25,6 @@ $(document).ready(function () {
       `app/controller/UserController.php?action=getProfile&userProfile=${userID}`,
       function (data, status) {
         if (status === "success") {
-          // console.log(data);
           $("#profile-container").html(data);
 
           render_timeline(userID);
@@ -72,6 +47,36 @@ $(document).ready(function () {
       }
     );
   }
+
+  /*
+  ================
+      BIO
+  ================
+  */
+
+  $("#profile-container").on("click", "#add-bio-btn", function () {
+    // Now, the code will only run when the button is clicked
+
+    // Access the bio-content inside the click event
+    var userID = $("#userID").val();
+    var bio = $("#bio-form").val();
+
+    $.post(
+      "app/controller/UserController.php",
+      {
+        action: "addBio",
+        userID: userID,
+        bio: bio,
+      },
+      function (data, status) {
+        if (status === "success") {
+          alert(data);
+        } else {
+          alert("Error");
+        }
+      }
+    );
+  });
 
   /*
   ==============
@@ -379,16 +384,7 @@ $(document).ready(function () {
       processData: false,
       success: function (data, status) {
         if (status === "success") {
-          alert(data);
-          // if (data == 0) {
-          //   alert("No Empty Homie!");
-          // }
-          // $.get(
-          //   "app/controller/PostController.php?action=getPost",
-          //   function (data, status) {
-          //     $(".post-container").html(data);
-          //   }
-          // );
+          render_user_profile(userID);
         } else {
           alert("Error occurred! Try again later.");
         }

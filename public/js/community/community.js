@@ -146,6 +146,57 @@ $(document).ready(function () {
     );
   });
 
+  // Updating COmmunity profile
+  $("#community-container").on("click", ".edit-community-btn", function () {
+    var communityName = $("#community-name").text();
+
+    $("#community-name-input").val(communityName);
+
+    $(".update-community-modal").slideDown();
+  });
+
+  // Close
+  $("#close-update-community").click(function () {
+    $(".update-community-modal").slideUp();
+  });
+
+  // Update Community
+  $("#update-community-btn").click(function (event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    var communityName = $("#community-name-input").val();
+    var communityID = $("#community-id").val();
+
+    // Create a FormData object
+    var formData = new FormData();
+
+    // Append the content and image to the FormData
+    formData.append("action", "updateCommunity");
+    formData.append("communityName", communityName);
+    formData.append("communityID", communityID);
+    formData.append("communityPic", $("#community-pic-input")[0].files[0]);
+    formData.append("communityBG", $("#community-bg-input")[0].files[0]);
+
+    $.ajax({
+      type: "POST",
+      url: "app/controller/CommunityController.php",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (data, status) {
+        if (status === "success") {
+          render_community(communityID);
+        } else {
+          alert("Error occurred! Try again later.");
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(error);
+        alert("An error occurred while sending the data.");
+      },
+    });
+  });
+
   /*
 ======================
         POSTING
