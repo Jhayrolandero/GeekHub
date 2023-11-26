@@ -177,6 +177,7 @@ WHERE groups.group_id = 3;
     {
         try {
             $sql = "SELECT users.username, 
+                    users.user_profile,
                     group_posts.content, 
                     group_posts.created_at, 
                     group_posts.group_post_id, 

@@ -336,4 +336,67 @@ $(document).ready(function () {
       }
     );
   });
+  /*
+    ================
+    Profile Options
+    ================
+    */
+
+  // Open profile modal
+  $("#profile-container").on("click", ".edit-profile-btn", function () {
+    var username = $("#profileName").text();
+
+    $(".curr-profile-name").val(username);
+    $(".update-profile-modal").slideDown();
+  });
+
+  // Close
+  $("#close-update-profile").click(function () {
+    $(".update-profile-modal").slideUp();
+  });
+
+  // Update Profile
+  $("#update-profile-btn").click(function (event) {
+    event.preventDefault(); // Prevent the default form submission
+    var username = $("#username-input").val();
+    var userID = $("#user-profile-id").val();
+
+    // Create a FormData object
+    var formData = new FormData();
+
+    // Append the content and image to the FormData
+    formData.append("action", "updateProfile");
+    formData.append("username", username);
+    formData.append("userID", userID);
+    formData.append("profilePic", $("#profile-pic-input")[0].files[0]);
+    formData.append("profileBG", $("#profile-bg-input")[0].files[0]);
+
+    $.ajax({
+      type: "POST",
+      url: "app/controller/UserController.php",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (data, status) {
+        if (status === "success") {
+          alert(data);
+          // if (data == 0) {
+          //   alert("No Empty Homie!");
+          // }
+          // $.get(
+          //   "app/controller/PostController.php?action=getPost",
+          //   function (data, status) {
+          //     $(".post-container").html(data);
+          //   }
+          // );
+        } else {
+          alert("Error occurred! Try again later.");
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(error);
+        alert("An error occurred while sending the data.");
+      },
+    });
+  });
 });

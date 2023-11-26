@@ -70,9 +70,9 @@ class CommunityController
     }
 
     // Template for post card
-    public function community_post_card($groupName, $author, $content, $date, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCount, $commentCounts)
+    public function community_post_card($groupName, $author, $content, $date, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCount, $commentCounts, $profileImg)
     {
-        return template_community_post_card($groupName, $author, $content, $date, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCount, $commentCounts);
+        return template_community_post_card($groupName, $author, $content, $date, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCount, $commentCounts, $profileImg);
     }
 
     // For Liking
@@ -360,8 +360,9 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
                 $groupID = $result["group_id"];
                 $likeCounts = $result["like_count"];
                 $commentCounts = $result["comment_count"];
+                $profileImg = $result["user_profile"];
 
-                echo $community->community_post_card($groupName, $author, $content, $timestamp, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCounts, $commentCounts);
+                echo $community->community_post_card($groupName, $author, $content, $timestamp, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCounts, $commentCounts, $profileImg);
             }
         } catch (Exception $e) {
             return $e->getMessage();

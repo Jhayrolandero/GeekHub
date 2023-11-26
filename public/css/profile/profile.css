@@ -8,10 +8,16 @@ body {
   color: #fff;
 }
 
+#profile-container {
+  position: relative;
+  top: 4em;
+}
+
 .profile-header {
   background-color: #282828;
   height: fit-content;
   border-radius: 10px;
+  padding: 0.5em;
 }
 
 .bg-img img {
@@ -103,4 +109,9 @@ body {
   border-bottom: rgba(255, 255, 255, 0.5) solid 1px;
   padding-top: 1em;
   padding-bottom: 1em;
+}
+
+.edit-profile-btn {
+  background-color: transparent;
+  color: var(--text-color);
 }

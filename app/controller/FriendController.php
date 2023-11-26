@@ -99,9 +99,9 @@ class FriendController
     }
 
     // Show friend nav
-    public function friend_nav($username, $userID)
+    public function friend_nav($username, $userID, $profileImg)
     {
-        return template_friend_nav($username, $userID);
+        return template_friend_nav($username, $userID, $profileImg);
     }
 }
 
@@ -193,7 +193,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
                 // Rendering of users' info
                 foreach ($users as $user) {
-                    echo $friend->friend_nav($user["username"], $user["user_id"]);
+                    echo $friend->friend_nav($user["username"], $user["user_id"], $user["user_profile"]);
                 }
                 break;
         }

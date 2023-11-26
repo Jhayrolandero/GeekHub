@@ -30,14 +30,20 @@ class UserController
         }
     }
 
-    public function show_profile($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID)
+    public function show_profile($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID, $profileImg, $profileBG)
     {
-        return profile_Template($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID);
+        return profile_Template($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID, $profileImg, $profileBG);
     }
 
     public function add_bio($userID, $userBio)
     {
         return $this->model->add_bio($userID, $userBio);
+    }
+
+    // Update Profile
+    public function edit_profile($userID, $username, $profileImg, $profileBG)
+    {
+        return $this->model->edit_profile($userID, $username, $profileImg, $profileBG);
     }
 
     public function search_user($username)
@@ -78,6 +84,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo "Error";
         }
     }
+
+    if (isset($_POST["action"]) && $_POST["action"] === "updateProfile") {
+        try {
+
+            $userID = $_POST["userID"];
+            $username = $_POST["username"];
+            $image = (isset($_FILES["profilePic"]) && $_FILES["profilePic"]["error"] === 0) ? file_get_contents($_FILES['profilePic']['tmp_name']) : null;
+            $imageBG = (isset($_FILES["profileBG"]) && $_FILES["profileBG"]["error"] === 0) ? file_get_contents($_FILES['profileBG']['tmp_name']) : null;
+
+            echo $user->edit_profile($userID, $username, $image, $imageBG);
+        } catch (Exception $e) {
+            echo $e;
+        }
+    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["action"]) && $_GET["action"] === "getID") {
@@ -100,8 +120,10 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $postCount = $result[0]["post_count"];
         $likeCount = $result[0]["like_count"];
         $userID = $result[0]["user_id"];
+        $profileImg = $result[0]["user_profile"];
+        $profileBG = $result[0]["profile_background"];
 
-        echo $user->show_profile($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID);
+        echo $user->show_profile($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID, $profileImg, $profileBG);
     }
 
     // Search User

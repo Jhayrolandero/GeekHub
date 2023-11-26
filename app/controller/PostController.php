@@ -217,8 +217,9 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $hasLiked = $post->has_liked($post_id, $user_id);
             $commentCount = $items["comment_count"];
             $userPost = $items["user_id"];
+            $profileImg = $items["user_profile"];
 
-            echo template_post($name, $content, $date, $post_id, $like_count, $hasLiked, $post_image, $commentCount, $userPost);
+            echo template_post($name, $content, $date, $post_id, $like_count, $hasLiked, $post_image, $commentCount, $userPost, $profileImg);
         }
 
         if (isset($_GET["id"])) {

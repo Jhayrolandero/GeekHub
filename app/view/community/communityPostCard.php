@@ -1,5 +1,5 @@
 <?php
-function template_community_post_card($groupName, $author, $content, $date, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCount, $commentCounts)
+function template_community_post_card($groupName, $author, $content, $date, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCount, $commentCounts, $profileImg)
 {
 ?>
     <form action="" class="container community-post-card">
@@ -10,7 +10,21 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                     <!-- Profile -->
                     <div class="col-xl-1 col-lg-2 col-md-1 col-sm-1 col-2 p-0">
                         <a href="#group#<?= $groupID ?>" class="mx-auto">
-                            <img src="public/images/you.png" alt="" style="width:45px" class="rounded-pill">
+                            <?php
+                            if ($profileImg) {
+                                $base64Image = base64_encode($profileImg);
+                                $imageSrc = "data:image/jpeg;base64," . $base64Image;
+                            ?>
+                                <img src="<?= $imageSrc ?>" class="profile-img rounded-pill" style="width:45px;" alt="Profile Image">
+                            <?php
+                            } else {
+                            ?>
+                                <img src="public\images\you.png" class="profile-img rounded-pill" style="width:45px;" alt="Profile Image">
+
+                            <?php
+                            }
+                            ?>
+                            <!-- <img src="public/images/you.png" alt="" style="width:45px" class="rounded-pill"> -->
                         </a>
                     </div>
                     <!-- Username and Community Name -->

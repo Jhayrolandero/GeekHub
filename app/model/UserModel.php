@@ -92,4 +92,39 @@ class User extends Database
             return $e;
         }
     }
+
+    // Update a Post
+    public function edit_profile($userID, $username, $profileImg, $profileBG)
+    {
+        try {
+            $sql = "UPDATE users 
+                    SET username = ?";
+
+            if ($profileImg != null) {
+                $sql .= ", user_profile = ?";
+            }
+
+            if ($profileBG != null) {
+                $sql .= ", profile_background = ?";
+            }
+
+            $sql .= " WHERE user_id = ?";
+
+            $stmt = $this->connect()->prepare($sql);
+
+            if ($profileImg != null && $profileBG != null) {
+                $stmt->execute([$username, $profileImg, $profileBG, $userID]);
+            } else if ($profileImg != null) {
+                $stmt->execute([$username, $profileImg, $userID]);
+            } else if ($profileBG != null) {
+                $stmt->execute([$username, $profileBG, $userID]);
+            } else {
+                $stmt->execute([$username, $userID]);
+            }
+
+            return "Profile Update Successfully!";
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 }

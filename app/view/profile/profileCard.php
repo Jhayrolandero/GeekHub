@@ -1,30 +1,74 @@
 <?php
-function profile_Template($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID)
+function profile_Template($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID, $profileImg, $profileBG)
 {
 ?>
 
     <body>
 
         <header class="container profile-header pb-5">
+            <input type="text" value="<?= $_SESSION["user"] ?>" id="userID" hidden>
+
             <div class="row">
                 <div class="bg-img">
-                    <img src="public\images\pngtree-abstract-bg-image_914283.jpg" alt="background-image">
+                    <?php
+                    if ($profileBG) {
+                        $base64Image = base64_encode($profileBG);
+                        $imageSrc = "data:image/jpeg;base64," . $base64Image;
+                    ?>
+                        <img src="<?= $imageSrc ?>" alt="Background Image">
+                    <?php
+                    } else {
+                    ?>
+                        <img src="public\images\pngtree-abstract-bg-image_914283.jpg" alt="background-image">
+                        <!-- <img src="public\images\you.png" alt="Profile Image"> -->
+
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
             <div class="profile-info">
                 <div class="row">
                     <div class="col-2">
                         <div class="row">
-                            <img src="public\images\zed.jpg" class="profile-img" alt="">
+                            <?php
+                            if ($profileImg) {
+                                $base64Image = base64_encode($profileImg);
+                                $imageSrc = "data:image/jpeg;base64," . $base64Image;
+                            ?>
+                                <img src="<?= $imageSrc ?>" class="profile-img" alt="Profile Image">
+                            <?php
+                            } else {
+                            ?>
+                                <img src="public\images\you.png" class="profile-img" alt="Profile Image">
+
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
                     <div class="col-7 profile-info-val">
                         <div class="row">
                             <div class="col-12">
-                                <h4 class="profile-name">Cjay</h4>
+                                <h4 class="profile-name" id="profileName"><?= $username ?></h4>
                             </div>
                         </div>
                     </div>
+                    <?php
+                    if ($userID == $_SESSION["user"]) {
+                    ?>
+                        <div class="col-3">
+                            <div class="row">
+                                <div class="col-12 text-end pl">
+                                    <button class="btn  edit-profile-btn" style="width: fit-content;"> <ion-icon name="pencil"></ion-icon> Edit</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php
+                    }
+
+                    ?>
 
                 </div>
             </div>

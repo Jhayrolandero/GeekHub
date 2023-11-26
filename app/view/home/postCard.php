@@ -1,5 +1,5 @@
 <?php
-function template_post($name, $content, $date, $post_id, $like_count, $hasLiked, $post_image, $commentCount, $userID)
+function template_post($name, $content, $date, $post_id, $like_count, $hasLiked, $post_image, $commentCount, $userID, $profileImg)
 {
 ?>
     <form class="container post">
@@ -8,7 +8,20 @@ function template_post($name, $content, $date, $post_id, $like_count, $hasLiked,
                 <div class="row">
                     <div class="col-xl-1 col-lg-2 col-md-1 col-sm-1 col-2 p-0">
                         <a href="#profile#<?= $userID ?>">
-                            <img src="public/images/you.png" alt="" style="width:45px;" class="rounded-pill">
+                            <?php
+                            if ($profileImg) {
+                                $base64Image = base64_encode($profileImg);
+                                $imageSrc = "data:image/jpeg;base64," . $base64Image;
+                            ?>
+                                <img src="<?= $imageSrc ?>" class="profile-img rounded-pill" style="width:45px;" alt="Profile Image">
+                            <?php
+                            } else {
+                            ?>
+                                <img src="public\images\you.png" class="profile-img rounded-pill" style="width:45px;" alt="Profile Image">
+
+                            <?php
+                            }
+                            ?>
                         </a>
                     </div>
                     <div class=" col-xl-8 col-lg-8 col-md-8 col-sm-10 col-8 p-0">
