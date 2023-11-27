@@ -1,5 +1,12 @@
 $(document).ready(function () {
   // Function to load a page based on the hash
+
+  function get_hash_id() {
+    var hash = window.location.hash.substring(1);
+    var hashParts = hash.split("#");
+
+    return hashParts[1];
+  }
   function loadPageFromHash() {
     var hash = window.location.hash.substring(1);
     var hashParts = hash.split("#");
@@ -101,7 +108,9 @@ $(document).ready(function () {
       function (data, status) {
         if (status === "success") {
           // Dynamically update the content
-          render_timeline(user_id);
+          var profileID = get_hash_id();
+
+          render_timeline(profileID);
         } else {
           alert("Error occurred! Try later again later");
         }
@@ -120,7 +129,9 @@ $(document).ready(function () {
       `app/controller/LikeController.php?action=unlike&post_id=${post_id}&user_id=${user_id}`,
       function (data, status) {
         if (status === "success") {
-          render_timeline(user_id);
+          var profileID = get_hash_id();
+
+          render_timeline(profileID);
         } else {
           alert("Error occurred! Try later again later");
         }

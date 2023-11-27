@@ -1,5 +1,7 @@
 :root {
   --text-clr: #fff;
+  --bg-color1: #141414;
+  --bg-color2: #282828;
 }
 
 body {
@@ -7,20 +9,29 @@ body {
   color: var(--text-clr);
 }
 
-#sidebar,
+#friend-sidebar,
 #main-content {
-  top: 5.5rem;
+  top: 4rem;
 }
 
-#sidebar {
+#friend-sidebar {
   position: fixed;
-  max-width: 20%;
-  color: #74e39a;
+  max-width: 15%;
+  height: 100vh;
+  border-right: rgba(255, 255, 255, 0.5) solid 1px;
+  /* color: #74e39a; */
+}
+
+.friend-btn {
+  color: var(--text-clr);
+  border: white solid 1px;
+  padding: 0.5em;
+  border-radius: 10px;
 }
 
 #main-content {
   position: relative;
-  width: 60%;
+  width: 70%;
 }
 @media all and (max-width: 970px) {
   #sidebar {

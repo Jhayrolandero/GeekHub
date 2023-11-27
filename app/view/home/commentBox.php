@@ -3,11 +3,11 @@ session_start();
 function template_commentBox($username, $time, $content, $userID, $commentID, $postID)
 {
 ?>
-    <div class="col-12 .mx-auto mt-2 comment-card" style="height: 100px">
+    <div class="row .mx-auto mt-2 comment-card" style="height: 100px; width: 100%;">
         <input type="text" value="<?= $userID ?>" class="comment-user-id" hidden>
         <input type="text" value="<?= $commentID ?>" class="comment-id" hidden>
         <input type="text" value="<?= $postID ?>" class="comment-post-id" hidden>
-        <div class="row h-100">
+        <div class="row h-100 mx-auto">
             <div class="col-1 .mx-auto comment-icon p-0 text-center">
                 <img src="public\images\you.png" alt="" style="width: 50px">
             </div>
@@ -15,7 +15,7 @@ function template_commentBox($username, $time, $content, $userID, $commentID, $p
                 <div class="row comment-info">
                     <div class="col-3"><?= $username ?></div>
                     <div class="col-6"><?= $time ?></div>
-                    <div class="col-3 text-end">
+                    <div class="col-3 p-0 text-end">
                         <?php
                         if ($_SESSION["user"] === $userID) {
                         ?>

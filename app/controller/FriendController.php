@@ -15,21 +15,21 @@ class FriendController
     }
 
     // Show friend suggestions
-    public function show_Suggestion($username, $userID, $email)
+    public function show_Suggestion($username, $userID, $email, $profile, $bio)
     {
-        return show_SuggestionList($username, $userID, $email);
+        return show_SuggestionList($username, $userID, $email, $profile, $bio);
     }
 
     // Show all friend list
-    public function show_Accepted($username, $userID)
+    public function show_Accepted($username, $userID, $profile, $bio)
     {
-        return show_AcceptedList($username, $userID);
+        return show_AcceptedList($username, $userID, $profile, $bio);
     }
 
     // Show all pending list
-    public function show_Pending($username, $userID, $friendship_id)
+    public function show_Pending($username, $userID, $friendship_id, $profile, $bio)
     {
-        return show_PendingList($username, $userID, $friendship_id);
+        return show_PendingList($username, $userID, $friendship_id, $profile, $bio);
     }
 
     // Get all users' info
@@ -135,16 +135,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
     if (isset($_GET["action"])) {
         switch ($_GET["action"]) {
+
+                // Show Suggestion
             case "suggestion":
 
                 $results = $friend->get_Users($_SESSION["user"]);
 
                 // var_dump($results);
                 foreach ($results as $result) {
-                    echo $friend->show_Suggestion($result["username"], $result["user_id"], $result["email"]);
+
+                    $username = $result["username"];
+                    $userID = $result["user_id"];
+                    $email = $result["email"];
+                    $profile = $result["user_profile"];
+                    $bio = isset($result["user_bio"]) ? $result["user_bio"] : "Nothing to see here";
+
+                    echo $friend->show_Suggestion($username, $userID, $email, $profile, $bio);
                 }
                 break;
 
+                // Show Buddies
             case "list":
                 $results = $friend->get_AcceptedID($_SESSION["user"]);
                 $users = array();
@@ -157,10 +167,17 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
                 // Rendering of users' info
                 foreach ($users as $user) {
-                    echo $friend->show_Accepted($user["username"], $user["user_id"]);
+
+                    $username = $user["username"];
+                    $userID = $user["user_id"];
+                    $profile = $user["user_profile"];
+                    $bio = isset($user["user_bio"]) ? $user["user_bio"] : "Nothing to see here";
+
+                    echo $friend->show_Accepted($username, $userID, $profile, $bio);
                 }
                 break;
 
+                // Show pending
             case "pending":
                 $results = $friend->get_PendingID($_SESSION["user"]);
                 // print_r($results);
@@ -177,10 +194,21 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
                 // Rendering of users' info
                 foreach ($users as $user) {
-                    echo $friend->show_Pending($user["username"], $user["user_id"], $user["friendship_id"]);
+
+
+                    $username = $user["username"];
+                    $userID = $user["user_id"];
+                    $friendshipID = $user["friendship_id"];
+                    $email = $user["email"];
+                    $profile = $user["user_profile"];
+                    $bio = isset($result["user_bio"]) ? $result["user_bio"] : "Nothing to see here";
+
+
+                    echo $friend->show_Pending($username, $userID, $friendshipID, $profile, $bio);
                 }
                 break;
 
+                // Show friend Nav
             case "homeList":
                 $results = $friend->get_AcceptedID($_SESSION["user"]);
                 $users = array();
