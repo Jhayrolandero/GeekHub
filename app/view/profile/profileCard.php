@@ -1,5 +1,5 @@
 <?php
-function profile_Template($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID, $profileImg, $profileBG)
+function profile_Template($username, $userBio, $createdAt, $userID, $profileImg, $profileBG)
 {
 ?>
 
@@ -74,23 +74,6 @@ function profile_Template($username, $userBio, $createdAt, $buddyCount, $postCou
             </div>
         </header>
 
-        <!-- <div class="container-fluid" id="main">
-            <input type="text" value="<?= $_SESSION["user"] ?>" id="userID" hidden>
-            <div class="row">
-                <div class="col-md-12 profile-container">
-                    <div class="bg-img">
-                        <img src="public\images\pngtree-abstract-bg-image_914283.jpg" alt="background-image">
-                    </div>
-                    <div class="profile">
-                        <img src="public\images\zed.jpg" class="profile-img" alt="">
-                        <div class="col-12 profile-info">
-                            <h4 class="profile-name"><?= $username ?></h4>
-                            <p class="profile-buddies">Buddies</p>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
         <main class="row p-3 content-section  mx-auto">
             <div class="col-md-3 col-sm-12  mt-3 bio-section ">
                 <div class="row">
@@ -120,24 +103,21 @@ function profile_Template($username, $userBio, $createdAt, $buddyCount, $postCou
 
                 <div class="row profile-stat">
                     <div class="col-4 ">
-                        <div class="stat-value text-center">
-                            <?= $buddyCount ?>
+                        <div class="stat-value text-center" id="buddy-count">
                         </div>
                         <div class="stat text-center">
                             Buddies
                         </div>
                     </div>
                     <div class="col-4 ">
-                        <div class="stat-value text-center">
-                            <?= $postCount ?>
+                        <div class="stat-value text-center" id="post-count">
                         </div>
                         <div class="stat text-center">
                             Posts
                         </div>
                     </div>
                     <div class="col-4 ">
-                        <div class="stat-value text-center">
-                            <?= $likeCount ?>
+                        <div class="stat-value text-center" id="like-count">
                         </div>
                         <div class="stat text-center">
                             Likes
@@ -159,8 +139,6 @@ function profile_Template($username, $userBio, $createdAt, $buddyCount, $postCou
 
                 ?>
                 <div class="row timeline-section">
-
-
                 </div>
             </div>
         </main>

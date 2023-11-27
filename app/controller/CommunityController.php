@@ -33,9 +33,9 @@ class CommunityController
     }
 
     // Render it
-    public function show_community($communityName, $desc, $hasJoined, $memberCount, $likeCount, $postContent, $createdAt, $groupID, $groupPic, $groupBG)
+    public function show_community($communityName, $desc, $hasJoined,  $createdAt, $groupID, $groupPic, $groupBG)
     {
-        return template_community($communityName, $desc, $hasJoined, $memberCount, $likeCount, $postContent, $createdAt, $groupID, $groupPic, $groupBG);
+        return template_community($communityName, $desc, $hasJoined,  $createdAt, $groupID, $groupPic, $groupBG);
     }
 
     // Join community
@@ -125,6 +125,20 @@ class CommunityController
     {
         return $this->model->show_comment($groupPostID);
     }
+
+    // Delete post
+    public function delete_post($groupPostID)
+    {
+        return $this->model->delete_post($groupPostID);
+    }
+
+    // Update Post
+
+    public function edit_post($groupPostID, $content)
+    {
+        return $this->model->edit_post($groupPostID, $content);
+    }
+
 
 
     // Time formatter
@@ -311,6 +325,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo $e->getMessage();
         }
     }
+
+    // API for deleting
+    if (isset($_POST["action"]) && $_POST["action"] === "deleteCommunityPost") {
+        try {
+            $groupPostID = $_POST["groupPostID"];
+            echo $community->delete_post($groupPostID);
+        } catch (Exception $e) {
+            throw new Exception($e);
+        }
+    }
+
+    // API for Updating
+    if (isset($_POST["action"]) && $_POST["action"] === "updateCommunityPost") {
+        try {
+            $groupPostID = $_POST["groupPostID"];
+            $content = $_POST["content"];
+
+            echo $community->edit_post($groupPostID, $content);
+        } catch (Exception $e) {
+            throw new Exception($e);
+        }
+    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
@@ -347,9 +383,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
                 $groupName = $result["group_name"];
                 $groupDesc = $result["description"];
-                $memberCount = $result["member_count"];
-                $likeCount = $result["like_count"];
-                $postCount = $result["post_count"];
                 $createdAt = $result["created_at"];
                 $groupPic = $result["community_profile"];
                 $groupBG = $result["community_background"];
@@ -358,7 +391,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
                 $groupID = $result["group_id"];
 
-                echo $community->show_community($groupName, $groupDesc, $hasJoined, $memberCount, $likeCount, $postCount, $date, $groupID, $groupPic, $groupBG);
+                echo $community->show_community($groupName, $groupDesc, $hasJoined, $date, $groupID, $groupPic, $groupBG);
             }
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -411,6 +444,34 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
                 echo $community->template_commentBox($result["username"], $date, $result["content"], $result["user_id"], $result["comment_id"], $result["group_post_id"]);
             }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // Get community stat
+    if (isset($_GET["action"]) && $_GET["action"] === "getCommunityStat") {
+        try {
+            $groupID = $_GET["groupID"];
+            $result = $community->get_community($groupID);
+
+            $memberCount = $result[0]["member_count"];
+            $likeCount = $result[0]["like_count"];
+            $postCount = $result[0]["post_count"];
+
+            $stat = array(
+                "member_count" => $memberCount,
+                "like_count" => $likeCount,
+                "post_count" => $postCount
+            );
+
+            $statJSON = json_encode($stat);
+
+            // Set the Content-Type header to application/json
+            header('Content-Type: application/json');
+
+            // Send the JSON response
+            echo $statJSON;
         } catch (Exception $e) {
             echo $e->getMessage();
         }

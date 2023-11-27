@@ -54,8 +54,8 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                             <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                         </button>
                         <ul class="dropdown-menu post-menu">
-                            <li><button class="btn post-menu-delete">Delete Post</button></li>
-                            <li><button class="btn post-menu-update">Update Post</button></li>
+                            <li><button class="btn post-menu-btn community-post-menu-delete">Delete Post</button></li>
+                            <li><button class="btn post-menu-btn community-post-menu-update">Update Post</button></li>
                         </ul>
                         <button type="button" class="p-0 hide-post" data-bs-dismiss="modal">&times;</button>
                     </div>

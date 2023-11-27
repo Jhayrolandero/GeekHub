@@ -21,6 +21,7 @@ class Community extends Database
         }
     }
 
+
     // Get Community
 
     public function get_community($communityID = null)
@@ -137,6 +138,38 @@ class Community extends Database
             return "Added Post";
         } catch (PDOException $e) {
             return $e;
+        }
+    }
+
+    // Delete a post
+    public function delete_post($groupPostID)
+    {
+        try {
+            $sql = "DELETE FROM group_posts
+                    WHERE group_post_id = ?";
+
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute([$groupPostID]);
+
+            return "Post Deleted";
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+
+    // Update a Post
+    public function edit_post($groupPostID, $content)
+    {
+        try {
+            $sql = "UPDATE group_posts
+                       SET content = ?
+                       WHERE group_post_id = ?";
+
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute([$content, $groupPostID]);
+            return "Post Updated!";
+        } catch (PDOException $e) {
+            return $e->getMessage();
         }
     }
 

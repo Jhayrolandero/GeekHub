@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-function template_community($groupName, $desc, $hasJoined, $memberCount, $likeCount, $postCount, $createdAt, $groupID, $groupPic, $groupBG)
+function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID, $groupPic, $groupBG)
 {
 ?>
 
@@ -122,24 +122,21 @@ function template_community($groupName, $desc, $hasJoined, $memberCount, $likeCo
                         </div>
                         <div class="row community-stat">
                             <div class="col-4 community-stat-container">
-                                <div class="stat-value text-center">
-                                    <?= $memberCount ?>
+                                <div class="stat-value text-center" id="member-count">
                                 </div>
                                 <div class="stat text-center">
                                     Members
                                 </div>
                             </div>
                             <div class="col-4 community-stat-container">
-                                <div class="stat-value text-center">
-                                    <?= $postCount ?>
+                                <div class="stat-value text-center" id="post-count">
                                 </div>
                                 <div class="stat text-center">
                                     Posts
                                 </div>
                             </div>
                             <div class="col-4 community-stat-container">
-                                <div class="stat-value text-center">
-                                    <?= $likeCount ?>
+                                <div class="stat-value text-center" id="like-count">
                                 </div>
                                 <div class="stat text-center">
                                     Likes

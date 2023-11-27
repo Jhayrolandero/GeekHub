@@ -35,6 +35,7 @@ $(document).ready(function () {
           $("#profile-container").html(data);
 
           render_timeline(userID);
+          render_stat(userID);
         } else {
           alert("Error! try again");
         }
@@ -50,6 +51,29 @@ $(document).ready(function () {
           $(".timeline-section").html(data);
         } else {
           alert("Error! try again");
+        }
+      }
+    );
+  }
+
+  function render_stat(userID) {
+    $.get(
+      "app/controller/UserController.php",
+      {
+        action: "getStat",
+        userID: userID,
+      },
+      function (data, status) {
+        if (status === "success") {
+          var buddyCount = data.buddy_count;
+          var postCount = data.post_count;
+          var likeCount = data.like_count;
+
+          $("#buddy-count").text(buddyCount);
+          $("#post-count").text(postCount);
+          $("#like-count").text(likeCount);
+        } else {
+          alert("error");
         }
       }
     );
@@ -111,6 +135,7 @@ $(document).ready(function () {
           var profileID = get_hash_id();
 
           render_timeline(profileID);
+          render_stat(profileID);
         } else {
           alert("Error occurred! Try later again later");
         }
@@ -132,6 +157,7 @@ $(document).ready(function () {
           var profileID = get_hash_id();
 
           render_timeline(profileID);
+          render_stat(profileID);
         } else {
           alert("Error occurred! Try later again later");
         }
@@ -147,8 +173,7 @@ $(document).ready(function () {
 
   // Post System
 
-  // Open COmmunity Post modal
-
+  // Open Community Post modal
   $("#profile-container").on("click", "#open-post-btn", function () {
     // alert("Hello");
     $(".create-post-modal").slideDown();
@@ -186,6 +211,7 @@ $(document).ready(function () {
           }
 
           render_timeline(userID);
+          render_stat(userID);
         } else {
           alert("Error occurred! Try again later.");
         }
@@ -203,14 +229,12 @@ $(document).ready(function () {
     ".post .post-menu-update",
     function (event) {
       event.preventDefault();
-
       var postID = $(this).closest(".post").find(".post_id").val();
       var pervContent = $(this)
         .closest(".post")
         .find(".post-content")
         .text()
         .trim();
-
       $("#update-post-id").val(postID);
       $("#update-post-form").val(pervContent);
       $(".update-post-modal").slideDown();
@@ -241,12 +265,10 @@ $(document).ready(function () {
             alert("No Empty Homie!");
           }
 
-          $.get(
-            "app/controller/PostController.php?action=getPost",
-            function (data, status) {
-              $(".post-container").html(data);
-            }
-          );
+          var profileID = get_hash_id();
+
+          render_timeline(profileID);
+          render_stat(profileID);
         } else {
           alert("Error occurred! Try again later.");
         }
@@ -258,6 +280,7 @@ $(document).ready(function () {
     });
   });
 
+  // Delete Post
   $("#profile-container").on(
     "click",
     ".post .post-menu-delete",
@@ -274,12 +297,10 @@ $(document).ready(function () {
         },
         function (data, status) {
           if (status === "success") {
-            $.get(
-              "app/controller/PostController.php?action=getPost",
-              function (data, status) {
-                $(".post-container").html(data);
-              }
-            );
+            var profileID = get_hash_id();
+
+            render_timeline(profileID);
+            render_stat(profileID);
           } else {
             alert("Error");
           }
@@ -344,8 +365,10 @@ $(document).ready(function () {
       function (data, status) {
         if (status === "success") {
           // Update contents dynamically
+          var profileID = get_hash_id();
+
           render_comment(postID);
-          render_timeline(userID);
+          render_timeline(profileID);
         } else {
           alert("Error! Try again");
         }

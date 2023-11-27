@@ -103,6 +103,7 @@ $(document).ready(function () {
     });
   });
 
+  // Delete Post
   $(".post-container").on("click", ".post .post-menu-delete", function (event) {
     event.preventDefault();
 

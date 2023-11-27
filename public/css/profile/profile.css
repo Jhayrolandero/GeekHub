@@ -84,3 +84,18 @@ body {
   background-color: transparent;
   color: var(--text-color);
 }
+
+#open-post-btn {
+  background-color: transparent;
+  border: white solid 1px;
+  padding: 0.7em;
+  border-radius: 10px;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+#open-post-btn:hover {
+  background-color: white;
+  color: #141414;
+}

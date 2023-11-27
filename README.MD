@@ -21,6 +21,7 @@ A facebook clone inspired site created by yours truly
 - just Finished comment and like for community
 - Finished User Customization
 - Support for profile and profile BG
+- Support for Edit and Delete on Community Post
 
 # Current things to do
 

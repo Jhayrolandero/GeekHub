@@ -30,9 +30,9 @@ class UserController
         }
     }
 
-    public function show_profile($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID, $profileImg, $profileBG)
+    public function show_profile($username, $userBio, $createdAt,  $userID, $profileImg, $profileBG)
     {
-        return profile_Template($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID, $profileImg, $profileBG);
+        return profile_Template($username, $userBio, $createdAt, $userID, $profileImg, $profileBG);
     }
 
     public function add_bio($userID, $userBio)
@@ -108,7 +108,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["action"]) && $_GET["act
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
-
     // Get profile
     if (isset($_GET["action"]) && $_GET["action"] === "getProfile" && $_GET["userProfile"]) {
         $id = $_GET["userProfile"];
@@ -126,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $profileImg = $result[0]["user_profile"];
         $profileBG = $result[0]["profile_background"];
 
-        echo $user->show_profile($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID, $profileImg, $profileBG);
+        echo $user->show_profile($username, $userBio, $createdAt,  $userID, $profileImg, $profileBG);
     }
 
     // Search User
@@ -138,5 +137,30 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         foreach ($results as $result) {
             echo $user->show_search_user($result["username"], $result["user_id"]);
         }
+    }
+
+    // Get profile Stat
+    if (isset($_GET["action"]) && $_GET["action"] === "getStat") {
+
+        $userID = $_GET["userID"];
+        $result = $user->get_user($userID);
+
+        $buddyCount = $result[0]["buddy_count"];
+        $postCount = $result[0]["post_count"];
+        $likeCount = $result[0]["like_count"];
+
+        $stat = array(
+            "buddy_count" => $buddyCount,
+            "post_count" => $postCount,
+            "like_count" => $likeCount
+        );
+
+        $statJSON = json_encode($stat);
+
+        // Set the Content-Type header to application/json
+        header('Content-Type: application/json');
+
+        // Send the JSON response
+        echo $statJSON;
     }
 }

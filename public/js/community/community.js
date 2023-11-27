@@ -5,6 +5,13 @@ $(document).ready(function () {
   ================
   */
   // Function to load a page based on the hash
+
+  function get_hash_community_id() {
+    var hash = window.location.hash.substring(1);
+    var hashParts = hash.split("#");
+
+    return hashParts[1];
+  }
   function loadPageFromHash() {
     var hash = window.location.hash.substring(1);
     var hashParts = hash.split("#");
@@ -39,6 +46,7 @@ $(document).ready(function () {
           $(".community-id").val(communityID);
 
           renderCommunityTimeline(communityID);
+          render_communtiy_stat(communityID);
           render_community_nav();
         }
       }
@@ -70,6 +78,29 @@ $(document).ready(function () {
       function (data, status) {
         if (status === "success") {
           $(".community-content-section").html(data);
+        }
+      }
+    );
+  }
+
+  function render_communtiy_stat(communityID) {
+    $.get(
+      "app/controller/CommunityController.php",
+      {
+        action: "getCommunityStat",
+        groupID: communityID,
+      },
+      function (data, status) {
+        if (status === "success") {
+          var memberCount = data.member_count;
+          var postCount = data.post_count;
+          var likeCount = data.like_count;
+
+          $("#member-count").text(memberCount);
+          $("#post-count").text(postCount);
+          $("#like-count").text(likeCount);
+        } else {
+          alert("error");
         }
       }
     );
@@ -118,7 +149,6 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
-          alert(data);
           render_community(communityID);
         }
       }
@@ -139,7 +169,6 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
-          alert(data);
           render_community(communityID);
         }
       }
@@ -246,6 +275,99 @@ $(document).ready(function () {
     });
   });
 
+  // Delete Post
+  $("#community-container").on(
+    "click",
+    ".community-post-menu-delete",
+    function (event) {
+      event.preventDefault();
+
+      var groupPostID = $(this)
+        .closest(".community-post-card")
+        .find(".community-post-id")
+        .val();
+
+      // alert(groupPostID);
+      $.post(
+        "app/controller/CommunityController.php",
+        {
+          action: "deleteCommunityPost",
+          groupPostID: groupPostID,
+        },
+        function (data, status) {
+          if (status === "success") {
+            alert(data);
+            var communityID = get_hash_community_id();
+
+            renderCommunityTimeline(communityID);
+            render_communtiy_stat(communityID);
+          } else {
+            alert("Error");
+          }
+        }
+      );
+    }
+  );
+
+  // Open Update Post
+  $("#community-container").on(
+    "click",
+    ".community-post-menu-update",
+    function (event) {
+      event.preventDefault();
+
+      var groupPostID = $(this)
+        .closest(".community-post-card")
+        .find(".community-post-id")
+        .val();
+
+      var pervContent = $(this)
+        .closest(".community-post-card")
+        .find(".post-content")
+        .text()
+        .trim();
+
+      $("#update-community-post-id").val(groupPostID);
+      $("#update-community-post-form").val(pervContent);
+
+      // alert(groupPostID);
+      // alert(pervContent);
+
+      $(".update-community-post-modal").slideDown();
+    }
+  );
+
+  // Close update
+  $("#close-update-community-post").click(function () {
+    $(".update-community-post-modal").slideUp();
+  });
+
+  // Update post
+  $("#update-community-post-btn").click(function () {
+    var content = $("#update-community-post-form").val();
+    var groupPostID = $("#update-community-post-id").val();
+
+    $.post(
+      "app/controller/CommunityController.php",
+      {
+        action: "updateCommunityPost",
+        content: content,
+        groupPostID: groupPostID,
+      },
+      function (data, status) {
+        if (status === "success") {
+          var groupID = get_hash_community_id();
+
+          renderCommunityTimeline(groupID);
+          render_communtiy_stat(groupID);
+          // alert(data);
+        } else {
+          alert("Error!");
+        }
+      }
+    );
+  });
+
   /* 
   =============
   
@@ -276,6 +398,7 @@ $(document).ready(function () {
       function (data, status) {
         if (status === "success") {
           renderCommunityTimeline(communityID);
+          render_communtiy_stat(communityID);
           render_community_nav();
         } else {
           alert("Error!");
@@ -306,6 +429,7 @@ $(document).ready(function () {
       function (data, status) {
         if (status === "success") {
           renderCommunityTimeline(communityID);
+          render_communtiy_stat(communityID);
           render_community_nav();
           // loadPageFromHash();
         } else {
