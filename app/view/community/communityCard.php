@@ -16,16 +16,23 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
                         $base64Image = base64_encode($groupBG);
                         $imageSrc = "data:image/jpeg;base64," . $base64Image;
                     ?>
+
+
                         <img src="<?= $imageSrc ?>" alt="Background Image">
                     <?php
                     } else {
                     ?>
                         <img src="public\images\pngtree-abstract-bg-image_914283.jpg" alt="background-image">
-                        <!-- <img src="public\images\you.png" alt="Profile Image"> -->
 
                     <?php
                     }
+
+
                     ?>
+
+                    <script>
+                        var profileBGSrc = '<?= $imageSrc ?>';
+                    </script>
                 </div>
             </div>
             <div class="community-info">
@@ -40,13 +47,18 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
                                 <img src="<?= $imageSrc ?>" class="community-img" alt="Profile Image">
                             <?php
                             } else {
+                                $imageSrc = "public\images\you.png";
+
                             ?>
-                                <img src="public\images\you.png" class="community-img" alt="Profile Image">
+                                <img src="<?= $imageSrc ?>" class="community-img" alt="Profile Image">
 
                             <?php
                             }
                             ?>
-                            <!-- <img src="public\images\you.png" alt="" style="width: 100%"> -->
+
+                            <script>
+                                var profileImageSrc = '<?= $imageSrc ?>';
+                            </script>
                         </div>
                     </div>
                     <div class="col-7">
@@ -86,7 +98,6 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
                             </div>
                             <input type="text" class="community-id" hidden>
                             <input type="text" class="user-id" value="<?= $_SESSION["user"] ?>" hidden>
-                            <!-- <input type="text" value="<?= $hasJoined ?>"> -->
 
                         </div>
                     </div>
@@ -116,7 +127,7 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
                 <div class="col-3">
                     <section class="desc-container ">
                         <h4>Description</h4>
-                        <textarea name="" class="form-control" id="bio-form"><?= $desc ?></textarea>
+                        <textarea name="" class="form-control" id="bio-form" readonly><?= $desc ?></textarea>
                         <div class="div mt-4">
                             <p><ion-icon name="calendar" size="large"></ion-icon> <?= $createdAt ?></p>
                         </div>

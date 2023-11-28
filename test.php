@@ -8,69 +8,84 @@
     <script src="https://cdn.jsdelivr.net/npm/kute.js@2.2.4/dist/kute.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script>
+        $(document).ready(function() {
+
+            var commentCount = 10;
+
+            function render_comments(postID, limit) {
+                $.get("app/controller/CommentController.php", {
+                    action: "showComment",
+                    postID: 56,
+                    limit: limit
+                }, function(data, status) {
+                    $("#comment-cont").html(data);
+                    commentCount = limit;
+                })
+            }
+
+            render_comments(56, commentCount);
+
+
+            $("#render-btn").click(function() {
+                render_comments(56, commentCount + 2);
+            });
+        });
+    </script>
+
+    <!-- CSS -->
     <style>
-        body {
-            background-color: #141414;
+        .file-input-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-input-label {
+            display: inline-block;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            margin: auto;
+        }
+
+        .button-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             color: #fff;
         }
 
-        .profile-header {
-            background-color: #282828;
-            height: fit-content;
-            border-radius: 10px;
-        }
-
-        .bg-img img {
-            width: 100%;
-            background-size: cover;
-            background-position: center;
-            height: 400px;
-            border-radius: 10px;
-        }
-
-        .profile-info {
-            position: relative;
-        }
-
-        .profile-info .profile-img {
-            width: 150px;
-            height: 150px;
-            display: inline-block;
-            position: absolute;
-            left: 10%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
+        /* Hide the default file input */
+        #community-pic-input {
+            display: none;
         }
     </style>
-
 </head>
 
 <body>
+    <!-- HTML -->
+    <div class="file-input-container">
+        <input type="file" name="image" id="community-pic-input" class="form-control" />
+        <label for="community-pic-input" class="file-input-label">
+            wut
+            <!-- <img src="public\images\background.jpg" alt="Choose an image" class="image-preview">
+            <span class="button-text">Choose Image</span> -->
+        </label>
+    </div>
 
-    <header class="container profile-header pb-5">
-        <div class="row">
-            <div class="bg-img">
-                <img src="public\images\pngtree-abstract-bg-image_914283.jpg" alt="background-image">
-            </div>
-        </div>
-        <div class="profile-info">
-            <div class="row">
-                <div class="col-2">
-                    <div class="row">
-                        <img src="public\images\zed.jpg" class="profile-img" alt="">
-                    </div>
-                </div>
-                <div class="col-7 profile-info-val">
-                    <div class="row">
-                        <div class="col-12">
-                            <h4 class="profile-name">Cjay</h4>
-                        </div>
-                    </div>
-                </div>
 
-            </div>
-        </div>
-    </header>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 

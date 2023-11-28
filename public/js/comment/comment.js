@@ -7,7 +7,7 @@ $(document).ready(function () {
         if (status === "success") {
           $("#comment-list").html(data);
         } else {
-          alert("Error!");
+          console.error("Error rendering comments");
         }
       }
     );
@@ -27,6 +27,13 @@ $(document).ready(function () {
     );
   }
 
+  function empty_input(inputID) {
+    // Assuming your form has the id "myForm"
+    var input = document.getElementById(inputID);
+
+    input.value = "";
+  }
+
   // Show comment box
   $(".post-container").on("click", ".post .comment-btn", function () {
     var postID = $(this).closest(".post").find(".post_id").val();
@@ -39,16 +46,6 @@ $(document).ready(function () {
     $(".comment-modal").slideDown();
 
     render_comment(postID);
-    // $.get(
-    //   `app/controller/CommentController.php?action=showComment&postID=${postID}`,
-    //   function (data, status) {
-    //     if (status === "success") {
-    //       $("#comment-list").html(data);
-    //     } else {
-    //       alert("Error!");
-    //     }
-    //   }
-    // );
   });
 
   // Close the comment
@@ -56,6 +53,16 @@ $(document).ready(function () {
     $(".comment-modal").slideUp();
   });
 
+  // Store current scroll position
+  var commentModal = $(".modal-body");
+
+  function scrollToBottom() {
+    // Set scrollTop to the maximum scroll height to scroll to the bottom
+    commentModal.scrollTop(commentModal.prop("scrollHeight"));
+  }
+
+  // Call scrollToBottom after adding a new comment or whenever needed
+  scrollToBottom();
   // Post a comment
   $("#add-comment-btn").click(function () {
     var comment = $(".comment-input").val();
@@ -76,27 +83,11 @@ $(document).ready(function () {
 
           render_comment(postID);
           render_post();
-          // $.get(
-          //   `app/controller/CommentController.php?action=showComment&postID=${postID}`,
-          //   function (data, status) {
-          //     if (status === "success") {
-          //       $("#comment-list").html(data);
-          //     } else {
-          //       alert("Error!");
-          //     }
-          //   }
-          // );
 
-          // $.get(
-          //   "app/controller/PostController.php?action=getPost",
-          //   function (data, status) {
-          //     if (status === "success") {
-          //       $(".post-container").html(data);
-          //     } else {
-          //       alert("Error!");
-          //     }
-          //   }
-          // );
+          // Restore scroll position after rendering comments
+          scrollToBottom();
+
+          empty_input("comment-form");
         } else {
           alert("Error! Try again");
         }
@@ -173,17 +164,6 @@ $(document).ready(function () {
       );
     }
   );
-
-  // Render Comment contents
-
-  // $(".post-container").on("click", ".post .comment-btn", function () {
-  //   var postID = $(this).closest(".post").find(".post_id").val();
-  //   var username = $(this).closest(".post").find(".username").text();
-
-  //   $(".comment-post-id").val(postID);
-  //   $(".comment-title").text(username + "'s post");
-  //   $(".comment-modal").slideDown();
-  // });
 
   // Hide comment
   $(".comment-modal").on("click", ".comment-card .hide-comment", function () {

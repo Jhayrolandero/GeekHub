@@ -295,7 +295,8 @@ class Community extends Database
             $sql = "SELECT group_post_comments.content, group_post_comments.created_at, group_post_comments.comment_id, group_post_comments.group_post_id, users.username, users.user_id, users.user_profile
                     FROM group_post_comments
                     LEFT JOIN users ON group_post_comments.user_id = users.user_id
-                    WHERE group_post_comments.group_post_id = ?";
+                    WHERE group_post_comments.group_post_id = ?
+                    ORDER BY group_post_comments.created_at DESC";
 
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute([$groupPostID]);
@@ -307,33 +308,34 @@ class Community extends Database
     }
 
     // Update Community
-    public function edit_community($groupID, $groupName, $communityProfile, $communityBG)
+    public function edit_community($groupID, $groupName, $communityProfile, $communityBG, $communityDesc)
     {
         try {
             $sql = "UPDATE groups
-                    SET group_name = ?";
+            SET group_name = ?";
 
-            if ($communityProfile != null) {
+            $params = [$groupName];
+
+            if ($communityProfile !== null) {
                 $sql .= ", community_profile = ?";
+                $params[] = $communityProfile;
             }
 
-            if ($communityBG != null) {
+            if ($communityBG !== null) {
                 $sql .= ", community_background = ?";
+                $params[] = $communityBG;
+            }
+
+            if ($communityDesc !== null) {
+                $sql .= ", description = ?";
+                $params[] = $communityDesc;
             }
 
             $sql .= " WHERE group_id = ?";
+            $params[] = $groupID;
 
             $stmt = $this->connect()->prepare($sql);
-
-            if ($communityProfile != null && $communityBG != null) {
-                $stmt->execute([$groupName, $communityProfile, $communityBG, $groupID]);
-            } else if ($communityProfile != null) {
-                $stmt->execute([$groupName, $communityProfile, $groupID]);
-            } else if ($communityBG != null) {
-                $stmt->execute([$groupName, $communityBG, $groupID]);
-            } else {
-                $stmt->execute([$groupName, $groupID]);
-            }
+            $stmt->execute($params);
 
             return "Community Update Successfully!";
         } catch (PDOException $e) {

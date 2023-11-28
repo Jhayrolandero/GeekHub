@@ -24,16 +24,34 @@
                 </div>
 
                 <!-- Modal body -->
-                <div class="modal-body">
+                <div class="modal-body text-center">
                     <!-- Caption -->
-                    <label for="" class="form-label">Community Name</label>
-                    <input type="text" class="form-control curr-community-name" id="community-name-input">
+                    <label for="" class="form-label">
+                        <h4>Community Name</h4>
+                    </label>
+                    <input type="text" class="form-control curr-community-name mb-5" id="community-name-input">
 
-                    <label for="" class="form-label">Community Picture</label>
-                    <input type="file" name="image" id="community-pic-input" class="form-control" />
+                    <label for="" class="form-label">
+                        <h4>Description</h4>
+                    </label>
+                    <textarea name="" class="form-control curr-community-desc mb-5" id="community-desc-input"></textarea>
 
-                    <label for="" class="form-label">Community background</label>
+                    <!-- <input type="text" class="form-control" id="community-desc-input"> -->
+
+                    <label for="" class="form-label w-100">
+                        <h4>Community Picture</h4>
+                        <img src="" alt="" style="width:150px; height: 150px;" class="mx-auto rounded-pill" id="prev-community-icon">
+                    </label>
+                    <input type="file" name="image" id="community-pic-input mb-2" class="form-control mb-5" />
+
+                    <label for="" class="form-label">
+                        <h4>Community background</h4>
+                        <div>
+                            <img src="" alt="" style="width:100%;" class="mx-auto" id="prev-community-bg">
+                        </div>
+                    </label>
                     <input type="file" name="image" id="community-bg-input" class="form-control" />
+
 
                     <!-- <textarea class="form-control" name="" id="update-profile-form" cols="30" rows="10" placeholder="Share your thoughts"></textarea> -->
                 </div>

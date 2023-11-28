@@ -57,9 +57,9 @@ class CommunityController
     }
 
     // Update Community
-    public function edit_community($groupID, $groupName, $communityProfile, $communityBG)
+    public function edit_community($groupID, $groupName, $communityProfile, $communityBG, $communityDesc)
     {
-        return $this->model->edit_community($groupID, $groupName, $communityProfile, $communityBG);
+        return $this->model->edit_community($groupID, $groupName, $communityProfile, $communityBG, $communityDesc);
     }
 
     // Create Post
@@ -231,8 +231,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $communityName = $_POST["communityName"];
             $image = (isset($_FILES["communityPic"]) && $_FILES["communityPic"]["error"] === 0) ? file_get_contents($_FILES['communityPic']['tmp_name']) : null;
             $imageBG = (isset($_FILES["communityBG"]) && $_FILES["communityBG"]["error"] === 0) ? file_get_contents($_FILES['communityBG']['tmp_name']) : null;
+            $communityDesc = $_POST["communityDesc"];
 
-            echo $community->edit_community($communityID, $communityName, $image, $imageBG);
+            echo $community->edit_community($communityID, $communityName, $image, $imageBG, $communityDesc);
             // echo $user->edit_profile($userID, $username, $image, $imageBG);
         } catch (Exception $e) {
             echo $e;

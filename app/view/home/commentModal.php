@@ -34,7 +34,7 @@
         <div class="modal-footer">
           <div class="row w-100">
             <div class="col-11">
-              <input type="text" class="form-control comment-input" placeholder="Say Something">
+              <input type="text" class="form-control comment-input" placeholder="Say Something" id="comment-form">
             </div>
             <div class="col-1">
               <button type="button" class="btn btn-success" id="add-comment-btn">Send</button>

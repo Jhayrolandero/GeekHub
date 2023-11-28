@@ -15,7 +15,7 @@
     <div class="modal create-post-modal" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content" id="content">
-                <input type="text" value="<?= $_SESSION["user"] ?>" id="user-id-post">
+                <input type="text" value="<?= $_SESSION["user"] ?>" id="user-id-post" hidden>
                 <!-- Modal Header -->
                 <div class="modal-header" id="modal-header">
                     <h4 class="modal-title">Create Post</h4>

@@ -178,9 +178,18 @@ $(document).ready(function () {
   // Updating COmmunity profile
   $("#community-container").on("click", ".edit-community-btn", function () {
     var communityName = $("#community-name").text();
+    var communityDesc = $("#bio-form").text().trim();
+
+    var imgSrc = profileImageSrc;
+    var bgSrc = profileBGSrc;
+
+    // console.log(imgSrc);
+    // console.log(bgSrc);
 
     $("#community-name-input").val(communityName);
-
+    $("#community-desc-input").val(communityDesc);
+    $("#prev-community-icon").attr("src", imgSrc);
+    $("#prev-community-bg").attr("src", bgSrc);
     $(".update-community-modal").slideDown();
   });
 
@@ -195,6 +204,7 @@ $(document).ready(function () {
 
     var communityName = $("#community-name-input").val();
     var communityID = $("#community-id").val();
+    var communityDesc = $("#community-desc-input").val();
 
     // Create a FormData object
     var formData = new FormData();
@@ -205,6 +215,7 @@ $(document).ready(function () {
     formData.append("communityID", communityID);
     formData.append("communityPic", $("#community-pic-input")[0].files[0]);
     formData.append("communityBG", $("#community-bg-input")[0].files[0]);
+    formData.append("communityDesc", communityDesc);
 
     $.ajax({
       type: "POST",
@@ -215,6 +226,7 @@ $(document).ready(function () {
       success: function (data, status) {
         if (status === "success") {
           render_community(communityID);
+          $(".update-community-modal").slideUp();
         } else {
           alert("Error occurred! Try again later.");
         }
@@ -320,12 +332,6 @@ $(document).ready(function () {
         .closest(".community-post-card")
         .find(".community-post-id")
         .val();
-
-      var pervContent = $(this)
-        .closest(".community-post-card")
-        .find(".post-content")
-        .text()
-        .trim();
 
       $("#update-community-post-id").val(groupPostID);
       $("#update-community-post-form").val(pervContent);

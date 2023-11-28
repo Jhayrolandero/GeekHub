@@ -140,7 +140,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST["action"]) && $_POST["action"] === "addPost") {
 
         try {
-            if (empty($_POST["content"])) {
+
+            if (empty($_POST["content"]) && empty($_FILES["image"])) {
                 echo 0;
                 die();
             }

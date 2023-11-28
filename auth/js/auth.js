@@ -54,7 +54,7 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
-          alert("Data: " + data);
+          alert(data);
         } else {
           alert("Error occurred: Unable to fetch data from the server.");
         }

@@ -385,7 +385,13 @@ $(document).ready(function () {
   $("#profile-container").on("click", ".edit-profile-btn", function () {
     var username = $("#profileName").text();
 
+    var imgSrc = profileImageSrc;
+    var bgSrc = profileBGSrc;
+
     $(".curr-profile-name").val(username);
+    $("#prev-profile-icon").attr("src", imgSrc);
+    $("#prev-profile-bg").attr("src", bgSrc);
+
     $(".update-profile-modal").slideDown();
   });
 

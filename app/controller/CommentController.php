@@ -132,9 +132,11 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         try {
 
             $postID = $_GET["postID"];
+            // $limit = $_GET["limit"];
 
             $results = $comment->show_comment($postID);
 
+            // var_dump($results);
             foreach ($results as $result) {
                 $username = $result["username"];
                 $timestamp = $result["created_at"];

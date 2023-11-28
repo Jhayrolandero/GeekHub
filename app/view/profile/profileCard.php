@@ -25,6 +25,9 @@ function profile_Template($username, $userBio, $createdAt, $userID, $profileImg,
                     <?php
                     }
                     ?>
+                    <script>
+                        var profileBGSrc = '<?= $imageSrc ?>';
+                    </script>
                 </div>
             </div>
             <div class="profile-info">
@@ -45,6 +48,9 @@ function profile_Template($username, $userBio, $createdAt, $userID, $profileImg,
                             <?php
                             }
                             ?>
+                            <script>
+                                var profileImageSrc = '<?= $imageSrc ?>';
+                            </script>
                         </div>
                     </div>
                     <div class="col-7 profile-info-val">
@@ -93,7 +99,7 @@ function profile_Template($username, $userBio, $createdAt, $userID, $profileImg,
                     ?>
                 </div>
                 <div class="bio-container p-0">
-                    <textarea name="" class="form-control" id="bio-form"><?= $userBio ?></textarea>
+                    <textarea name="" class="form-control" id="bio-form" <?php if ($userID != $_SESSION["user"]) echo 'readonly'; ?>><?= $userBio ?></textarea>
                 </div>
                 <div class="row mt-4 date-container">
                     <p>

@@ -24,15 +24,25 @@
                 </div>
 
                 <!-- Modal body -->
-                <div class="modal-body">
+                <div class="modal-body text-center">
                     <!-- Caption -->
-                    <label for="" class="form-label">Username</label>
-                    <input type="text" class="form-control curr-profile-name" id="username-input">
+                    <label for="" class="form-label">
+                        <h4>Username</h4>
+                    </label>
+                    <input type="text" class="form-control curr-profile-name mb-5" id="username-input">
 
-                    <label for="" class="form-label">Profile Picture</label>
-                    <input type="file" name="image" id="profile-pic-input" class="form-control" />
+                    <label for="" class="form-label">
+                        <h4>Profile Picture</h4>
+                        <img src="" alt="" style="width:150px; height: 150px;" class="mx-auto rounded-pill" id="prev-profile-icon">
+                    </label>
+                    <input type="file" name="image" id="profile-pic-input" class="form-control mb-5" />
 
-                    <label for="" class="form-label">Profile background</label>
+                    <label for="" class="form-label">
+                        <h4>Profile background</h4>
+                        <div>
+                            <img src="" alt="" style="width:100%;" class="mx-auto" id="prev-profile-bg">
+                        </div>
+                    </label>
                     <input type="file" name="image" id="profile-bg-input" class="form-control" />
 
                     <!-- <textarea class="form-control" name="" id="update-profile-form" cols="30" rows="10" placeholder="Share your thoughts"></textarea> -->
