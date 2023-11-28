@@ -29,7 +29,7 @@ body {
 }
 
 .modal-body {
-  height: 70vh; /* Set the maximum height to 70% of the viewport height, adjust as needed */
+  height: 70vh;
   overflow-y: auto; /* Add a vertical scrollbar if the content exceeds the max height */
 }
 
