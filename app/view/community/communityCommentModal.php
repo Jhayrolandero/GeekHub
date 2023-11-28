@@ -26,7 +26,7 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-          <div class="row p-1" id="comment-list">
+          <div class="row p-1 container" id="comment-list">
 
           </div>
         </div>

@@ -1,12 +1,6 @@
 $(document).ready(function () {
-  // Show comment box
-  $(".post-container").on("click", ".post .comment-btn", function () {
-    var postID = $(this).closest(".post").find(".post_id").val();
-    var targetID = $(this).closest(".post").find(".creator_id").val();
-    $(".comment-post-id").val(postID);
-    $(".comment-target-id").val(targetID);
-    $(".comment-modal").slideDown();
-
+  // Function to render comments
+  function render_comment(postID) {
     $.get(
       `app/controller/CommentController.php?action=showComment&postID=${postID}`,
       function (data, status) {
@@ -17,6 +11,44 @@ $(document).ready(function () {
         }
       }
     );
+  }
+
+  // Function to render post
+  function render_post() {
+    $.get(
+      "app/controller/PostController.php?action=getPost",
+      function (data, status) {
+        if (status === "success") {
+          $(".post-container").html(data);
+        } else {
+          alert("Error!");
+        }
+      }
+    );
+  }
+
+  // Show comment box
+  $(".post-container").on("click", ".post .comment-btn", function () {
+    var postID = $(this).closest(".post").find(".post_id").val();
+    var targetID = $(this).closest(".post").find(".creator_id").val();
+    var username = $(this).closest(".post").find(".username").text();
+
+    $(".comment-post-id").val(postID);
+    $(".comment-target-id").val(targetID);
+    $(".comment-title").text(username + "'s post");
+    $(".comment-modal").slideDown();
+
+    render_comment(postID);
+    // $.get(
+    //   `app/controller/CommentController.php?action=showComment&postID=${postID}`,
+    //   function (data, status) {
+    //     if (status === "success") {
+    //       $("#comment-list").html(data);
+    //     } else {
+    //       alert("Error!");
+    //     }
+    //   }
+    // );
   });
 
   // Close the comment
@@ -27,7 +59,6 @@ $(document).ready(function () {
   // Post a comment
   $("#add-comment-btn").click(function () {
     var comment = $(".comment-input").val();
-
     var postID = $(".comment-post-id").val();
     var userID = $(".comment-user-id").val();
 
@@ -42,27 +73,30 @@ $(document).ready(function () {
       function (data, status) {
         if (status === "success") {
           // Update contents dynamically
-          $.get(
-            `app/controller/CommentController.php?action=showComment&postID=${postID}`,
-            function (data, status) {
-              if (status === "success") {
-                $("#comment-list").html(data);
-              } else {
-                alert("Error!");
-              }
-            }
-          );
 
-          $.get(
-            "app/controller/PostController.php?action=getPost",
-            function (data, status) {
-              if (status === "success") {
-                $(".post-container").html(data);
-              } else {
-                alert("Error!");
-              }
-            }
-          );
+          render_comment(postID);
+          render_post();
+          // $.get(
+          //   `app/controller/CommentController.php?action=showComment&postID=${postID}`,
+          //   function (data, status) {
+          //     if (status === "success") {
+          //       $("#comment-list").html(data);
+          //     } else {
+          //       alert("Error!");
+          //     }
+          //   }
+          // );
+
+          // $.get(
+          //   "app/controller/PostController.php?action=getPost",
+          //   function (data, status) {
+          //     if (status === "success") {
+          //       $(".post-container").html(data);
+          //     } else {
+          //       alert("Error!");
+          //     }
+          //   }
+          // );
         } else {
           alert("Error! Try again");
         }
@@ -84,7 +118,8 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
-          alert(data);
+          // alert(data);
+          render_comment(postID);
         } else {
           alert("Error occurred! Try later again later");
         }
@@ -141,14 +176,14 @@ $(document).ready(function () {
 
   // Render Comment contents
 
-  $(".post-container").on("click", ".post .comment-btn", function () {
-    var postID = $(this).closest(".post").find(".post_id").val();
-    var username = $(this).closest(".post").find(".username").text();
+  // $(".post-container").on("click", ".post .comment-btn", function () {
+  //   var postID = $(this).closest(".post").find(".post_id").val();
+  //   var username = $(this).closest(".post").find(".username").text();
 
-    $(".comment-post-id").val(postID);
-    $(".comment-title").text(username + "'s post");
-    $(".comment-modal").slideDown();
-  });
+  //   $(".comment-post-id").val(postID);
+  //   $(".comment-title").text(username + "'s post");
+  //   $(".comment-modal").slideDown();
+  // });
 
   // Hide comment
   $(".comment-modal").on("click", ".comment-card .hide-comment", function () {

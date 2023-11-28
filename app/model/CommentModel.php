@@ -24,7 +24,7 @@ class Comment extends Database
     public function show_comment($postID)
     {
         try {
-            $sql = "SELECT comments.comment, comments.created_at, comments.comment_id, comments.post_id, users.username, users.user_id
+            $sql = "SELECT comments.comment, comments.created_at, comments.comment_id, comments.post_id, users.username, users.user_id, users.user_profile
                     FROM comments
                     LEFT JOIN users ON comments.user_id = users.user_id
                     WHERE comments.post_id = ?";

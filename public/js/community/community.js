@@ -108,7 +108,7 @@ $(document).ready(function () {
 
   /*
   ================
-  COMMUNITY
+      COMMUNITY
   ================
   */
 

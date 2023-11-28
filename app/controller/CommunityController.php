@@ -115,9 +115,9 @@ class CommunityController
     }
 
     // Template for comment box
-    public function template_commentBox($username, $time, $content, $userID, $comment_id, $groupPostID)
+    public function template_commentBox($username, $time, $content, $userID, $comment_id, $groupPostID, $profileImg)
     {
-        return template_commentBox($username, $time, $content, $userID, $comment_id, $groupPostID);
+        return template_commentBox($username, $time, $content, $userID, $comment_id, $groupPostID, $profileImg);
     }
 
     // Showing comment
@@ -442,7 +442,14 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
                 $timestamp = $result["created_at"];
                 $date = CommunityController::time_elapsed_string($timestamp);
 
-                echo $community->template_commentBox($result["username"], $date, $result["content"], $result["user_id"], $result["comment_id"], $result["group_post_id"]);
+                $username = $result["username"];
+                $content = $result["content"];
+                $userID = $result["user_id"];
+                $commentID = $result["comment_id"];
+                $groupPostID = $result["group_post_id"];
+                $profileImg = $result["user_profile"];
+
+                echo $community->template_commentBox($username, $date, $content, $userID, $commentID, $groupPostID, $profileImg);
             }
         } catch (Exception $e) {
             echo $e->getMessage();

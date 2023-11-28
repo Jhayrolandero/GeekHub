@@ -26,9 +26,9 @@ class CommentController
     }
 
     // Template for comment box component
-    public function template_commentBox($username, $time, $content, $userID, $comment_id, $post_id)
+    public function template_commentBox($username, $time, $content, $userID, $comment_id, $post_id, $profileImg)
     {
-        return template_commentBox($username, $time, $content, $userID, $comment_id, $post_id);
+        return template_commentBox($username, $time, $content, $userID, $comment_id, $post_id, $profileImg);
     }
     public function delete_comment($commendID)
     {
@@ -136,10 +136,16 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $results = $comment->show_comment($postID);
 
             foreach ($results as $result) {
+                $username = $result["username"];
                 $timestamp = $result["created_at"];
                 $date = CommentController::time_elapsed_string($timestamp);
+                $commentContent = $result["comment"];
+                $userID = $result["user_id"];
+                $commentID = $result["comment_id"];
+                $postID = $result["post_id"];
+                $profileImg = $result["user_profile"];
 
-                echo $comment->template_commentBox($result["username"], $date, $result["comment"], $result["user_id"], $result["comment_id"], $result["post_id"]);
+                echo $comment->template_commentBox($username, $date, $commentContent, $userID, $commentID, $postID, $profileImg);
             }
         } catch (Exception $e) {
             echo $e->getMessage();

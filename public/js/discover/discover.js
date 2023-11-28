@@ -173,4 +173,103 @@ $(document).ready(function () {
       }
     );
   });
+
+  /*
+  ================
+    POST SYSTEM
+  ================
+  */
+
+  // Delete Post
+  $("#discover-post").on(
+    "click",
+    ".community-post-menu-delete",
+    function (event) {
+      event.preventDefault();
+
+      var groupPostID = $(this)
+        .closest(".community-post-card")
+        .find(".community-post-id")
+        .val();
+
+      // alert(groupPostID);
+      $.post(
+        "app/controller/CommunityController.php",
+        {
+          action: "deleteCommunityPost",
+          groupPostID: groupPostID,
+        },
+        function (data, status) {
+          if (status === "success") {
+            alert(data);
+            var communityID = get_hash_community_id();
+
+            renderCommunityTimeline(communityID);
+            render_communtiy_stat(communityID);
+          } else {
+            alert("Error");
+          }
+        }
+      );
+    }
+  );
+
+  // Open Update Post
+  $("#discover-post").on(
+    "click",
+    ".community-post-menu-update",
+    function (event) {
+      event.preventDefault();
+
+      var groupPostID = $(this)
+        .closest(".community-post-card")
+        .find(".community-post-id")
+        .val();
+
+      var pervContent = $(this)
+        .closest(".community-post-card")
+        .find(".post-content")
+        .text()
+        .trim();
+
+      $("#update-community-post-id").val(groupPostID);
+      $("#update-community-post-form").val(pervContent);
+
+      // alert(groupPostID);
+      // alert(pervContent);
+
+      $(".update-community-post-modal").slideDown();
+    }
+  );
+
+  // Close update
+  $("#close-update-community-post").click(function () {
+    $(".update-community-post-modal").slideUp();
+  });
+
+  // Update post
+  $("#update-community-post-btn").click(function () {
+    var content = $("#update-community-post-form").val();
+    var groupPostID = $("#update-community-post-id").val();
+
+    $.post(
+      "app/controller/CommunityController.php",
+      {
+        action: "updateCommunityPost",
+        content: content,
+        groupPostID: groupPostID,
+      },
+      function (data, status) {
+        if (status === "success") {
+          var groupID = get_hash_community_id();
+
+          renderCommunityTimeline(groupID);
+          render_communtiy_stat(groupID);
+          // alert(data);
+        } else {
+          alert("Error!");
+        }
+      }
+    );
+  });
 });

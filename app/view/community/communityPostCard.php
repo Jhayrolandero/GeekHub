@@ -50,13 +50,21 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                     </div>
                     <!-- Del and Update Dropdown -->
                     <div class="col-xl-3 col-lg-2 col-md-3 col-sm-1 col-2 p-0 option-col text-end">
-                        <button data-bs-toggle="dropdown" class="option-btn">
-                            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-                        </button>
-                        <ul class="dropdown-menu post-menu">
-                            <li><button class="btn post-menu-btn community-post-menu-delete">Delete Post</button></li>
-                            <li><button class="btn post-menu-btn community-post-menu-update">Update Post</button></li>
-                        </ul>
+                        <?php
+                        if ($authorID == $_SESSION["user"]) {
+                        ?>
+                            <button data-bs-toggle="dropdown" class="option-btn">
+                                <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                            </button>
+                            <ul class="dropdown-menu post-menu">
+                                <li><button class="btn post-menu-btn community-post-menu-delete">Delete Post</button></li>
+                                <li><button class="btn post-menu-btn community-post-menu-update">Update Post</button></li>
+                            </ul>
+                        <?php
+                        }
+
+                        ?>
+
                         <button type="button" class="p-0 hide-post" data-bs-dismiss="modal">&times;</button>
                     </div>
                 </div>

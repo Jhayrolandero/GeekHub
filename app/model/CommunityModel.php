@@ -292,7 +292,7 @@ class Community extends Database
     public function show_comment($groupPostID)
     {
         try {
-            $sql = "SELECT group_post_comments.content, group_post_comments.created_at, group_post_comments.comment_id, group_post_comments.group_post_id, users.username, users.user_id
+            $sql = "SELECT group_post_comments.content, group_post_comments.created_at, group_post_comments.comment_id, group_post_comments.group_post_id, users.username, users.user_id, users.user_profile
                     FROM group_post_comments
                     LEFT JOIN users ON group_post_comments.user_id = users.user_id
                     WHERE group_post_comments.group_post_id = ?";

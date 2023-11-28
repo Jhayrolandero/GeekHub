@@ -175,3 +175,19 @@
 .post-menu-btn {
   width: 100%;
 }
+
+.comment-author-date {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.author-name a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.comment-author-date > * {
+  margin-right: 0.5rem;
+}

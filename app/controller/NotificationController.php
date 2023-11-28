@@ -20,9 +20,9 @@ class NotificationController
 
 
     // Template for notif card
-    public function template_notification($username, $date, $message)
+    public function template_notification($username, $date, $message, $profileImg, $userID)
     {
-        return template_notif($username, $date, $message);
+        return template_notif($username, $date, $message, $profileImg, $userID);
     }
 
     public function template_empty_notification()
@@ -88,10 +88,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $user_id = $_SESSION["user"];
 
             if ($target_id == $_SESSION["user"]) {
-                die("what?");
+                die();
             }
 
-            echo $notif->add_notification($_SESSION["user"], $target_id, "has commented your post!", "comment", $post_id);
+            echo $notif->add_notification($_SESSION["user"], $target_id, "has commented on your post!", "comment", $post_id);
         } catch (Exception $e) {
             echo ($e);
         }
@@ -129,7 +129,10 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
                 $username = $result["username"];
                 $date = $result["created_at"];
                 $message = $result["message"];
-                echo $notif->template_notification($username, $date, $message);
+                $profileImg = $result["user_profile"];
+                $userID = $result["user_id"];
+
+                echo $notif->template_notification($username, $date, $message, $profileImg, $userID);
             }
         } catch (Exception $e) {
             return $e->getMessage();

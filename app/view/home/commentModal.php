@@ -16,15 +16,15 @@
 
         <!-- Modal Header -->
         <div class="modal-header">
-          <input type="text" class="comment-post-id">
-          <input type="text" class="comment-user-id" value="<?= $_SESSION["user"] ?>">
-          <input type="text" class="comment-target-id">
+          <input type="text" class="comment-post-id" hidden>
+          <input type="text" class="comment-user-id" value="<?= $_SESSION["user"] ?>" hidden>
+          <input type="text" class="comment-target-id" hidden>
           <h4 class="modal-title comment-title text-center"></h4>
           <button type="button" class="btn-close close-btn"></button>
         </div>
 
         <!-- Modal body -->
-        <div class="modal-body">
+        <div class="modal-body p-0">
           <div class="container-fluid p-1" id="comment-list">
 
           </div>
