@@ -22,7 +22,7 @@ class Notification extends Database
     public function get_notification($user_id)
     {
         try {
-            $sql = "SELECT users.username, notifications.message, notifications.created_at
+            $sql = "SELECT users.username, notifications.message, notifications.created_at, users.user_profile, users.user_id
                     FROM notifications 
                     LEFT JOIN users ON users.user_id = notifications.user_id 
                     WHERE notifications.target_id = ?";

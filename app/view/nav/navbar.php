@@ -37,7 +37,7 @@
         <div class="dropdown dropstart text-end">
           <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" id="nav-drop-btn">
             <ion-icon name="notifications"></ion-icon> </button>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu" id="notif">
             <div class="notif-header">
               <p>Notification</p>
             </div>

@@ -1,11 +1,26 @@
 <?php
-function template_notif($username, $date, $content)
+function template_notif($username, $date, $content, $profileImg, $userID)
 {
 ?>
-    <div class="notif-card">
+    <div class="notif-card p-3">
         <div class="row">
             <div class="col-2 notif-user-icon">
-                png
+                <a href="#profile#<?= $userID ?>">
+                    <?php
+                    if ($profileImg) {
+                        $base64Image = base64_encode($profileImg);
+                        $imageSrc = "data:image/jpeg;base64," . $base64Image;
+                    ?>
+                        <img src="<?= $imageSrc ?>" class="profile-img rounded-pill" style="width:45px;" alt="Profile Image">
+                    <?php
+                    } else {
+                    ?>
+                        <img src="public\images\you.png" class="profile-img rounded-pill" style="width:45px;" alt="Profile Image">
+
+                    <?php
+                    }
+                    ?>
+                </a>
             </div>
             <div class="col-10">
                 <div class="row">
