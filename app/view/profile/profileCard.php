@@ -81,55 +81,59 @@ function profile_Template($username, $userBio, $createdAt, $userID, $profileImg,
         </header>
 
         <main class="row p-3 content-section  mx-auto">
-            <div class="col-md-3 col-sm-12  mt-3 bio-section ">
-                <div class="row">
-                    <div class="col-6">
-                        <h4>Bio</h4>
-                    </div>
-                    <?php
-                    if ($_SESSION["user"] == $userID) {
-                    ?>
-                        <div class="col-6 text-end">
-                            <button id="add-bio-btn">Add Bio</button>
+            <div class="col-md-3 col-sm-12  mt-3">
+                <section class="bio-section">
+                    <div class="row">
+                        <div class="col-6">
+                            <h4>Bio</h4>
                         </div>
+                        <?php
+                        if ($_SESSION["user"] == $userID) {
+                        ?>
+                            <div class="col-6 text-end">
+                                <button id="add-bio-btn">Add Bio</button>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                    <div class="bio-container p-0">
+                        <textarea name="" class="form-control" id="bio-form" <?php if ($userID != $_SESSION["user"]) echo 'readonly'; ?>><?= $userBio ?></textarea>
+                    </div>
+                    <div class="row mt-4 date-container">
+                        <p>
+                            <ion-icon name="calendar" size="large"></ion-icon><?= $createdAt ?>
+                        </p>
+                    </div>
+                    <div class="row profile-stat">
+                        <div class="col-4 ">
+                            <div class="stat-value text-center" id="buddy-count">
+                            </div>
+                            <div class="stat text-center">
+                                Buddies
+                            </div>
+                        </div>
+                        <div class="col-4 ">
+                            <div class="stat-value text-center" id="post-count">
+                            </div>
+                            <div class="stat text-center">
+                                Posts
+                            </div>
+                        </div>
+                        <div class="col-4 ">
+                            <div class="stat-value text-center" id="like-count">
+                            </div>
+                            <div class="stat text-center">
+                                Likes
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-                    <?php
-                    }
-
-                    ?>
-                </div>
-                <div class="bio-container p-0">
-                    <textarea name="" class="form-control" id="bio-form" <?php if ($userID != $_SESSION["user"]) echo 'readonly'; ?>><?= $userBio ?></textarea>
-                </div>
-                <div class="row mt-4 date-container">
-                    <p>
-                        <ion-icon name="calendar" size="large"></ion-icon><?= $createdAt ?>
-                    </p>
-                </div>
-
-                <div class="row profile-stat">
-                    <div class="col-4 ">
-                        <div class="stat-value text-center" id="buddy-count">
-                        </div>
-                        <div class="stat text-center">
-                            Buddies
-                        </div>
-                    </div>
-                    <div class="col-4 ">
-                        <div class="stat-value text-center" id="post-count">
-                        </div>
-                        <div class="stat text-center">
-                            Posts
-                        </div>
-                    </div>
-                    <div class="col-4 ">
-                        <div class="stat-value text-center" id="like-count">
-                        </div>
-                        <div class="stat text-center">
-                            Likes
-                        </div>
-                    </div>
-                </div>
+                <section id="community-nav" class="mt-2">
+                    <h4 class="mb-4">Joined Communities</h4>
+                    <div id="community-side-nav"></div>
+                </section>
 
             </div>
             <div class="col-md-5 col-sm-12 ms-2">

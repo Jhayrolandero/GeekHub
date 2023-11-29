@@ -49,7 +49,6 @@ function template_commentBox($username, $time, $content, $userID, $commentID, $p
                             </button>
                             <ul class="dropdown-menu post-menu">
                                 <li><button class="btn comment-menu-delete">Delete Comment</button></li>
-                                <li><button class="btn comment-menu-update">Update Comment</button></li>
                             </ul>
                         <?php
                         }

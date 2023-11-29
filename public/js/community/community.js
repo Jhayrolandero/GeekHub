@@ -244,6 +244,34 @@ $(document).ready(function () {
 ======================
 */
 
+  // Function for validating Picture
+  function validateIMGType(fileID) {
+    // Get the file input element
+    var fileInput = document.getElementById(fileID);
+
+    // Get the selected file
+    var file = fileInput.files[0];
+
+    // Check if a file is selected
+    if (file) {
+      // Get the file extension
+      var extension = file.name.split(".").pop().toLowerCase();
+
+      // Array of allowed image file extensions
+      var allowedExtensions = ["jpg", "jpeg", "png", "webp"];
+
+      // Check if the file extension is in the allowed extensions array
+      if (allowedExtensions.indexOf(extension) === -1) {
+        fileInput.value = "";
+
+        return false;
+      } else {
+        return true;
+      }
+    }
+    return true;
+  }
+
   // Open COmmunity Post modal
   $("#community-container").on("click", "#create-community-post", function () {
     $(".create-community-post-modal").slideDown();
@@ -262,6 +290,16 @@ $(document).ready(function () {
     var communityID = $(".community-id").val();
     var userID = $(".user-id").val();
 
+    var valid = validateIMGType("image-input");
+
+    // Validate first the image
+    if (!valid) {
+      alert(
+        "Invalid file type. Please select a valid image file (JPG, JPEG, PNG, WEBP)."
+      );
+      return;
+    }
+
     var formData = new FormData();
     formData.append("action", "createPostCommunity");
     formData.append("content", content);
@@ -279,7 +317,8 @@ $(document).ready(function () {
         if (data == 0) {
           alert("No Empty Homie!");
         }
-        render_community(communityID);
+
+        renderCommunityTimeline(communityID);
       },
       error: function () {
         alert("Error");
@@ -336,9 +375,6 @@ $(document).ready(function () {
       $("#update-community-post-id").val(groupPostID);
       $("#update-community-post-form").val(pervContent);
 
-      // alert(groupPostID);
-      // alert(pervContent);
-
       $(".update-community-post-modal").slideDown();
     }
   );
@@ -376,9 +412,7 @@ $(document).ready(function () {
 
   /* 
   =============
-  
   Like System
-
   =============
   */
 
@@ -447,7 +481,7 @@ $(document).ready(function () {
 
   /*
   ====================
-  COMMENT
+        COMMENT
   ====================
   */
 
@@ -491,13 +525,12 @@ $(document).ready(function () {
     renderComment(groupPostID);
   });
 
-  // CLose comment modal
+  // Close comment modal
   $(".close-btn").click(function () {
     $(".community-comment-modal").slideUp();
   });
 
   // Comment
-
   $("#add-comment-btn").click(function () {
     var comment = $(".comment-input").val();
     var groupPostID = $(".comment-post-id").val();
@@ -523,4 +556,38 @@ $(document).ready(function () {
       }
     );
   });
+
+  // Delete Comment
+  $(".community-comment-modal").on(
+    "click",
+    ".comment-card .comment-menu-delete",
+    function () {
+      var commentID = $(this)
+        .closest(".comment-card")
+        .find(".comment-id")
+        .val();
+      var groupPostID = $(this)
+        .closest(".comment-card")
+        .find(".comment-post-id")
+        .val();
+      $.post(
+        "app/controller/CommunityController.php",
+        {
+          action: "deleteCommentCommunity",
+          commentID: commentID,
+        },
+        function (data, status) {
+          if (status === "success") {
+            // Render the new comment list
+            renderComment(groupPostID);
+            // Render the timeline
+            var communityID = get_hash_community_id();
+            renderCommunityTimeline(communityID);
+          } else {
+            alert("Error!");
+          }
+        }
+      );
+    }
+  );
 });

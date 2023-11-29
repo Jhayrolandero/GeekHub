@@ -36,15 +36,6 @@
   position: relative;
 }
 
-/* .community-profile {
-  width: 150px;
-  height: 150px;
-  display: inline-block;
-  position: absolute;
-  left: 10%;
-  transform: translate(-50%, -50%);
-} */
-
 .community-img {
   width: 150px;
   height: 150px;
@@ -75,6 +66,7 @@
   border: var(--text-clr) solid 1px;
   border-radius: 10px;
   font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .community-btn {
@@ -82,6 +74,7 @@
   color: black;
   font-weight: 500;
   padding: 0.7em;
+  transition: all 0.3s ease;
 }
 
 #create-community-post:hover {
@@ -144,6 +137,11 @@
 
 #community-nav .nav-item {
   list-style: none;
+  transition: all 0.3s ease;
+}
+
+#community-nav .nav-item:hover {
+  font-weight: 500;
 }
 
 #community-nav .community-name {

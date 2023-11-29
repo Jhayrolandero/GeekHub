@@ -6,7 +6,7 @@ function template_community_nav($communityName, $community_id, $groupPic)
         <a href="#group#<?= $community_id ?>">
             <div class="row">
 
-                <div class="row">
+                <div class="row mb-2">
                     <div class="col-lg-2 col-md-3 p-1  text-center">
                         <?php
                         if ($groupPic) {

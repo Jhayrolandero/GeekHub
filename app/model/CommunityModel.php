@@ -24,12 +24,13 @@ class Community extends Database
 
     // Get Community
 
-    public function get_community($communityID = null)
+    public function get_community($communityID = null, $userID = null)
     {
         try {
 
             $sql = "SELECT groups.* ";
 
+            // For recommendation nav for community nav
             if ($communityID != null) {
                 $sql = "SELECT groups.*, ";
             }
@@ -58,6 +59,12 @@ class Community extends Database
 
             $sql .= " FROM groups";
 
+            // For user community nav
+            if ($userID != null) {
+                $sql .= " JOIN user_group ON groups.group_id = user_group.group_id 
+                        WHERE user_group.user_id = :user_id";
+            }
+
             if ($communityID != null) {
                 $sql .= " WHERE groups.group_id = :group_id";
             }
@@ -66,6 +73,10 @@ class Community extends Database
 
             if ($communityID != null) {
                 $stmt->bindParam(':group_id', $communityID, PDO::PARAM_INT);
+            }
+
+            if ($userID != null) {
+                $stmt->bindParam(':user_id', $userID, PDO::PARAM_INT);
             }
 
             $stmt->execute();
@@ -283,6 +294,21 @@ class Community extends Database
             $stmt->execute([$user_id, $groupPostID, $comment]);
 
             return "You commented!";
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
+
+    public function delete_comment($commentID)
+    {
+        try {
+            $sql = "DELETE FROM group_post_comments
+                    WHERE comment_id = ?";
+
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute([$commentID]);
+
+            return "Comment Deleted!";
         } catch (PDOException $e) {
             return $e;
         }

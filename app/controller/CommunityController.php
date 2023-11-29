@@ -21,9 +21,9 @@ class CommunityController
     }
 
     // Get community info
-    public function get_community($communityID = null)
+    public function get_community($communityID = null, $userID = null)
     {
-        return $this->model->get_community($communityID);
+        return $this->model->get_community($communityID, $userID);
     }
 
     // Community template
@@ -112,6 +112,12 @@ class CommunityController
     public function add_Comment($user_id, $groupPostID, $comment)
     {
         return $this->model->add_Comment($user_id, $groupPostID, $comment);
+    }
+
+    // Delete Comment
+    public function delete_comment($commentID)
+    {
+        return $this->model->delete_comment($commentID);
     }
 
     // Template for comment box
@@ -208,6 +214,12 @@ class CommunityController
 }
 
 $community = new CommunityController();
+
+/*
+==============
+POST REQUEST
+==============
+*/
 
 // API for creating community
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -327,6 +339,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
+    // Delete a Comment
+    if (isset($_POST["action"]) && $_POST["action"] === "deleteCommentCommunity") {
+        try {
+            $commentID = $_POST["commentID"];
+
+            echo $community->delete_comment($commentID);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
     // API for deleting
     if (isset($_POST["action"]) && $_POST["action"] === "deleteCommunityPost") {
         try {
@@ -350,11 +373,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
+/*
+==============
+GET REQUEST
+==============
+*/
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
     // API for show nav
     if (isset($_GET["action"]) && $_GET["action"] === "showCommunityNav") {
         try {
             $results = $community->get_community();
+
+            foreach ($results as $result) {
+
+                $groupName = $result["group_name"];
+                $groupID = $result["group_id"];
+                $groupPic = $result["community_profile"];
+
+                echo $community->community_nav($groupName, $groupID, $groupPic);
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // API for showing community in profile 
+    if (isset($_GET["action"]) && $_GET["action"] === "showProfileCommunityNav") {
+        try {
+
+            $userID = $_GET["userID"];
+            $results = $community->get_community(null, $userID);
 
             foreach ($results as $result) {
 

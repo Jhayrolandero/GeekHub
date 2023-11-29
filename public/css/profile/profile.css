@@ -99,3 +99,23 @@ body {
   background-color: white;
   color: #141414;
 }
+
+#community-nav {
+  padding: 1.2em;
+  background-color: var(--bg-color1);
+  border-radius: 10px;
+}
+
+#community-nav .nav-item {
+  list-style: none;
+  transition: all 0.3s ease;
+}
+
+#community-nav .nav-item:hover {
+  font-weight: 500;
+}
+
+#community-nav .nav-item a {
+  color: var(--text-color);
+  text-decoration: none;
+}

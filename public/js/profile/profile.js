@@ -36,6 +36,7 @@ $(document).ready(function () {
 
           render_timeline(userID);
           render_stat(userID);
+          render_community_nav(userID);
         } else {
           alert("Error! try again");
         }
@@ -74,6 +75,21 @@ $(document).ready(function () {
           $("#like-count").text(likeCount);
         } else {
           alert("error");
+        }
+      }
+    );
+  }
+
+  function render_community_nav(userID) {
+    $.get(
+      "app/controller/CommunityController.php",
+      {
+        action: "showProfileCommunityNav",
+        userID: userID,
+      },
+      function (data, status) {
+        if (status === "success") {
+          $("#community-side-nav").html(data);
         }
       }
     );
@@ -171,6 +187,34 @@ $(document).ready(function () {
   ================
   */
 
+  // Function for validating Picture
+  function validateIMGType(fileID) {
+    // Get the file input element
+    var fileInput = document.getElementById(fileID);
+
+    // Get the selected file
+    var file = fileInput.files[0];
+
+    // Check if a file is selected
+    if (file) {
+      // Get the file extension
+      var extension = file.name.split(".").pop().toLowerCase();
+
+      // Array of allowed image file extensions
+      var allowedExtensions = ["jpg", "jpeg", "png", "webp"];
+
+      // Check if the file extension is in the allowed extensions array
+      if (allowedExtensions.indexOf(extension) === -1) {
+        fileInput.value = "";
+
+        return false;
+      } else {
+        return true;
+      }
+    }
+    return true;
+  }
+
   // Post System
 
   // Open Community Post modal
@@ -190,6 +234,16 @@ $(document).ready(function () {
     var content = $("#post-form").val();
     // Create a FormData object
     var userID = $("#user-id-post").val();
+
+    var valid = validateIMGType("image-input");
+
+    // Validate first the image
+    if (!valid) {
+      alert(
+        "Invalid file type. Please select a valid image file (JPG, JPEG, PNG, WEBP)."
+      );
+      return;
+    }
 
     var formData = new FormData();
 

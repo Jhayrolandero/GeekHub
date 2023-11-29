@@ -182,7 +182,7 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
                     </section>
 
                     <section id="community-nav" class="mt-2">
-                        <h4>Other Communities</h4>
+                        <h4 class="mb-4">Other Communities</h4>
                         <div id="community-side-nav"></div>
                     </section>
                 </div>

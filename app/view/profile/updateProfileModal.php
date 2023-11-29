@@ -44,7 +44,6 @@
                         </div>
                     </label>
                     <input type="file" name="image" id="profile-bg-input" class="form-control" />
-
                     <!-- <textarea class="form-control" name="" id="update-profile-form" cols="30" rows="10" placeholder="Share your thoughts"></textarea> -->
                 </div>
 

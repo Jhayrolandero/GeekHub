@@ -27,8 +27,8 @@ $(document).ready(function () {
     );
   }
 
+  // Empty the input
   function empty_input(inputID) {
-    // Assuming your form has the id "myForm"
     var input = document.getElementById(inputID);
 
     input.value = "";
