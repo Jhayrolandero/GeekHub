@@ -5,22 +5,73 @@ include "../../config/Database.php";
 class Community extends Database
 {
 
-    // For creating Community
-    public function create_community($groupName, $description)
+    // Create Community 
+    public function createAndJoinCommunity($groupName, $description, $user_id, $role = 'owner')
     {
         try {
-            $sql = "INSERT INTO groups (group_name, description)
-                    VALUES (?, ?)";
+            $pdo = $this->connect();
+            $pdo->beginTransaction();
 
-            $stmt = $this->connect()->prepare($sql);
-            $stmt->execute([$groupName, $description]);
+            // Create Community
+            $createCommunitySQL = "INSERT INTO groups (group_name, description) VALUES (?, ?)";
+            $createCommunityStmt = $pdo->prepare($createCommunitySQL);
+            $createCommunityStmt->execute([$groupName, $description]);
 
-            return "Successfully Created";
+            // Get the last inserted ID of the created community
+            $community_id = $pdo->lastInsertId();
+
+            // Join Community
+            $joinCommunitySQL = "INSERT INTO user_group (user_id, group_id, role) VALUES (?, ?, ?)";
+            $joinCommunityStmt = $pdo->prepare($joinCommunitySQL);
+            $joinCommunityStmt->execute([$user_id, $community_id, $role]);
+
+            // commit
+            $pdo->commit();
+
+            return "Successfully Created and Joined!";
         } catch (PDOException $e) {
+            // If an error occurs, rollback the transaction
+            $pdo->rollBack();
             return $e;
         }
     }
 
+    // Check if user is owner
+    public function is_community_owner($user_id, $group_id)
+    {
+        try {
+            $sql = "SELECT COUNT(*) as count
+                FROM user_group
+                WHERE group_id = ? AND user_id = ? AND role = 'owner'";
+
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute([$group_id, $user_id]);
+
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            return $e->getMessage(); // Handle the exception as needed
+        }
+    }
+
+
+    // For creating Community
+    // public function create_community($groupName, $description)
+    // {
+    //     try {
+    //         $sql = "INSERT INTO groups (group_name, description)
+    //                 VALUES (?, ?)";
+
+    //         $stmt = $this->connect()->prepare($sql);
+    //         $stmt->execute([$groupName, $description]);
+
+    //         // Get the last inserted ID
+    //         $lastInsertId = $this->connect()->lastInsertId();
+
+    //         return $lastInsertId;
+    //     } catch (PDOException $e) {
+    //         return $e;
+    //     }
+    // }
 
     // Get Community
 
@@ -88,7 +139,7 @@ class Community extends Database
     }
 
     // Join community
-    public function join_community($user_id, $community_id, $role)
+    public function join_community($user_id, $community_id, $role = "member")
     {
         try {
             $sql = "INSERT INTO user_group (user_id, group_id, role)

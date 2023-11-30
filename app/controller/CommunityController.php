@@ -5,6 +5,8 @@ include "../view/community/communityNav.php";
 include "../view/community/communityCard.php";
 include "../view/community/communityPostCard.php";
 include "../view/community/communityCommentBox.php";
+
+// session_start();
 class CommunityController
 {
     private $model;
@@ -14,10 +16,17 @@ class CommunityController
         $this->model = new Community();
     }
 
-    // Create a community
-    public function create_community($groupName, $description)
+    // Creating COmmunity
+    public function createAndJoinCommunity($groupName, $description, $user_id, $role)
     {
-        return $this->model->create_community($groupName, $description);
+        return $this->model->createAndJoinCommunity($groupName, $description, $user_id, $role);
+    }
+
+    // Checking for ownership
+
+    public function is_community_owner($user_id, $group_id)
+    {
+        return $this->model->is_community_owner($user_id, $group_id);
     }
 
     // Get community info
@@ -33,9 +42,9 @@ class CommunityController
     }
 
     // Render it
-    public function show_community($communityName, $desc, $hasJoined,  $createdAt, $groupID, $groupPic, $groupBG)
+    public function show_community($communityName, $desc, $hasJoined,  $createdAt, $groupID, $groupPic, $groupBG, $isOwner)
     {
-        return template_community($communityName, $desc, $hasJoined,  $createdAt, $groupID, $groupPic, $groupBG);
+        return template_community($communityName, $desc, $hasJoined,  $createdAt, $groupID, $groupPic, $groupBG, $isOwner);
     }
 
     // Join community
@@ -145,8 +154,6 @@ class CommunityController
         return $this->model->edit_post($groupPostID, $content);
     }
 
-
-
     // Time formatter
     public static function time_elapsed_string($datetime, $full = false)
     {
@@ -228,8 +235,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $groupName = $_POST["groupName"];
             $groupDesc = $_POST["groupDesc"];
+            $userID = $_SESSION["user"];
 
-            echo $community->create_community($groupName, $groupDesc);
+            echo $community->createAndJoinCommunity($groupName, $groupDesc, $userID, "owner");
+            // $lastGroupID = $community->create_community($groupName, $groupDesc)[0];
+
+            // var_dump($community->create_community($groupName, $groupDesc));
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -427,6 +438,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $results = $community->get_community($communityID);
 
             $hasJoined = $community->validate_user_community($communityID, $userID);
+            $isOwner = $community->is_community_owner($userID, $communityID);
 
             foreach ($results as $result) {
 
@@ -440,7 +452,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
                 $groupID = $result["group_id"];
 
-                echo $community->show_community($groupName, $groupDesc, $hasJoined, $date, $groupID, $groupPic, $groupBG);
+                echo $community->show_community($groupName, $groupDesc, $hasJoined, $date, $groupID, $groupPic, $groupBG, $isOwner);
             }
         } catch (Exception $e) {
             echo $e->getMessage();

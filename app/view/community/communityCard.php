@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID, $groupPic, $groupBG)
+function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID, $groupPic, $groupBG, $isOwner)
 {
 ?>
 
@@ -16,8 +16,6 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
                         $base64Image = base64_encode($groupBG);
                         $imageSrc = "data:image/jpeg;base64," . $base64Image;
                     ?>
-
-
                         <img src="<?= $imageSrc ?>" alt="Background Image">
                     <?php
                     } else {
@@ -26,10 +24,7 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
 
                     <?php
                     }
-
-
                     ?>
-
                     <script>
                         var profileBGSrc = '<?= $imageSrc ?>';
                     </script>
@@ -55,7 +50,6 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
                             <?php
                             }
                             ?>
-
                             <script>
                                 var profileImageSrc = '<?= $imageSrc ?>';
                             </script>
@@ -66,7 +60,6 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
                             <div class="col-12">
                                 <h4 class="community-name" id="community-name"><?= $groupName ?></h4>
                             </div>
-
                         </div>
                     </div>
                     <div class="col-3">
@@ -84,9 +77,16 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
                                 } else {
                                 ?>
                                     <div class="row">
-                                        <div class="col-6 p-0">
-                                            <button class="btn community-btn w-100 edit-community-btn" style="width: fit-content;"> <ion-icon name="pencil"></ion-icon> Edit</button>
-                                        </div>
+
+                                        <?php
+                                        if ($isOwner > 0) {
+                                        ?>
+                                            <div class="col-6 p-0">
+                                                <button class="btn community-btn w-100 edit-community-btn" style="width: fit-content;"> <ion-icon name="pencil"></ion-icon> Edit</button>
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
                                         <div class="col-6 ">
                                             <button class="btn leave-community-btn community-btn w-100"><ion-icon name="checkmark-outline"></ion-icon> Joined</button>
                                         </div>
