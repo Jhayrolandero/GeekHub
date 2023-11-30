@@ -42,17 +42,7 @@ session_start();
                                 <ion-icon name="compass-sharp"></ion-icon> Discover
                             </a>
                         </li>
-                        <li class="nav-item disable">
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" id="nav-drop-btn">
-                                    <ion-icon name="notifications"></ion-icon> Notifications</button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Link 1</a></li>
-                                    <li><a class="dropdown-item" href="#">Link 2</a></li>
-                                    <li><a class="dropdown-item" href="#">Link 3</a></li>
-                                </ul>
-                            </div>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <ion-icon name="menu-sharp"></ion-icon> Menu
@@ -96,7 +86,11 @@ session_start();
     <!-- Modal Comment -->
     <?php include "community/communityCommentModal.php" ?>
 
+
     <?php include "community/updateCommunitypostModal.php" ?>
+
+    <!-- For creating Community -->
+    <?php include "home/communityModal.php" ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 

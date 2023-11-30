@@ -80,12 +80,14 @@ class User extends Database
     public function search_user($username)
     {
         try {
+
+            $searchQuery = "%" . $username . "%";
             $sql = "SELECT username, user_id 
             FROM users 
             WHERE username LIKE ?";
 
             $stmt = $this->connect()->prepare($sql);
-            $stmt->execute([$username]);
+            $stmt->execute([$searchQuery]);
 
             return $stmt->fetchAll();
         } catch (PDOException $e) {

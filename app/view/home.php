@@ -46,17 +46,6 @@ session_start();
                                 <ion-icon name="compass-sharp"></ion-icon> Discover
                             </a>
                         </li>
-                        <li class="nav-item disable">
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" id="nav-drop-btn">
-                                    <ion-icon name="notifications"></ion-icon> Notifications</button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Link 1</a></li>
-                                    <li><a class="dropdown-item" href="#">Link 2</a></li>
-                                    <li><a class="dropdown-item" href="#">Link 3</a></li>
-                                </ul>
-                            </div>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <ion-icon name="menu-sharp"></ion-icon> Menu

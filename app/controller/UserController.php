@@ -21,6 +21,7 @@ class UserController
         }
     }
 
+    // Gettin User info
     public function get_user($id)
     {
         try {
@@ -30,11 +31,13 @@ class UserController
         }
     }
 
+    // Template to render profile
     public function show_profile($username, $userBio, $createdAt,  $userID, $profileImg, $profileBG)
     {
         return profile_Template($username, $userBio, $createdAt, $userID, $profileImg, $profileBG);
     }
 
+    // For bio
     public function add_bio($userID, $userBio)
     {
         return $this->model->add_bio($userID, $userBio);
@@ -46,16 +49,17 @@ class UserController
         return $this->model->edit_profile($userID, $username, $profileImg, $profileBG);
     }
 
-    public function search_user($username)
-    {
-        return $this->model->search_user($username);
-    }
+    // // 
+    // public function search_user($username)
+    // {
+    //     return $this->model->search_user($username);
+    // }
 
-    // Show results
-    public function show_search_user($username, $userID)
-    {
-        return template_search($username, $userID);
-    }
+    // // Show results
+    // public function show_search_user($username, $userID)
+    // {
+    //     return template_search($username, $userID);
+    // }
 
     public static function month_day($date)
     {
@@ -128,16 +132,16 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         echo $user->show_profile($username, $userBio, $createdAt,  $userID, $profileImg, $profileBG);
     }
 
-    // Search User
-    if (isset($_GET["action"]) && $_GET["action"] === "searchUser") {
-        $username = $_GET["username"];
+    // // Search User
+    // if (isset($_GET["action"]) && $_GET["action"] === "searchUser") {
+    //     $username = $_GET["username"];
 
-        $results = $user->search_user($username);
+    //     $results = $user->search_user($username);
 
-        foreach ($results as $result) {
-            echo $user->show_search_user($result["username"], $result["user_id"]);
-        }
-    }
+    //     foreach ($results as $result) {
+    //         echo $user->show_search_user($result["username"], $result["user_id"]);
+    //     }
+    // }
 
     // Get profile Stat
     if (isset($_GET["action"]) && $_GET["action"] === "getStat") {

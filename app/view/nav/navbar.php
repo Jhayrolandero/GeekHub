@@ -19,11 +19,9 @@
               <span>GeekHub</span>
             </a>
           </div>
-          <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-              <span class="navbar-toggler-icon"></span>
-            </button> -->
+
           <div class="searchbar-container col-8">
-            <input type="text" placeholder="Search...." class="searchbar-input form-control" id="searchInput">
+            <input type="text" placeholder="Search...." class="searchbar-input form-control" id="searchInput" autocomplete="off">
             <div class="searchbar-content">
               <ul id="searchResults" class="nav"></ul>
             </div>

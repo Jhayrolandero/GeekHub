@@ -31,9 +31,7 @@ $(document).ready(function () {
 
   /* 
   =============
-  
   Like System
-
   =============
   */
 
@@ -43,11 +41,8 @@ $(document).ready(function () {
       .closest(".community-post-card")
       .find(".community-post-id")
       .val();
+
     var userID = $(this).closest(".community-post-card").find(".user-id").val();
-    // var communityID = $(this)
-    //   .closest(".community-post-card")
-    //   .find(".community-id")
-    //   .val();
 
     $.post(
       "app/controller/CommunityController.php",
@@ -166,7 +161,7 @@ $(document).ready(function () {
         if (status === "success") {
           // Update contents dynamically
           renderComment(groupPostID);
-          console.log(data);
+          render_dicover_page();
         } else {
           alert("Error! Try again");
         }
@@ -271,5 +266,23 @@ $(document).ready(function () {
         }
       }
     );
+  });
+
+  /*
+  =================
+  Create Community
+  ================
+  */
+
+  // Open community Modal
+  $("#community-btn").click(function (e) {
+    e.preventDefault();
+
+    $(".create-community-modal").slideDown();
+  });
+
+  // Close community post modal
+  $("#close-create-community").click(function () {
+    $(".create-community-modal").slideUp();
   });
 });

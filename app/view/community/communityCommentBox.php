@@ -24,7 +24,6 @@ function template_commentBox($username, $time, $content, $userID, $commentID, $p
                     }
                     ?>
                 </a>
-                <!-- <img src="public\images\you.png" alt="" style="width: 50px"> -->
             </div>
             <div class="col-11 comment-paragraph p-0">
                 <div class="row comment-info">
