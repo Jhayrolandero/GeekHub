@@ -38,7 +38,7 @@
               <input type="text" class="form-control comment-input" placeholder="Say Something">
             </div>
             <div class="col-1">
-              <button type="button" class="btn btn-success" id="add-comment-btn">Send</button>
+              <button type="button" class="btn btn-success add-community-comment-btn" id="add-comment-btn">Send</button>
             </div>
           </div>
         </div>

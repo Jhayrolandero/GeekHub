@@ -112,28 +112,6 @@ $(document).ready(function () {
   ================
   */
 
-  // Create a community
-  $("#create-community-btn").click(function () {
-    var groupName = $("#group-name").val();
-    var groupDesc = $("#group-desc").val();
-
-    $.post(
-      "app/controller/CommunityController.php",
-      {
-        action: "createCommunity",
-        groupName: groupName,
-        groupDesc: groupDesc,
-      },
-      function (data, status) {
-        if (status === "success") {
-          alert(data);
-        } else {
-          alert("Error!");
-        }
-      }
-    );
-  });
-
   // Join community
   $("#community-container").on("click", ".join-community-btn", function () {
     var communityID = $(".community-id").val();
@@ -183,9 +161,6 @@ $(document).ready(function () {
     var imgSrc = profileImageSrc;
     var bgSrc = profileBGSrc;
 
-    // console.log(imgSrc);
-    // console.log(bgSrc);
-
     $("#community-name-input").val(communityName);
     $("#community-desc-input").val(communityDesc);
     $("#prev-community-icon").attr("src", imgSrc);
@@ -202,6 +177,7 @@ $(document).ready(function () {
   $("#update-community-btn").click(function (event) {
     event.preventDefault(); // Prevent the default form submission
 
+    // alert("Hello");
     var communityName = $("#community-name-input").val();
     var communityID = $("#community-id").val();
     var communityDesc = $("#community-desc-input").val();
@@ -531,12 +507,11 @@ $(document).ready(function () {
   });
 
   // Comment
-  $("#add-comment-btn").click(function () {
+  $(".add-community-comment-btn").click(function () {
     var comment = $(".comment-input").val();
     var groupPostID = $(".comment-post-id").val();
     var userID = $(".comment-user-id").val();
     var groupID = $(".comment-community-id").val();
-
     $.post(
       "app/controller/CommunityController.php",
       {

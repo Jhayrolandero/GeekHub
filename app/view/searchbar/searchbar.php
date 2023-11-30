@@ -22,10 +22,10 @@ function template_search($username, $link, $profileImg)
                     }
                     ?>
                 </div>
-                <div class="col-8 p-0">
-                    <p>
+                <div class="col-8 p-0 d-flex align-items-center">
+                    <small class="result-name">
                         <?= $username ?>
-                    </p>
+                    </small>
                 </div>
             </div>
         </a>

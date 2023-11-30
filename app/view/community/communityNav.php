@@ -7,7 +7,7 @@ function template_community_nav($communityName, $community_id, $groupPic)
             <div class="row">
 
                 <div class="row mb-2">
-                    <div class="col-lg-2 col-md-3 p-1  text-center">
+                    <div class="col-lg-2 col-md-3 p-1  text-center p-0">
                         <?php
                         if ($groupPic) {
                             $base64Image = base64_encode($groupPic);
@@ -24,8 +24,10 @@ function template_community_nav($communityName, $community_id, $groupPic)
                         ?>
                         <!-- <img src="public\images\you.png" alt="" style="width: 100%; max-width: 42px"> -->
                     </div>
-                    <div class="col-lg-10 col-md-9 p-1 community-name-container">
-                        <p class="community-name"><?= $communityName ?></p>
+                    <div class="col-lg-10 col-md-9 p-1 community-name-container d-flex align-items-center p-0">
+                        <small>
+                            <?= $communityName ?>
+                        </small>
                     </div>
                 </div>
 

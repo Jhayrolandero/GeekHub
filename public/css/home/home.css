@@ -98,6 +98,7 @@ body {
 #communitybar #community-side-nav .community-name-container {
   display: flex;
   align-items: center;
+  color: var(--text-color);
 }
 
 #friendbar #friend-side-nav .buddy-name,

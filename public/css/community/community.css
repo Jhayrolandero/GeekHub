@@ -189,3 +189,7 @@
 .comment-author-date > * {
   margin-right: 0.5rem;
 }
+
+.nav-item a {
+  color: var(--text-clr);
+}

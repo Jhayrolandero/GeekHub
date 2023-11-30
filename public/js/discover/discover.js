@@ -29,6 +29,28 @@ $(document).ready(function () {
     );
   }
 
+  // Create a community
+  $("#create-community-btn").click(function () {
+    var groupName = $("#group-name").val();
+    var groupDesc = $("#group-desc").val();
+
+    $.post(
+      "app/controller/CommunityController.php",
+      {
+        action: "createCommunity",
+        groupName: groupName,
+        groupDesc: groupDesc,
+      },
+      function (data, status) {
+        if (status === "success") {
+          alert(data);
+        } else {
+          alert("Error!");
+        }
+      }
+    );
+  });
+
   /* 
   =============
   Like System
@@ -143,12 +165,12 @@ $(document).ready(function () {
 
   // Comment
 
-  $("#add-comment-btn").click(function () {
+  $(".add-community-comment-btn").click(function () {
     var comment = $(".comment-input").val();
     var groupPostID = $(".comment-post-id").val();
     var userID = $(".comment-user-id").val();
-    // var groupID = $(".comment-community-id").val();
 
+    var groupID = $(".comment-community-id").val();
     $.post(
       "app/controller/CommunityController.php",
       {

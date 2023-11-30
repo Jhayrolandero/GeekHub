@@ -91,9 +91,9 @@ session_start();
                         <div class="col-6">
                             <p id="community-bar-title">Communities</p>
                         </div>
-                        <div class="col-6">
+                        <!-- <div class="col-6">
                             <button id="community-btn">Create +</button>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- For communities -->
                     <ul class="nav flex-column" id="community-side-nav">

@@ -206,3 +206,13 @@
   max-height: 40rem; /* Set the maximum height as needed */
   overflow-y: auto;
 }
+
+.result-name {
+  text-decoration: none;
+  color: var(--text-color);
+  list-style: none;
+}
+
+.nav-item a {
+  text-decoration: none;
+}

@@ -29,7 +29,11 @@ $(document).ready(function () {
     return true;
   }
 
-  // Post System
+  /*
+  =====================
+      POST SYSTEM
+  =====================
+  */
 
   // Make a post
   $("#post-btn").click(function (event) {

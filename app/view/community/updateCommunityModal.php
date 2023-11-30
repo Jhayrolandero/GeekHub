@@ -42,7 +42,7 @@
                         <h4>Community Picture</h4>
                         <img src="" alt="" style="width:150px; height: 150px;" class="mx-auto rounded-pill" id="prev-community-icon">
                     </label>
-                    <input type="file" name="image" id="community-pic-input mb-2" class="form-control mb-5" />
+                    <input type="file" name="image" id="community-pic-input" class="form-control mb-5" />
 
                     <label for="" class="form-label">
                         <h4>Community background</h4>
