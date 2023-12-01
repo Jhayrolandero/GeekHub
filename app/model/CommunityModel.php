@@ -53,29 +53,8 @@ class Community extends Database
         }
     }
 
-
-    // For creating Community
-    // public function create_community($groupName, $description)
-    // {
-    //     try {
-    //         $sql = "INSERT INTO groups (group_name, description)
-    //                 VALUES (?, ?)";
-
-    //         $stmt = $this->connect()->prepare($sql);
-    //         $stmt->execute([$groupName, $description]);
-
-    //         // Get the last inserted ID
-    //         $lastInsertId = $this->connect()->lastInsertId();
-
-    //         return $lastInsertId;
-    //     } catch (PDOException $e) {
-    //         return $e;
-    //     }
-    // }
-
     // Get Community
-
-    public function get_community($communityID = null, $userID = null)
+    public function get_community($communityID = null, $userID = null, $random = false)
     {
         try {
 
@@ -120,6 +99,10 @@ class Community extends Database
                 $sql .= " WHERE groups.group_id = :group_id";
             }
 
+            if ($random) {
+                $sql .= " ORDER BY RAND()";
+            }
+
             $stmt = $this->connect()->prepare($sql);
 
             if ($communityID != null) {
@@ -137,6 +120,71 @@ class Community extends Database
             return $e->getMessage();
         }
     }
+
+    // Get all members' ID on a community
+    private function helper_get_members($groupID)
+    {
+        try {
+
+            $sql = "SELECT user_id 
+                    FROM user_group 
+                    WHERE group_id = ?";
+
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute([$groupID]);
+
+            $results = $stmt->fetchAll();
+
+            return $results;
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
+
+    // Get all Top members
+    public function get_top_members($groupID)
+    {
+        try {
+
+            $userDatas = array_values($this->helper_get_members($groupID));
+            $userIDs = [];
+
+            foreach ($userDatas as $data) {
+                array_push($userIDs, $data["user_id"]);
+            }
+
+            $results = [];
+            foreach ($userIDs as $userID) {
+                $sql = "SELECT COUNT(group_posts.group_post_id) as post_count, users.username, users.user_id, users.user_profile
+                        FROM group_posts
+                        JOIN users ON group_posts.user_id = users.user_id 
+                        WHERE group_posts.group_id = ? AND group_posts.user_id = ?
+                        HAVING post_count > 0
+                        LIMIT 5";
+
+                $stmt = $this->connect()->prepare($sql);
+                $stmt->execute([$groupID, $userID]);
+
+                $userResults = $stmt->fetchAll();
+
+                // Merge results into the main array
+                $results = array_merge($results, $userResults);
+            }
+
+            return $results;
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
+
+    /*
+
+SELECT COUNT(group_posts.group_post_id), users.username, users.user_id
+FROM group_posts
+JOIN users ON group_posts.user_id = users.user_id 
+WHERE group_posts.group_id = 3 AND group_posts.user_id = 15; 
+
+*/
 
     // Join community
     public function join_community($user_id, $community_id, $role = "member")
@@ -158,6 +206,14 @@ class Community extends Database
     public function leave_community($user_id, $community_id)
     {
         try {
+
+
+            $isOwner = $this->is_community_owner($user_id, $community_id);
+
+            if ($isOwner > 0) {
+                return -1;
+            }
+
             $sql = "DELETE FROM user_group 
                     WHERE user_id = ? AND group_id = ?";
 

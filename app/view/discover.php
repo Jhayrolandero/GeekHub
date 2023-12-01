@@ -59,6 +59,7 @@ session_start();
             </nav>
 
             <!-- Main Content -->
+
             <main class="col-md-6 col-lg-4 main-content mx-auto" id="discover-post">
             </main>
 
@@ -66,11 +67,18 @@ session_start();
 
                 <nav id="communitybar">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-5">
                             <p id="community-bar-title">Recommended</p>
                         </div>
-                        <div class="col-6">
-                            <button id="community-btn">Create +</button>
+                        <div class="col-7">
+                            <div class="row">
+                                <div class="col-6">
+                                    <button id="show-all-discover">Show All</button>
+                                </div>
+                                <div class="col-6">
+                                    <button id="community-btn">Create +</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- For communities -->

@@ -29,6 +29,22 @@ $(document).ready(function () {
     );
   }
 
+  function render_dicover_card() {
+    $.get(
+      "app/controller/CommunityController.php",
+      {
+        action: "showDiscoverCard",
+        groupID: null,
+      },
+      function (data, status) {
+        if (status === "success") {
+          // console.log(data);
+          $("#discover-post").html(data);
+        }
+      }
+    );
+  }
+
   // Create a community
   $("#create-community-btn").click(function () {
     var groupName = $("#group-name").val();
@@ -306,5 +322,64 @@ $(document).ready(function () {
   // Close community post modal
   $("#close-create-community").click(function () {
     $(".create-community-modal").slideUp();
+  });
+
+  // Show discover community
+
+  $("#show-all-discover").click(function () {
+    render_dicover_card();
+  });
+
+  /*
+  ================
+      COMMUNITY
+  ================
+  */
+
+  // Join community
+  $("#discover-post").on("click", ".join-community-btn", function () {
+    var communityID = $(this)
+      .closest(".discover-card")
+      .find("#community-id")
+      .val();
+    var userID = $(this).closest(".discover-card").find(".user-id").val();
+
+    $.post(
+      "app/controller/CommunityController.php",
+      {
+        action: "joinCommunity",
+        userID: userID,
+        groupID: communityID,
+        role: "member",
+      },
+      function (data, status) {
+        if (status === "success") {
+          render_dicover_card();
+        }
+      }
+    );
+  });
+
+  // leave Community
+  $("#discover-post").on("click", ".leave-community-btn", function () {
+    var communityID = $(this)
+      .closest(".discover-card")
+      .find("#community-id")
+      .val();
+    var userID = $(this).closest(".discover-card").find(".user-id").val();
+
+    $.post(
+      "app/controller/CommunityController.php",
+      {
+        action: "leaveCommunity",
+        userID: userID,
+        groupID: communityID,
+      },
+      function (data, status) {
+        if (status === "success") {
+          render_dicover_card();
+        }
+      }
+    );
   });
 });

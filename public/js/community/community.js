@@ -47,6 +47,7 @@ $(document).ready(function () {
 
           renderCommunityTimeline(communityID);
           render_communtiy_stat(communityID);
+          render_top_members(communityID);
           render_community_nav();
         }
       }
@@ -62,6 +63,23 @@ $(document).ready(function () {
       function (data, status) {
         if (status === "success") {
           $("#community-side-nav").html(data);
+        }
+      }
+    );
+  }
+
+  function render_top_members(communityID) {
+    $.get(
+      "app/controller/CommunityController.php",
+      {
+        action: "getTopMembers",
+        groupID: communityID,
+      },
+      function (data, status) {
+        if (status === "success") {
+          $("#community-top-members").html(data);
+        } else {
+          $("#community-top-members").html("<p>Error!</p>");
         }
       }
     );
@@ -147,6 +165,7 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
+          alert(data);
           render_community(communityID);
         }
       }
@@ -295,6 +314,8 @@ $(document).ready(function () {
         }
 
         renderCommunityTimeline(communityID);
+        render_communtiy_stat(communityID);
+        render_top_members(communityID);
       },
       error: function () {
         alert("Error");
@@ -328,6 +349,7 @@ $(document).ready(function () {
 
             renderCommunityTimeline(communityID);
             render_communtiy_stat(communityID);
+            render_top_members(communityID);
           } else {
             alert("Error");
           }
@@ -415,7 +437,7 @@ $(document).ready(function () {
         if (status === "success") {
           renderCommunityTimeline(communityID);
           render_communtiy_stat(communityID);
-          render_community_nav();
+          // render_community_nav();
         } else {
           alert("Error!");
         }
@@ -446,7 +468,7 @@ $(document).ready(function () {
         if (status === "success") {
           renderCommunityTimeline(communityID);
           render_communtiy_stat(communityID);
-          render_community_nav();
+          // render_community_nav();
           // loadPageFromHash();
         } else {
           alert("Error!");

@@ -1,5 +1,7 @@
 :root {
   --text-clr: #f5fefd;
+  --black-color1: #141414;
+  --black-color2: #282828;
 }
 
 #community-container {
@@ -192,4 +194,14 @@
 
 .nav-item a {
   color: var(--text-clr);
+}
+
+#top-members-nav {
+  background-color: var(--black-color2);
+  padding: 1.2em;
+  border-radius: 10px;
+}
+
+#top-members-nav .nav-item {
+  list-style: none;
 }

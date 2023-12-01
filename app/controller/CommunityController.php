@@ -5,6 +5,8 @@ include "../view/community/communityNav.php";
 include "../view/community/communityCard.php";
 include "../view/community/communityPostCard.php";
 include "../view/community/communityCommentBox.php";
+include "../view/discover/discoverCard.php";
+include "../view/community/topMembersCard.php";
 
 // session_start();
 class CommunityController
@@ -29,10 +31,16 @@ class CommunityController
         return $this->model->is_community_owner($user_id, $group_id);
     }
 
-    // Get community info
-    public function get_community($communityID = null, $userID = null)
+    // Get top members
+    public function get_top_members($groupID)
     {
-        return $this->model->get_community($communityID, $userID);
+        return $this->model->get_top_members($groupID);
+    }
+
+    // Get community info
+    public function get_community($communityID = null, $userID = null, $random = false)
+    {
+        return $this->model->get_community($communityID, $userID, $random);
     }
 
     // Community template
@@ -78,7 +86,6 @@ class CommunityController
     }
 
     // Get Post
-
     public function get_post($groupID = null)
     {
         return $this->model->get_post($groupID);
@@ -152,6 +159,18 @@ class CommunityController
     public function edit_post($groupPostID, $content)
     {
         return $this->model->edit_post($groupPostID, $content);
+    }
+
+    // Discover card template
+    public function show_discover_community($groupName, $desc, $hasJoined, $createdAt, $groupID, $groupPic, $groupBG, $isOwner)
+    {
+        return template_discover($groupName, $desc, $hasJoined, $createdAt, $groupID, $groupPic, $groupBG, $isOwner);
+    }
+
+    // Show top Members
+    public function show_top_members($username, $userID, $profilePic, $postCount)
+    {
+        return template_top_members($username, $userID, $profilePic, $postCount);
     }
 
     // Time formatter
@@ -282,7 +301,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $userID = $_POST["userID"];
             $groupID = $_POST["groupID"];
 
-            echo $community->leave_community($userID, $groupID);
+            $status =  $community->leave_community($userID, $groupID);
+
+            if ($status == -1) {
+                echo "You cannot leave the community!";
+            }
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -459,6 +482,35 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         }
     }
 
+    // For rendering discover cards
+    if (isset($_GET["action"]) && $_GET["action"] === "showDiscoverCard") {
+        try {
+
+            $userID = $_SESSION["user"];
+            $results = $community->get_community(null, null, true);
+
+
+            foreach ($results as $result) {
+
+                $groupName = $result["group_name"];
+                $groupDesc = $result["description"];
+                $createdAt = $result["created_at"];
+                $groupPic = $result["community_profile"];
+                $groupBG = $result["community_background"];
+
+                $date = $community::month_day($createdAt);
+
+                $groupID = $result["group_id"];
+                $hasJoined = $community->validate_user_community($groupID, $userID);
+                $isOwner = $community->is_community_owner($userID, $groupID);
+
+                echo $community->show_discover_community($groupName, $groupDesc, $hasJoined, $date, $groupID, $groupPic, $groupBG, $isOwner);
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
     // Api for showing community post
     if (isset($_GET["action"]) && $_GET["action"] === "getCommunityPost") {
         try {
@@ -540,6 +592,27 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
             // Send the JSON response
             echo $statJSON;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // Get community stat
+    if (isset($_GET["action"]) && $_GET["action"] === "getTopMembers") {
+        try {
+            $groupID = $_GET["groupID"];
+
+            $results = $community->get_top_members($groupID);
+
+            // var_dump($results);
+            foreach ($results as $result) {
+                $username = $result["username"];
+                $profileImg = $result["user_profile"];
+                $userID = $result["user_id"];
+                $postCount = $result["post_count"];
+
+                echo $community->show_top_members($username, $userID, $profileImg, $postCount);
+            }
         } catch (Exception $e) {
             echo $e->getMessage();
         }

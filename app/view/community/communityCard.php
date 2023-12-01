@@ -180,6 +180,12 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
                             </div>
                         </div>
                     </section>
+                    <section class="mt-2" id="top-members-nav">
+                        <h4 class="mb-4">Top Members</h4>
+                        <div id="community-top-members">
+
+                        </div>
+                    </section>
 
                     <section id="community-nav" class="mt-2">
                         <h4 class="mb-4">Other Communities</h4>
