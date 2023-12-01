@@ -12,7 +12,7 @@
 <body>
 
     <!-- The Modal -->
-    <div class="modal update-community-modal" id="myModal">
+    <div class="modal update-community-modal modal-lg" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content" id="content">
 
@@ -25,32 +25,42 @@
 
                 <!-- Modal body -->
                 <div class="modal-body text-center">
-                    <!-- Caption -->
+
+                    <!-- Community Name -->
                     <label for="" class="form-label">
                         <h4>Community Name</h4>
                     </label>
-                    <input type="text" class="form-control curr-community-name mb-5" id="community-name-input">
+                    <input type="text" class="form-control curr-community-name mb-5 edit-name" id="community-name-input">
 
+                    <!-- Description -->
                     <label for="" class="form-label">
                         <h4>Description</h4>
                     </label>
-                    <textarea name="" class="form-control curr-community-desc mb-5" id="community-desc-input"></textarea>
+                    <textarea name="" class="form-control curr-community-desc mb-5 community-desc" id="community-desc-input"></textarea>
 
                     <!-- <input type="text" class="form-control" id="community-desc-input"> -->
 
-                    <label for="" class="form-label w-100">
-                        <h4>Community Picture</h4>
-                        <img src="" alt="" style="width:150px; height: 150px;" class="mx-auto rounded-pill" id="prev-community-icon">
-                    </label>
-                    <input type="file" name="image" id="community-pic-input" class="form-control mb-5" />
+                    <!-- Profile Pic -->
+                    <h4>Community Picture</h4>
+                    <label class="w-100 mb-5">
+                        <input type="file" name="image" id="community-pic-input" class="w-100" onchange="preview_community_pic()" />
+                        <div id="community-profile-preview" class="d-flex flex-column justify-content-center align-items-center">
 
-                    <label for="" class="form-label">
-                        <h4>Community background</h4>
-                        <div>
-                            <img src="" alt="" style="width:100%;" class="mx-auto" id="prev-community-bg">
+                            <img src="" alt="" style="width:150px; height: 150px;" class="mx-auto rounded-pill" id="prev-community-icon">
+
                         </div>
                     </label>
-                    <input type="file" name="image" id="community-bg-input" class="form-control mb-5" />
+
+                    <!-- Community BG -->
+                    <h4>Community Picture</h4>
+                    <label class="w-100 mb-5">
+                        <input type="file" name="image" id="community-bg-input" class="w-100" onchange="preview_community_bg()" />
+                        <div id="community-bg-preview" class="d-flex flex-column justify-content-center align-items-center">
+
+                            <img src="" alt="" style="width:100%;" class="mx-auto" id="prev-community-bg">
+
+                        </div>
+                    </label>
 
                     <label for="" class="form-label">
                         <h4>Danger Zone</h4>

@@ -29,6 +29,29 @@ $(document).ready(function () {
     return true;
   }
 
+  // Preview image on post
+  function preview_image() {
+    var input = document.getElementById("image-input");
+    var preview = document.getElementById("image-preview");
+
+    // Check if a file is selected
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        // Set the source of the image preview
+        preview.innerHTML =
+          '<img src="' + e.target.result + '" alt="Image Preview" />';
+      };
+
+      // Read the selected file as a data URL
+      reader.readAsDataURL(input.files[0]);
+    } else {
+      // Clear the image preview if no file is selected
+      preview.innerHTML = "";
+    }
+  }
+
   /*
   =====================
       POST SYSTEM

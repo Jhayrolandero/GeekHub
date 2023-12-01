@@ -1,5 +1,7 @@
 :root {
   --text-color: #f5fefd;
+  --black-color1: #141414;
+  --black-color2: #282828;
 }
 
 body {
@@ -136,7 +138,22 @@ body {
   font-size: 0.875rem;
   border: none;
 }
+.menu-btn {
+  list-style: none;
+}
+.menu-btn button {
+  color: var(--text-color);
+  list-style: none;
+}
 
+.menu-option {
+  background-color: var(--black-color2);
+}
+
+#post-form {
+  color: var(--text-color);
+  border: var(--text-color) solid 1px;
+}
 /* Media Query */
 @media all and (max-width: 970px) {
   #sidebar {

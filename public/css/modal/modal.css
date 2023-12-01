@@ -1,6 +1,10 @@
+:root {
+  --text-color: #fff;
+}
+
 #content {
   background-color: #141414;
-  height: 60dvh;
+  height: fit-content;
   color: white;
 }
 
@@ -29,6 +33,44 @@
 #post-form,
 #update-post-form {
   background-color: #141414;
-  border: none;
   color: white;
+}
+
+#post-form::placeholder {
+  color: white;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+}
+
+#image-preview {
+  aspect-ratio: 16/9;
+}
+
+#image-preview img {
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  object-fit: fill;
+}
+
+.edit-name,
+.community-desc {
+  background-color: transparent;
+  border: white solid 1px;
+  color: var(--text-color);
+}
+
+.edit-name:focus,
+.community-desc:focus {
+  color: var(--text-color);
+  background-color: transparent;
+  border: white solid 1px;
 }

@@ -46,16 +46,7 @@ session_start();
                                 <ion-icon name="compass-sharp"></ion-icon> Discover
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <div class="dropdown dropend">
-                                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-                                    <ion-icon name="reorder-three"></ion-icon> Menu</button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#profile#<?= $_SESSION["user"] ?>">Profile</a></li>
-                                    <li><a class="dropdown-item" href="#logout">Logout</a></li>
-                                </ul>
-                            </div>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link active" href="#logout">
                                 <ion-icon name="log-out"></ion-icon> Logout

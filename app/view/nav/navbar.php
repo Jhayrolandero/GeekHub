@@ -43,14 +43,18 @@
             </section>
           </div>
         </div>
-        <div class="dropdown dropstart">
-          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-            <ion-icon name="reorder-three"></ion-icon> </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#profile#<?= $_SESSION["user"] ?>">Profile</a></li>
-            <li><a class="dropdown-item" href="#logout">Logout</a></li>
-          </ul>
+
+        <div class="dropdown dropstart text-end">
+          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" id="nav-drop-btn">
+            <ion-icon name="apps"></ion-icon> </button>
+          <div class="dropdown-menu" id="notif">
+            <ul>
+              <li><a href="#profile#<?= $_SESSION["user"] ?>">Profile</a></li>
+              <li><a href="#logout">Logout</a></li>
+            </ul>
+          </div>
         </div>
+
 
       </div>
     </div>

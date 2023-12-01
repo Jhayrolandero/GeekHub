@@ -12,7 +12,7 @@
 <body>
 
     <!-- The Modal -->
-    <div class="modal create-post-modal" id="myModal">
+    <div class="modal create-post-modal modal-lg" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content" id="content">
                 <input type="text" value="<?= $_SESSION["user"] ?>" id="user-id-post" hidden>
@@ -27,7 +27,16 @@
                     <!-- Caption -->
                     <textarea class="form-control" name="" id="post-form" cols="30" rows="10" placeholder="Share your thoughts"></textarea>
                     <!-- Image -->
-                    <input type="file" name="image" id="image-input" />
+                    <label class="custom-file-upload w-100 mt-4">
+                        <input type="file" name="image" id="image-input" class="w-100" onchange="preview_image()" />
+                        <div id="image-preview" class="d-flex flex-column justify-content-center align-items-center">
+
+                            <small><ion-icon name="images" size="large"></ion-icon></small>
+                            <p>Photos</p>
+
+                        </div>
+                    </label>
+
                 </div>
 
                 <!-- Modal footer -->
@@ -38,6 +47,10 @@
             </div>
         </div>
     </div>
+
+    <script src="public/js/modal/modal.js">
+
+    </script>
 </body>
 
 </html>

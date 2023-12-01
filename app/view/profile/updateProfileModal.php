@@ -12,7 +12,7 @@
 <body>
 
     <!-- The Modal -->
-    <div class="modal update-profile-modal" id="myModal">
+    <div class="modal update-profile-modal modal-lg" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content" id="content">
 
@@ -29,21 +29,30 @@
                     <label for="" class="form-label">
                         <h4>Username</h4>
                     </label>
-                    <input type="text" class="form-control curr-profile-name mb-5" id="username-input">
+                    <input type="text" class="form-control curr-profile-name mb-5 edit-name" id="username-input">
 
-                    <label for="" class="form-label">
-                        <h4>Profile Picture</h4>
-                        <img src="" alt="" style="width:150px; height: 150px;" class="mx-auto rounded-pill" id="prev-profile-icon">
+
+                    <!-- Profile Pic -->
+                    <h4>Profile Picture</h4>
+                    <label class="w-100 mb-5">
+                        <input type="file" name="image" id="profile-pic-input" class="w-100" onchange="preview_image_pic()" />
+                        <div id="profile-preview" class="d-flex flex-column justify-content-center align-items-center">
+
+                            <img src="" alt="" style="width:150px; height: 150px;" class="mx-auto rounded-pill" id="prev-profile-icon">
+
+                        </div>
                     </label>
-                    <input type="file" name="image" id="profile-pic-input" class="form-control mb-5" />
 
-                    <label for="" class="form-label">
-                        <h4>Profile background</h4>
-                        <div>
+                    <!-- Profile Background -->
+                    <h4>Profile Background</h4>
+                    <label class="w-100 mb-5">
+                        <input type="file" name="image" id="profile-bg-input" class="w-100" onchange="preview_profile_bg()" />
+                        <div id="bg-preview" class="d-flex flex-column justify-content-center align-items-center">
                             <img src="" alt="" style="width:100%;" class="mx-auto" id="prev-profile-bg">
                         </div>
                     </label>
-                    <input type="file" name="image" id="profile-bg-input" class="form-control" />
+
+
                     <!-- <textarea class="form-control" name="" id="update-profile-form" cols="30" rows="10" placeholder="Share your thoughts"></textarea> -->
                 </div>
 
@@ -55,6 +64,8 @@
             </div>
         </div>
     </div>
+
+    <script src="public/js/modal/modal.js"></script>
 </body>
 
 </html>

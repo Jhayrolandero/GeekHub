@@ -22,7 +22,6 @@ function template_community_nav($communityName, $community_id, $groupPic)
                         <?php
                         }
                         ?>
-                        <!-- <img src="public\images\you.png" alt="" style="width: 100%; max-width: 42px"> -->
                     </div>
                     <div class="col-lg-10 col-md-9 p-1 community-name-container d-flex align-items-center p-0">
                         <small>

@@ -1,6 +1,6 @@
 :root {
   --dark-color: #282828;
-  --text-color: $fff;
+  --text-color: #fff;
 }
 
 #navbar {
@@ -215,4 +215,8 @@
 
 .nav-item a {
   text-decoration: none;
+}
+
+.menu-btn button {
+  color: var(--text-color);
 }
