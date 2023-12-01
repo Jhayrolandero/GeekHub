@@ -38,9 +38,9 @@ class CommunityController
     }
 
     // Get community info
-    public function get_community($communityID = null, $userID = null, $random = false)
+    public function get_community($communityID = null, $userID = null, $random = false, $limit = null)
     {
-        return $this->model->get_community($communityID, $userID, $random);
+        return $this->model->get_community($communityID, $userID, $random, $limit);
     }
 
     // Community template
@@ -92,9 +92,9 @@ class CommunityController
     }
 
     // Template for post card
-    public function community_post_card($groupName, $author, $content, $date, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCount, $commentCounts, $profileImg)
+    public function community_post_card($groupName, $author, $content, $date, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCount, $commentCounts, $profileImg, $isOwner = 0)
     {
-        return template_community_post_card($groupName, $author, $content, $date, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCount, $commentCounts, $profileImg);
+        return template_community_post_card($groupName, $author, $content, $date, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCount, $commentCounts, $profileImg, $isOwner);
     }
 
     // For Liking
@@ -173,6 +173,12 @@ class CommunityController
         return template_top_members($username, $userID, $profilePic, $postCount);
     }
 
+    // Delete Community 
+    public function delete_community($userID, $groupID)
+    {
+        return $this->model->delete_community($userID, $groupID);
+    }
+
     // Time formatter
     public static function time_elapsed_string($datetime, $full = false)
     {
@@ -247,8 +253,9 @@ POST REQUEST
 ==============
 */
 
-// API for creating community
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    // API for creating community
     if (isset($_POST["action"]) && $_POST["action"] === "createCommunity") {
         try {
 
@@ -257,13 +264,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $userID = $_SESSION["user"];
 
             echo $community->createAndJoinCommunity($groupName, $groupDesc, $userID, "owner");
-            // $lastGroupID = $community->create_community($groupName, $groupDesc)[0];
-
-            // var_dump($community->create_community($groupName, $groupDesc));
         } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
+
+    // Deleting Community
+    if (isset($_POST["action"]) && $_POST["action"] === "deleteCommunity") {
+        try {
+
+            $userID = $_POST["userID"];
+            $groupID = $_POST["groupID"];
+
+            $result = $community->delete_community($userID, $groupID);
+
+            if ($result == -1) {
+                echo "You aren't the owner!";
+            } else {
+                echo "Community Deleted";
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+
 
     // For Updating Community
     if (isset($_POST["action"]) && $_POST["action"] === "updateCommunity") {
@@ -413,10 +438,29 @@ GET REQUEST
 ==============
 */
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
-    // API for show nav
+
+    // API for show nav in home
     if (isset($_GET["action"]) && $_GET["action"] === "showCommunityNav") {
         try {
-            $results = $community->get_community();
+            $results = $community->get_community(null, null, null, 5);
+
+            foreach ($results as $result) {
+
+                $groupName = $result["group_name"];
+                $groupID = $result["group_id"];
+                $groupPic = $result["community_profile"];
+
+                echo $community->community_nav($groupName, $groupID, $groupPic);
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // API for show nav recommendations
+    if (isset($_GET["action"]) && $_GET["action"] === "showRecommendCommunityNav") {
+        try {
+            $results = $community->get_community(null, null, true, 7);
 
             foreach ($results as $result) {
 
@@ -536,8 +580,12 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
                 $likeCounts = $result["like_count"];
                 $commentCounts = $result["comment_count"];
                 $profileImg = $result["user_profile"];
+                $isOwner = 0;
+                if (!empty($_GET["groupID"])) {
+                    $isOwner = $community->is_community_owner($authorID, $groupID);
+                }
 
-                echo $community->community_post_card($groupName, $author, $content, $timestamp, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCounts, $commentCounts, $profileImg);
+                echo $community->community_post_card($groupName, $author, $content, $timestamp, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCounts, $commentCounts, $profileImg, $isOwner);
             }
         } catch (Exception $e) {
             return $e->getMessage();

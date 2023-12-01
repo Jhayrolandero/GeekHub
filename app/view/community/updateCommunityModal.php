@@ -50,7 +50,12 @@
                             <img src="" alt="" style="width:100%;" class="mx-auto" id="prev-community-bg">
                         </div>
                     </label>
-                    <input type="file" name="image" id="community-bg-input" class="form-control" />
+                    <input type="file" name="image" id="community-bg-input" class="form-control mb-5" />
+
+                    <label for="" class="form-label">
+                        <h4>Danger Zone</h4>
+                    </label>
+                    <input type="button" value="Delete Community" class="form-control btn btn-danger delete-community">
 
 
                     <!-- <textarea class="form-control" name="" id="update-profile-form" cols="30" rows="10" placeholder="Share your thoughts"></textarea> -->

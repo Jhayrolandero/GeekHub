@@ -71,13 +71,9 @@ session_start();
                             <p id="community-bar-title">Recommended</p>
                         </div>
                         <div class="col-7">
-                            <div class="row">
-                                <div class="col-6">
-                                    <button id="show-all-discover">Show All</button>
-                                </div>
-                                <div class="col-6">
-                                    <button id="community-btn">Create +</button>
-                                </div>
+                            <div class="row text-end">
+
+                                <button id="community-btn">Create +</button>
                             </div>
                         </div>
                     </div>
@@ -85,6 +81,11 @@ session_start();
                     <ul class="nav flex-column" id="community-side-nav">
 
                     </ul>
+                    <div class="row">
+                        <div class="col-12 ">
+                            <button id="show-all-discover" class="btn btn-primary w-100">Show All</button>
+                        </div>
+                    </div>
                 </nav>
             </nav>
 

@@ -172,6 +172,29 @@ $(document).ready(function () {
     );
   });
 
+  // Delete COmmunity
+
+  $(".delete-community").click(function () {
+    var userID = $("#user-profile-id").val();
+    var communityID = $("#community-id").val();
+
+    $.post(
+      "app/controller/CommunityController.php",
+      {
+        action: "deleteCommunity",
+        userID: userID,
+        groupID: communityID,
+      },
+      function (data, status) {
+        if (status === "success") {
+          alert(data);
+        } else {
+          alert("Error");
+        }
+      }
+    );
+  });
+
   // Updating COmmunity profile
   $("#community-container").on("click", ".edit-community-btn", function () {
     var communityName = $("#community-name").text();
@@ -364,15 +387,19 @@ $(document).ready(function () {
     ".community-post-menu-update",
     function (event) {
       event.preventDefault();
-
       var groupPostID = $(this)
         .closest(".community-post-card")
         .find(".community-post-id")
         .val();
 
-      $("#update-community-post-id").val(groupPostID);
-      $("#update-community-post-form").val(pervContent);
+      var prevContent = $(this)
+        .closest(".community-post-card")
+        .find(".post-content")
+        .text()
+        .trim();
 
+      $("#update-community-post-id").val(groupPostID);
+      $("#update-community-post-form").val(prevContent);
       $(".update-community-post-modal").slideDown();
     }
   );

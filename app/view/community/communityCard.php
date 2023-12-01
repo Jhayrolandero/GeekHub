@@ -19,8 +19,9 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
                         <img src="<?= $imageSrc ?>" alt="Background Image">
                     <?php
                     } else {
+                        $imageSrc = "public/images/pngtree-abstract-bg-image_914283.jpg";
                     ?>
-                        <img src="public\images\pngtree-abstract-bg-image_914283.jpg" alt="background-image">
+                        <img src="<?= $imageSrc ?>" alt="background-image">
 
                     <?php
                     }
@@ -42,7 +43,7 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
                                 <img src="<?= $imageSrc ?>" class="community-img" alt="Profile Image">
                             <?php
                             } else {
-                                $imageSrc = "public\images\you.png";
+                                $imageSrc = "public/images/you.png";
 
                             ?>
                                 <img src="<?= $imageSrc ?>" class="community-img" alt="Profile Image">

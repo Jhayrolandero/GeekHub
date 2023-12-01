@@ -19,7 +19,7 @@ $(document).ready(function () {
     $.get(
       "app/controller/CommunityController.php",
       {
-        action: "showCommunityNav",
+        action: "showRecommendCommunityNav",
       },
       function (data, status) {
         if (status === "success") {
@@ -59,7 +59,7 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
-          alert(data);
+          render_dicover_page();
         } else {
           alert("Error!");
         }

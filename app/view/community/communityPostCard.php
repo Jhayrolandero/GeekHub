@@ -1,5 +1,5 @@
 <?php
-function template_community_post_card($groupName, $author, $content, $date, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCount, $commentCounts, $profileImg)
+function template_community_post_card($groupName, $author, $content, $date, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCount, $commentCounts, $profileImg, $isOwner = 0)
 {
 ?>
     <form action="" class="container community-post-card">
@@ -45,6 +45,18 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                             <small>
                                 &#8226;
                             </small>
+                            <?php
+                            if ($isOwner > 0) {
+                            ?>
+                                <div class="owner">
+                                    <i class="gg-crown"></i>
+                                </div>
+                                <small>
+                                    &#8226;
+                                </small>
+                            <?php
+                            }
+                            ?>
                             <div class=" date"><?= $date ?></div>
                         </div>
                     </div>

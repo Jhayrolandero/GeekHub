@@ -47,9 +47,14 @@ session_start();
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <ion-icon name="menu-sharp"></ion-icon> Menu
-                            </a>
+                            <div class="dropdown dropend">
+                                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                                    <ion-icon name="reorder-three"></ion-icon> Menu</button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#profile#<?= $_SESSION["user"] ?>">Profile</a></li>
+                                    <li><a class="dropdown-item" href="#logout">Logout</a></li>
+                                </ul>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="#logout">
@@ -80,7 +85,14 @@ session_start();
             <!-- FriendBar navigation -->
             <nav id="rightbar">
                 <nav id="friendbar">
-                    <p id="friend-bar-title">Buddies</p>
+                    <div class="row">
+                        <div class="col-6">
+                            <p id="friend-bar-title">Buddies</p>
+                        </div>
+                        <div class="col-5 text-end">
+                            <a href="#friend">See all</a>
+                        </div>
+                    </div>
                     <!-- Render friend side nav -->
                     <ul class="nav flex-column" id="friend-side-nav">
 

@@ -54,7 +54,7 @@ class Community extends Database
     }
 
     // Get Community
-    public function get_community($communityID = null, $userID = null, $random = false)
+    public function get_community($communityID = null, $userID = null, $random = false, $limit = null)
     {
         try {
 
@@ -103,6 +103,10 @@ class Community extends Database
                 $sql .= " ORDER BY RAND()";
             }
 
+            if ($limit != null) {
+                $sql .= " LIMIT :limit";
+            }
+
             $stmt = $this->connect()->prepare($sql);
 
             if ($communityID != null) {
@@ -111,6 +115,10 @@ class Community extends Database
 
             if ($userID != null) {
                 $stmt->bindParam(':user_id', $userID, PDO::PARAM_INT);
+            }
+
+            if ($limit != null) {
+                $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             }
 
             $stmt->execute();
@@ -126,9 +134,11 @@ class Community extends Database
     {
         try {
 
-            $sql = "SELECT user_id 
-                    FROM user_group 
-                    WHERE group_id = ?";
+            $sql = "SELECT COUNT(group_post_id) as post_count, user_id 
+                    FROM group_posts 
+                    WHERE group_id = ? 
+                    GROUP BY user_id 
+                    ORDER BY post_count DESC;";
 
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute([$groupID]);
@@ -160,6 +170,7 @@ class Community extends Database
                         JOIN users ON group_posts.user_id = users.user_id 
                         WHERE group_posts.group_id = ? AND group_posts.user_id = ?
                         HAVING post_count > 0
+                          ORDER BY post_count DESC
                         LIMIT 5";
 
                 $stmt = $this->connect()->prepare($sql);
@@ -176,15 +187,6 @@ class Community extends Database
             return $e;
         }
     }
-
-    /*
-
-SELECT COUNT(group_posts.group_post_id), users.username, users.user_id
-FROM group_posts
-JOIN users ON group_posts.user_id = users.user_id 
-WHERE group_posts.group_id = 3 AND group_posts.user_id = 15; 
-
-*/
 
     // Join community
     public function join_community($user_id, $community_id, $role = "member")
@@ -221,6 +223,29 @@ WHERE group_posts.group_id = 3 AND group_posts.user_id = 15;
             $stmt->execute([$user_id, $community_id]);
 
             return "You left the Group";
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
+
+    public function delete_community($userID, $groupID)
+    {
+        try {
+
+            $isOwner = $this->is_community_owner($userID, $groupID);
+
+            if ($isOwner == 0) {
+                return -1;
+            }
+
+            $sql = "DELETE FROM groups 
+                    WHERE group_id = ?";
+
+            $stmt = $this->connect()->prepare($sql);
+
+            $stmt->execute([$groupID]);
+
+            return "Community Deleted!";
         } catch (PDOException $e) {
             return $e;
         }

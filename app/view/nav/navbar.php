@@ -29,7 +29,7 @@
         </div>
       </div>
       <div id="right-section col-6">
-        <a class="navbar-brand" href="#friend">
+        <a class="navbar-brand btn m-0" href="#friend">
           <ion-icon name="person-add-outline"></ion-icon>
         </a>
         <div class="dropdown dropstart text-end">
@@ -43,9 +43,15 @@
             </section>
           </div>
         </div>
-        <a class="navbar-brand" href="#">
-          <ion-icon name="chevron-down"></ion-icon>
-        </a>
+        <div class="dropdown dropstart">
+          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+            <ion-icon name="reorder-three"></ion-icon> </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#profile#<?= $_SESSION["user"] ?>">Profile</a></li>
+            <li><a class="dropdown-item" href="#logout">Logout</a></li>
+          </ul>
+        </div>
+
       </div>
     </div>
   </nav>
