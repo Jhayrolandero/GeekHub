@@ -25,14 +25,16 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <!-- Caption -->
-                    <textarea class="form-control" name="" id="post-form" cols="30" rows="10" placeholder="Share your thoughts"></textarea>
+                    <h4>Caption</h4>
+                    <textarea class="form-control" name="" id="post-form" placeholder="Share your thoughts"></textarea>
                     <!-- Image -->
+
                     <label class="custom-file-upload w-100 mt-4">
                         <input type="file" name="image" id="image-input" class="w-100" onchange="preview_image()" />
                         <div id="image-preview" class="d-flex flex-column justify-content-center align-items-center">
 
                             <small><ion-icon name="images" size="large"></ion-icon></small>
-                            <p>Photos</p>
+                            <p>Photo</p>
 
                         </div>
                     </label>

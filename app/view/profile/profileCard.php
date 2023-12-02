@@ -18,8 +18,10 @@ function profile_Template($username, $userBio, $createdAt, $userID, $profileImg,
                         <img src="<?= $imageSrc ?>" alt="Background Image">
                     <?php
                     } else {
+                        $imageSrc = "public/images/pngtree-abstract-bg-image_914283.jpg"
+
                     ?>
-                        <img src="public\images\pngtree-abstract-bg-image_914283.jpg" alt="background-image">
+                        <img src="<?= $imageSrc ?>" alt="background-image">
                         <!-- <img src="public\images\you.png" alt="Profile Image"> -->
 
                     <?php
@@ -42,8 +44,9 @@ function profile_Template($username, $userBio, $createdAt, $userID, $profileImg,
                                 <img src="<?= $imageSrc ?>" class="profile-img" alt="Profile Image">
                             <?php
                             } else {
+                                $imageSrc = "public/images/you.png"
                             ?>
-                                <img src="public\images\you.png" class="profile-img" alt="Profile Image">
+                                <img src="<?= $imageSrc ?>" class="profile-img" alt="Profile Image">
 
                             <?php
                             }
