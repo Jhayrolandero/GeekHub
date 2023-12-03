@@ -243,6 +243,31 @@ class CommunityController
         // Output the result
         return $formattedDate;
     }
+
+    // File validation
+    public static function file_validation($file)
+    {
+        // Check if the file input is set and not empty
+        if (isset($file["name"]) && !empty($file["name"])) {
+
+            // Get file information
+            $fileName = basename($file["name"]);
+            $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+
+            // Check if the file is an image
+            $isImage = getimagesize($file["tmp_name"]);
+
+            if ($isImage === false) {
+                return -1;
+            }
+
+            if ($file["size"] > 5000000) {
+                return 0;
+            }
+
+            return 1;
+        }
+    }
 }
 
 $community = new CommunityController();
@@ -296,9 +321,44 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $communityID = $_POST["communityID"];
             $communityName = $_POST["communityName"];
-            $image = (isset($_FILES["communityPic"]) && $_FILES["communityPic"]["error"] === 0) ? file_get_contents($_FILES['communityPic']['tmp_name']) : null;
-            $imageBG = (isset($_FILES["communityBG"]) && $_FILES["communityBG"]["error"] === 0) ? file_get_contents($_FILES['communityBG']['tmp_name']) : null;
+            // $image = (isset($_FILES["communityPic"]) && $_FILES["communityPic"]["error"] === 0) ? file_get_contents($_FILES['communityPic']['tmp_name']) : null;
+            // $imageBG = (isset($_FILES["communityBG"]) && $_FILES["communityBG"]["error"] === 0) ? file_get_contents($_FILES['communityBG']['tmp_name']) : null;
             $communityDesc = $_POST["communityDesc"];
+
+            $image = (isset($_FILES["communityPic"]) && $_FILES["communityPic"]["error"] === 0) ? $_FILES["communityPic"] : null;
+
+            if ($image) {
+                $result = $community::file_validation($image);
+
+                if ($result == -1) {
+
+                    die("Image is only allowed");
+                } else if ($result == 0) {
+
+                    die("Size is too large!");
+                } else if ($result == 1) {
+
+                    $image = file_get_contents($_FILES['communityPic']['tmp_name']);
+                }
+            }
+            // $imageBG = (isset($_FILES["profileBG"]) && $_FILES["profileBG"]["error"] === 0) ? file_get_contents($_FILES['profileBG']['tmp_name']) : null;
+            // Same with BG
+            $imageBG = (isset($_FILES["communityBG"]) && $_FILES["communityBG"]["error"] === 0) ? $_FILES["communityBG"] : null;
+
+            if ($imageBG) {
+                $result = $community::file_validation($imageBG);
+
+                if ($result == -1) {
+
+                    die("Image is only allowed");
+                } else if ($result == 0) {
+
+                    die("Size is too large!");
+                } else if ($result == 1) {
+
+                    $imageBG = file_get_contents($_FILES['communityBG']['tmp_name']);
+                }
+            }
 
             echo $community->edit_community($communityID, $communityName, $image, $imageBG, $communityDesc);
             // echo $user->edit_profile($userID, $username, $image, $imageBG);
@@ -348,9 +408,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $userID = $_POST["userID"];
             $groupID = $_POST["communityID"];
             $content = (isset($_POST["content"])) ? $_POST["content"] : null;
-            $image = (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) ? file_get_contents($_FILES['image']['tmp_name']) : null;
+            // $image = (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) ? file_get_contents($_FILES['image']['tmp_name']) : null;
 
+            $image = (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) ? $_FILES["image"] : null;
 
+            if ($image) {
+                $result = $community::file_validation($image);
+
+                if ($result == -1) {
+
+                    die("Image is only allowed");
+                } else if ($result == 0) {
+
+                    die("Size is too large!");
+                } else if ($result == 1) {
+
+                    $image = file_get_contents($_FILES['image']['tmp_name']);
+                }
+            }
 
             echo $community->create_post($groupID, $userID, $content, $image);
         } catch (Exception $e) {
@@ -460,7 +535,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     // API for show nav recommendations
     if (isset($_GET["action"]) && $_GET["action"] === "showRecommendCommunityNav") {
         try {
-            $results = $community->get_community(null, null, true, 7);
+            $results = $community->get_community(null, null, true, 5);
 
             foreach ($results as $result) {
 

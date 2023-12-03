@@ -49,17 +49,6 @@ class UserController
         return $this->model->edit_profile($userID, $username, $profileImg, $profileBG);
     }
 
-    // // 
-    // public function search_user($username)
-    // {
-    //     return $this->model->search_user($username);
-    // }
-
-    // // Show results
-    // public function show_search_user($username, $userID)
-    // {
-    //     return template_search($username, $userID);
-    // }
 
     public static function month_day($date)
     {
@@ -71,6 +60,31 @@ class UserController
 
         // Output the result
         return $formattedDate;
+    }
+
+    // File validation
+    public static function file_validation($file)
+    {
+        // Check if the file input is set and not empty
+        if (isset($file["name"]) && !empty($file["name"])) {
+
+            // Get file information
+            $fileName = basename($file["name"]);
+            $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+
+            // Check if the file is an image
+            $isImage = getimagesize($file["tmp_name"]);
+
+            if ($isImage === false) {
+                return -1;
+            }
+
+            if ($file["size"] > 5000000) {
+                return 0;
+            }
+
+            return 1;
+        }
     }
 }
 
@@ -97,8 +111,43 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $userID = $_POST["userID"];
             $username = $_POST["username"];
-            $image = (isset($_FILES["profilePic"]) && $_FILES["profilePic"]["error"] === 0) ? file_get_contents($_FILES['profilePic']['tmp_name']) : null;
-            $imageBG = (isset($_FILES["profileBG"]) && $_FILES["profileBG"]["error"] === 0) ? file_get_contents($_FILES['profileBG']['tmp_name']) : null;
+            // $image = (isset($_FILES["profilePic"]) && $_FILES["profilePic"]["error"] === 0) ? file_get_contents($_FILES['profilePic']['tmp_name']) : null;
+
+            // Validate the image first
+            $image = (isset($_FILES["profilePic"]) && $_FILES["profilePic"]["error"] === 0) ? $_FILES["profilePic"] : null;
+
+            if ($image) {
+                $result = $user::file_validation($image);
+
+                if ($result == -1) {
+
+                    die("Image is only allowed");
+                } else if ($result == 0) {
+
+                    die("Size is too large!");
+                } else if ($result == 1) {
+
+                    $image = file_get_contents($_FILES['profilePic']['tmp_name']);
+                }
+            }
+            // $imageBG = (isset($_FILES["profileBG"]) && $_FILES["profileBG"]["error"] === 0) ? file_get_contents($_FILES['profileBG']['tmp_name']) : null;
+            // Same with BG
+            $imageBG = (isset($_FILES["profileBG"]) && $_FILES["profileBG"]["error"] === 0) ? $_FILES["profileBG"] : null;
+
+            if ($imageBG) {
+                $result = $user::file_validation($imageBG);
+
+                if ($result == -1) {
+
+                    die("Image is only allowed");
+                } else if ($result == 0) {
+
+                    die("Size is too large!");
+                } else if ($result == 1) {
+
+                    $imageBG = file_get_contents($_FILES['profileBG']['tmp_name']);
+                }
+            }
 
             echo $user->edit_profile($userID, $username, $image, $imageBG);
         } catch (Exception $e) {

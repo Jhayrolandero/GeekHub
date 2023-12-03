@@ -29,29 +29,6 @@ $(document).ready(function () {
     return true;
   }
 
-  // Preview image on post
-  function preview_image() {
-    var input = document.getElementById("image-input");
-    var preview = document.getElementById("image-preview");
-
-    // Check if a file is selected
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        // Set the source of the image preview
-        preview.innerHTML =
-          '<img src="' + e.target.result + '" alt="Image Preview" />';
-      };
-
-      // Read the selected file as a data URL
-      reader.readAsDataURL(input.files[0]);
-    } else {
-      // Clear the image preview if no file is selected
-      preview.innerHTML = "";
-    }
-  }
-
   /*
   =====================
       POST SYSTEM
@@ -64,15 +41,15 @@ $(document).ready(function () {
     var content = $("#post-form").val();
     var userID = $("#user-id-post").val();
 
-    var valid = validateIMGType("image-input");
+    // var valid = validateIMGType("image-input");
 
-    // Validate first the image
-    if (!valid) {
-      alert(
-        "Invalid file type. Please select a valid image file (JPG, JPEG, PNG, WEBP)."
-      );
-      return;
-    }
+    // // Validate first the image
+    // if (!valid) {
+    //   alert(
+    //     "Invalid file type. Please select a valid image file (JPG, JPEG, PNG, WEBP)."
+    //   );
+    //   return;
+    // }
 
     // Create a FormData object
     var formData = new FormData();
@@ -94,6 +71,7 @@ $(document).ready(function () {
             alert("No Empty Homie!");
           }
 
+          alert(data);
           $.get(
             "app/controller/PostController.php?action=getPost",
             function (data, status) {

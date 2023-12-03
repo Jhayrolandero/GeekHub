@@ -127,6 +127,11 @@ body {
   text-decoration: none;
 }
 
+#rightbar {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
 /* Media Query */
 @media all and (max-width: 970px) {
   #sidebar {

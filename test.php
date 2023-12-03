@@ -12,13 +12,33 @@
     <script>
         $(document).ready(function() {
 
-            $("#get-members").click(function() {
-                $.get("app/controller/CommunityController.php", {
-                    action: "getTopMembers",
-                    groupID: 3
-                }, function(data, status) {
-                    $(".members").html(data);
-                })
+            $("#upload").click(function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Create a FormData object
+                var formData = new FormData();
+
+                formData.append("action", "validate");
+                formData.append("image", $("#image-input")[0].files[0]);
+
+                $.ajax({
+                    type: "POST",
+                    url: "app/controller/PostController.php",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(data, status) {
+                        if (status === "success") {
+                            alert(data);
+                        } else {
+                            alert("Error occurred! Try again later.");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        alert("An error occurred while sending the data.");
+                    },
+                });
             });
         });
     </script>
@@ -27,12 +47,8 @@
 </head>
 
 <body>
-    <!-- HTML -->
-    <div class="members">
-
-    </div>
-
-    <button id="get-members">Click</button>
+    <input type="file" name="image" id="image-input" class="w-100" />
+    <button id="upload">Click</button>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

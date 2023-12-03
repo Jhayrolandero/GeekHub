@@ -130,7 +130,33 @@ class PostController
 
         return $diff_str;
     }
+
+    // File validation
+    public static function file_validation($file)
+    {
+        // Check if the file input is set and not empty
+        if (isset($file["name"]) && !empty($file["name"])) {
+
+            // Get file information
+            $fileName = basename($file["name"]);
+            $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+
+            // Check if the file is an image
+            $isImage = getimagesize($file["tmp_name"]);
+
+            if ($isImage === false) {
+                return -1;
+            }
+
+            if ($file["size"] > 5000000) {
+                return 0;
+            }
+
+            return 1;
+        }
+    }
 }
+
 
 $post = new PostController();
 
@@ -147,11 +173,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
 
             $content = $_POST["content"];
-            $image = (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) ? file_get_contents($_FILES['image']['tmp_name']) : null;
+
+            // Validate the image first
+            $image = (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) ? $_FILES["image"] : null;
+
+            if ($image) {
+                $result = $post::file_validation($image);
+
+                if ($result == -1) {
+
+                    die("Image is only allowed");
+                } else if ($result == 0) {
+
+                    die("Size is too large!");
+                } else if ($result == 1) {
+
+                    $image = file_get_contents($_FILES['image']['tmp_name']);
+                }
+            }
+
             $user_id = $_SESSION["user"];
-
-            // echo $image;
-
             $post->add_post($user_id, $content, $image);
 
             echo "Successfully Added!";
@@ -187,6 +228,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $post_id = $_POST["postID"];
             $post->delete_post($post_id);
             echo "Post deleted";
+        } catch (Exception $e) {
+            throw new Exception($e);
+        }
+    }
+
+    // Picture validation
+    if (isset($_POST["action"]) && $_POST["action"] === "validate") {
+        try {
+            $image = (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) ? $_FILES["image"] : null;
+
+            if ($image) {
+                $result = $post::file_validation($image);
+
+                if ($result == -1) {
+
+                    die("Image is only allowed");
+                } else if ($result == 0) {
+
+                    die("Size is too large!");
+                } else if ($result == 1) {
+                    $image = file_get_contents($_FILES['image']['tmp_name']);
+                }
+            }
+
+            echo $image;
         } catch (Exception $e) {
             throw new Exception($e);
         }

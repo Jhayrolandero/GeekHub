@@ -8,7 +8,7 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
             <div class="card-header p-2" id="card-header">
                 <div class="row">
                     <!-- Profile -->
-                    <div class="col-xl-1 col-lg-2 col-md-1 col-sm-1 col-2 p-0">
+                    <div class="col-xxl-1 col-lg-2 col-md-1 col-sm-1 col-2 p-0">
                         <a href="#group#<?= $groupID ?>" class="mx-auto">
                             <?php
                             if ($profileImg) {
@@ -28,7 +28,7 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                         </a>
                     </div>
                     <!-- Username and Community Name -->
-                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-8 p-0">
+                    <div class="col-xxl-7 col-lg-8 col-md-8 col-sm-10 col-8 p-0">
                         <div class="row">
                             <div class="col-12">
                                 <a href="#group#<?= $groupID ?>" class="community-name">
@@ -61,7 +61,7 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                         </div>
                     </div>
                     <!-- Del and Update Dropdown -->
-                    <div class="col-xl-3 col-lg-2 col-md-3 col-sm-1 col-2 p-0 option-col text-end">
+                    <div class="col-xxl-3 col-lg-2 col-md-3 col-sm-1 col-2 p-0 option-col text-end">
                         <?php
                         if ($authorID == $_SESSION["user"]) {
                         ?>

@@ -243,6 +243,8 @@ $(document).ready(function () {
       processData: false,
       success: function (data, status) {
         if (status === "success") {
+          alert(data);
+
           render_community(communityID);
           $(".update-community-modal").slideUp();
         } else {
@@ -308,15 +310,15 @@ $(document).ready(function () {
     var communityID = $(".community-id").val();
     var userID = $(".user-id").val();
 
-    var valid = validateIMGType("image-input");
+    // var valid = validateIMGType("image-input");
 
-    // Validate first the image
-    if (!valid) {
-      alert(
-        "Invalid file type. Please select a valid image file (JPG, JPEG, PNG, WEBP)."
-      );
-      return;
-    }
+    // // Validate first the image
+    // if (!valid) {
+    //   alert(
+    //     "Invalid file type. Please select a valid image file (JPG, JPEG, PNG, WEBP)."
+    //   );
+    //   return;
+    // }
 
     var formData = new FormData();
     formData.append("action", "createPostCommunity");
@@ -335,6 +337,8 @@ $(document).ready(function () {
         if (data == 0) {
           alert("No Empty Homie!");
         }
+
+        alert(data);
 
         renderCommunityTimeline(communityID);
         render_communtiy_stat(communityID);

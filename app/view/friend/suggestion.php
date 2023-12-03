@@ -4,7 +4,7 @@
 function show_SuggestionList($username, $userID, $email, $profile, $bio)
 {
 ?>
-  <form class="col-xxl-3 col-lg-3 col-md-3 col-sm-6 col-12 suggestion-card mb-4">
+  <form class="col-xxl-3 col-lg-4 col-md-3 col-sm-6 col-12 suggestion-card mb-4">
     <div class="card bg-dark text-white">
       <div class="row ">
         <?php

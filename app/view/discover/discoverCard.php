@@ -27,7 +27,7 @@ function template_discover($groupName, $desc, $hasJoined, $createdAt, $groupID, 
         </div>
         <div class="community-info">
             <div class="row">
-                <div class="col-2">
+                <div class="col-xxl-2 col-lg-3">
                     <div class="row">
                         <?php
                         if ($groupPic) {
@@ -50,7 +50,7 @@ function template_discover($groupName, $desc, $hasJoined, $createdAt, $groupID, 
                         </script>
                     </div>
                 </div>
-                <div class="col-7">
+                <div class="col-xxl-7 col-lg-9">
                     <div class="row">
                         <div class="col-12">
                             <a href="#group#<?= $groupID ?>">
@@ -66,7 +66,7 @@ function template_discover($groupName, $desc, $hasJoined, $createdAt, $groupID, 
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-xxl-3 col-lg-12">
                     <div class="row">
                         <div class="col-12 mx-auto text-end">
                             <?php
