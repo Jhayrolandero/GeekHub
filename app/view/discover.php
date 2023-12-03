@@ -42,12 +42,6 @@ session_start();
                                 <ion-icon name="compass-sharp"></ion-icon> Discover
                             </a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <ion-icon name="menu-sharp"></ion-icon> Menu
-                            </a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="#logout">
                                 <ion-icon name="log-out"></ion-icon> Logout

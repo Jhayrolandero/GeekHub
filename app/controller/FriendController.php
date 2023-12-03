@@ -79,10 +79,10 @@ class FriendController
     }
 
     // Get all pending user's id
-    public function get_AcceptedID($userID)
+    public function get_AcceptedID($userID, $limit = null, $random = false)
     {
         try {
-            return $this->model->get_AcceptedID($userID);
+            return $this->model->get_AcceptedID($userID, $limit, $random);
         } catch (Exception $e) {
             return $e;
         }
@@ -103,11 +103,19 @@ class FriendController
     {
         return template_friend_nav($username, $userID, $profileImg);
     }
+
+    // unfriend
+    public function unfriend_friend($userID, $friendID)
+    {
+        return $this->model->unfriend_friend($userID, $friendID);
+    }
 }
 
 $friend = new FriendController();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    // Adding Friend
     if (isset($_POST["action"]) && $_POST["action"] === "addFriend") {
         $userID = $_POST["userID"];
         $friendID = $_POST["friendID"];
@@ -120,12 +128,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
+    // Accepting Friend
     if (isset($_POST["action"]) && $_POST["action"] === "acceptFriend") {
         $friendshipID = $_POST["friendshipID"];
 
         try {
             $friend->accept_Friend($friendshipID);
             echo "Friend Accepted";
+        } catch (Exception $e) {
+            echo $e;
+        }
+    }
+
+    // Unfriend
+
+    if (isset($_POST["action"]) && $_POST["action"] === "unfriendFriend") {
+
+        $userID = $_POST["userID"];
+        $friendshipID = $_POST["friendshipID"];
+
+        try {
+            echo $friend->unfriend_friend($userID, $friendshipID);
         } catch (Exception $e) {
             echo $e;
         }
@@ -187,10 +210,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
                 // Add all users' info to an array
                 foreach ($results as $result) {
                     array_push($users, $friend->show_PendingUser($result["user_id"]));
-                    // print_r($friend->show_PendingUser($result["user_id"]));
                 }
-
-                // print_r($users);
 
                 // Rendering of users' info
                 foreach ($users as $user) {
@@ -210,14 +230,13 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
                 // Show friend Nav
             case "homeList":
-                $results = $friend->get_AcceptedID($_SESSION["user"]);
+                $results = $friend->get_AcceptedID($_SESSION["user"], 5, true);
                 $users = array();
 
                 // Add all users' info to an array
                 foreach ($results as $result) {
                     array_push($users, $friend->show_AcceptedUser($result["friend_id"]));
                 }
-
 
                 // Rendering of users' info
                 foreach ($users as $user) {

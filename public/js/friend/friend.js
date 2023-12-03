@@ -1,11 +1,6 @@
 $(document).ready(function () {
   // Render the suggestion page as default when clicking friend section
-  $.get(
-    "app/controller/FriendController.php?action=suggestion",
-    function (data) {
-      $("#friend-content").html(data);
-    }
-  );
+  render_friend_page();
 
   // Render the friend content when clicked
   $(".nav-btn").click(function () {
@@ -18,30 +13,14 @@ $(document).ready(function () {
     );
   });
 
-  // // See the user's profile
-  // $("#friend-content").on(
-  //   "click",
-  //   ".suggestion-card .profile-btn",
-  //   function (event) {
-  //     event.preventDefault();
-
-  //     var friend_id = $(this)
-  //       .closest(".suggestion-card")
-  //       .find(".friend_id")
-  //       .val();
-
-  //     $.get(
-  //       `app/controller/UserController.php?action=getProfile&buddyID=${friend_id}`,
-  //       function (data, status) {
-  //         if (status === "success") {
-  //           $("#content").html(data);
-  //         } else {
-  //           alert("Error! try again");
-  //         }
-  //       }
-  //     );
-  //   }
-  // );
+  function render_friend_page() {
+    $.get(
+      "app/controller/FriendController.php?action=suggestion",
+      function (data) {
+        $("#friend-content").html(data);
+      }
+    );
+  }
 
   // Send add request to the user
   $("#friend-content").on("click", ".suggestion-card .add-btn", function () {
@@ -60,12 +39,7 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
-          $.get(
-            "app/controller/FriendController.php?action=suggestion",
-            function (data) {
-              $("#friend-content").html(data);
-            }
-          );
+          render_friend_page();
         } else {
           alert("Error! Try again");
         }
@@ -89,12 +63,6 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
-          $.get(
-            "app/controller/FriendController.php?action=suggestion",
-            function (data) {
-              $("#friend-content").html(data);
-            }
-          );
         } else {
           alert("Error occurred! Try later again later");
         }
@@ -117,7 +85,31 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
-          alert(data);
+          render_friend_page();
+        } else {
+          alert("Error! Try again");
+        }
+      }
+    );
+  });
+
+  // unfriend user
+  $("#friend-content").on("click", ".unfriend-btn", function () {
+    // alert("Unfriending");
+    var friendshipID = $(this).closest(".friend-card").find(".friend_id").val();
+
+    var userID = $(this).closest(".friend-card").find(".user_id").val();
+
+    $.post(
+      "app/controller/FriendController.php",
+      {
+        action: "unfriendFriend",
+        friendshipID: friendshipID,
+        userID: userID,
+      },
+      function (data, status) {
+        if (status === "success") {
+          render_friend_page();
         } else {
           alert("Error! Try again");
         }

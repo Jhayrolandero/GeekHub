@@ -100,7 +100,7 @@ class Friend extends Database
     }
 
     // Get the ID of the accepted friends
-    public function get_AcceptedID($userID)
+    public function get_AcceptedID($userID, $limit = null, $random = false)
     {
         try {
             $sql = "SELECT friendships.friend_id 
@@ -110,8 +110,18 @@ class Friend extends Database
                     FROM friendships LEFT JOIN users ON friendships.user_id = users.user_id 
                     WHERE friendships.friend_id = :user_id AND friendships.status = 'accepted'";
 
+
+            if ($random) {
+                $sql .= " ORDER BY RAND()";
+            }
+
+            if ($limit != null) {
+                $sql .= " LIMIT :limit";
+            }
+
             $stmt = $this->connect()->prepare($sql);
             $stmt->bindParam(':user_id', $userID, PDO::PARAM_INT);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
 
             $stmt->execute();
             return $stmt->fetchAll();
@@ -124,15 +134,39 @@ class Friend extends Database
     public function show_Accepted($userID)
     {
         try {
-            $sql = "SELECT * 
-                    FROM users
-                    WHERE user_id = ?";
+            $sql = "SELECT * FROM users WHERE user_id = :userID";
 
             $stmt = $this->connect()->prepare($sql);
 
-            $stmt->execute([$userID]);
+            $stmt->bindParam(":userID", $userID, PDO::PARAM_INT);
+
+            $stmt->execute();
 
             return $stmt->fetch();
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
+
+    // Unfriend
+    public function unfriend_friend($userID, $friendID)
+    {
+        try {
+
+            $sql = "DELETE
+                    FROM friendships
+                    WHERE (friendships.user_id = :user_id OR friendships.friend_id = :user_id) AND (friendships.user_id = :friend_id OR friendships.friend_id = :friend_id)
+                    AND friendships.status = 'accepted'";
+
+            $stmt = $this->connect()->prepare($sql);
+
+            $stmt->bindParam(':user_id', $userID, PDO::PARAM_INT);
+            $stmt->bindParam(':friend_id', $friendID, PDO::PARAM_INT);
+
+
+            $stmt->execute();
+
+            return "Friend Unfriended";
         } catch (PDOException $e) {
             return $e;
         }
