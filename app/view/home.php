@@ -58,7 +58,7 @@ session_start();
             </nav>
 
             <!-- Main Content -->
-            <main class="col-md-9 col-lg-8 main-content mx-auto" id="main-content">
+            <main class="col-xxl-5 col-md-9 col-lg-8 main-content mx-auto" id="main-content">
                 <!-- For posting -->
                 <div class="row p-3" id="post-bar">
                     <div class="col-12 p-0">

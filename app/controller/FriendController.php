@@ -3,6 +3,7 @@ session_start();
 include "../model/FriendModel.php";
 include "../view/friend/suggestion.php";
 include "../view/friend/pending.php";
+include "../view/friend/recommended.php";
 include "../view/friend/list.php";
 include "../view/sidebar/sideFriendCard.php";
 class FriendController
@@ -108,6 +109,12 @@ class FriendController
     public function unfriend_friend($userID, $friendID)
     {
         return $this->model->unfriend_friend($userID, $friendID);
+    }
+
+    // Show Recommend
+    public function show_recommend()
+    {
+        return show_template_recommend();
     }
 }
 
@@ -241,6 +248,10 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
                 foreach ($users as $user) {
                     echo $friend->friend_nav($user["username"], $user["user_id"], $user["user_profile"]);
                 }
+                break;
+
+            case "getRecommend":
+                echo $friend->show_recommend();
                 break;
         }
     }

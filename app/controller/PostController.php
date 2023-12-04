@@ -271,6 +271,16 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $result = $post->get_post($profileID);
         }
 
+        // Algo for rendering follow div
+        $min = 0;
+        $max = count($result);
+
+        $randomNumber = mt_rand($min * 50, $max * 50) / 100;
+
+        $recommendDivNumber = (int) $randomNumber;
+
+        echo $recommendDivNumber;
+        $count = 0;
 
         foreach ($result as $items) {
             $name = $items["username"];
@@ -287,6 +297,13 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $profileImg = $items["user_profile"];
 
             echo template_post($name, $content, $date, $post_id, $like_count, $hasLiked, $post_image, $commentCount, $userPost, $profileImg);
+
+            if ($count == $recommendDivNumber) {
+                echo "<div class='recommend-div'>
+                </div>";
+            }
+
+            $count++;
         }
 
         if (isset($_GET["id"])) {

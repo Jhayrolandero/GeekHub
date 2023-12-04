@@ -1,6 +1,36 @@
 $(document).ready(function () {
   $(".image-modal").hide();
 
+  // Render the newsfeed
+  $.get(
+    "app/controller/PostController.php?action=getPost",
+    function (data, status) {
+      if (status === "success") {
+        try {
+          $(".post-container").html(data).fadeIn();
+          render_recommend();
+        } catch (error) {
+          alert(error);
+        }
+      }
+    }
+  );
+
+  function render_recommend() {
+    $.get(
+      "app/controller/FriendController.php?action=getRecommend",
+      function (data, status) {
+        if (status === "success") {
+          try {
+            $(".recommend-div").html(data);
+          } catch (error) {
+            alert(error);
+          }
+        }
+      }
+    );
+  }
+
   // Function for validating Picture
   function validateIMGType(fileID) {
     // Get the file input element
@@ -40,16 +70,6 @@ $(document).ready(function () {
     event.preventDefault(); // Prevent the default form submission
     var content = $("#post-form").val();
     var userID = $("#user-id-post").val();
-
-    // var valid = validateIMGType("image-input");
-
-    // // Validate first the image
-    // if (!valid) {
-    //   alert(
-    //     "Invalid file type. Please select a valid image file (JPG, JPEG, PNG, WEBP)."
-    //   );
-    //   return;
-    // }
 
     // Create a FormData object
     var formData = new FormData();
