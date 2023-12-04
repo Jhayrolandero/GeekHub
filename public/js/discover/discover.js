@@ -50,21 +50,55 @@ $(document).ready(function () {
     var groupName = $("#group-name").val();
     var groupDesc = $("#group-desc").val();
 
-    $.post(
-      "app/controller/CommunityController.php",
-      {
-        action: "createCommunity",
-        groupName: groupName,
-        groupDesc: groupDesc,
-      },
-      function (data, status) {
+    // Create a FormData object
+    var formData = new FormData();
+
+    // Append the content and image to the FormData
+    formData.append("action", "createCommunity");
+    formData.append("groupName", groupName);
+    formData.append("groupProfile", $("#community-pic-input")[0].files[0]);
+    formData.append("groupBG", $("#community-bg-input")[0].files[0]);
+    formData.append("groupDesc", groupDesc);
+
+    // $.post(
+    //   "app/controller/CommunityController.php",
+    //   {
+    //     action: "createCommunity",
+    //     groupName: groupName,
+    //     groupDesc: groupDesc,
+    //   },
+    //   function (data, status) {
+    //     if (status === "success") {
+    //       render_dicover_page();
+    //     } else {
+    //       alert("Error!");
+    //     }
+    //   }
+    // );
+
+    $.ajax({
+      type: "POST",
+      url: "app/controller/CommunityController.php",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (data, status) {
         if (status === "success") {
+          alert(data);
+
           render_dicover_page();
+
+          // render_community(communityID);
+          // $(".update-community-modal").slideUp();
         } else {
-          alert("Error!");
+          alert("Error occurred! Try again later.");
         }
-      }
-    );
+      },
+      error: function (xhr, status, error) {
+        console.error(error);
+        alert("An error occurred while sending the data.");
+      },
+    });
   });
 
   /* 

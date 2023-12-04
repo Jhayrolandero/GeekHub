@@ -11,7 +11,7 @@ body {
 
 #friend-sidebar,
 #main-content {
-  top: 4rem;
+  padding-top: 4rem;
 }
 
 #friend-sidebar {

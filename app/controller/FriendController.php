@@ -215,7 +215,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
                 // Rendering of users' info
                 foreach ($users as $user) {
 
-
                     $username = $user["username"];
                     $userID = $user["user_id"];
                     $friendshipID = $user["friendship_id"];
@@ -230,7 +229,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
                 // Show friend Nav
             case "homeList":
-                $results = $friend->get_AcceptedID($_SESSION["user"], 5, true);
+                $results = $friend->get_AcceptedID($_SESSION["user"], 15, true);
                 $users = array();
 
                 // Add all users' info to an array

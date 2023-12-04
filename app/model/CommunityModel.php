@@ -6,31 +6,27 @@ class Community extends Database
 {
 
     // Create Community 
-    public function createAndJoinCommunity($groupName, $description, $user_id, $role = 'owner')
+    public function createAndJoinCommunity($groupName, $description, $communityProfile = null, $communityBG = null, $user_id, $role = 'owner')
     {
         try {
             $pdo = $this->connect();
             $pdo->beginTransaction();
 
-            // Create Community
-            $createCommunitySQL = "INSERT INTO groups (group_name, description) VALUES (?, ?)";
+            $createCommunitySQL = "INSERT INTO groups (group_name, description, community_profile, community_background) VALUES (?, ?, ?, ?)";
             $createCommunityStmt = $pdo->prepare($createCommunitySQL);
-            $createCommunityStmt->execute([$groupName, $description]);
+            $createCommunityStmt->execute([$groupName, $description, $communityProfile, $communityBG]);
 
             // Get the last inserted ID of the created community
             $community_id = $pdo->lastInsertId();
 
-            // Join Community
             $joinCommunitySQL = "INSERT INTO user_group (user_id, group_id, role) VALUES (?, ?, ?)";
             $joinCommunityStmt = $pdo->prepare($joinCommunitySQL);
             $joinCommunityStmt->execute([$user_id, $community_id, $role]);
 
-            // commit
             $pdo->commit();
 
             return "Successfully Created and Joined!";
         } catch (PDOException $e) {
-            // If an error occurs, rollback the transaction
             $pdo->rollBack();
             return $e;
         }

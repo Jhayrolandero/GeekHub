@@ -19,9 +19,9 @@ class CommunityController
     }
 
     // Creating COmmunity
-    public function createAndJoinCommunity($groupName, $description, $user_id, $role)
+    public function createAndJoinCommunity($groupName, $description, $communityProfile = null, $communityBG = null, $user_id, $role)
     {
-        return $this->model->createAndJoinCommunity($groupName, $description, $user_id, $role);
+        return $this->model->createAndJoinCommunity($groupName, $description, $communityProfile, $communityBG, $user_id, $role);
     }
 
     // Checking for ownership
@@ -286,9 +286,48 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $groupName = $_POST["groupName"];
             $groupDesc = $_POST["groupDesc"];
+
+            // $groupProfile = $_POST['groupProfile'];
+
+            $groupProfile = (isset($_FILES["groupProfile"]) && $_FILES["groupProfile"]["error"] === 0) ? $_FILES["groupProfile"] : null;
+
+            if ($groupProfile) {
+                $result = $community::file_validation($groupProfile);
+
+                if ($result == -1) {
+
+                    die("Image is only allowed");
+                } else if ($result == 0) {
+
+                    die("Size is too large!");
+                } else if ($result == 1) {
+
+                    $groupProfile = file_get_contents($_FILES['groupProfile']['tmp_name']);
+                }
+            }
+
+            // Same with BG
+
+            $groupBG = (isset($_FILES["groupBG"]) && $_FILES["groupBG"]["error"] === 0) ? $_FILES["groupBG"] : null;
+            // $groupBG = $_POST['groupBG'];
+            if ($groupBG) {
+                $result = $community::file_validation($groupBG);
+
+                if ($result == -1) {
+
+                    die("Image is only allowed");
+                } else if ($result == 0) {
+
+                    die("Size is too large!");
+                } else if ($result == 1) {
+
+                    $groupBG = file_get_contents($_FILES['groupBG']['tmp_name']);
+                }
+            }
+
             $userID = $_SESSION["user"];
 
-            echo $community->createAndJoinCommunity($groupName, $groupDesc, $userID, "owner");
+            echo $community->createAndJoinCommunity($groupName, $groupDesc, $groupProfile, $groupBG, $userID, "owner");
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -321,8 +360,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $communityID = $_POST["communityID"];
             $communityName = $_POST["communityName"];
-            // $image = (isset($_FILES["communityPic"]) && $_FILES["communityPic"]["error"] === 0) ? file_get_contents($_FILES['communityPic']['tmp_name']) : null;
-            // $imageBG = (isset($_FILES["communityBG"]) && $_FILES["communityBG"]["error"] === 0) ? file_get_contents($_FILES['communityBG']['tmp_name']) : null;
             $communityDesc = $_POST["communityDesc"];
 
             $image = (isset($_FILES["communityPic"]) && $_FILES["communityPic"]["error"] === 0) ? $_FILES["communityPic"] : null;
@@ -341,7 +378,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $image = file_get_contents($_FILES['communityPic']['tmp_name']);
                 }
             }
-            // $imageBG = (isset($_FILES["profileBG"]) && $_FILES["profileBG"]["error"] === 0) ? file_get_contents($_FILES['profileBG']['tmp_name']) : null;
+
             // Same with BG
             $imageBG = (isset($_FILES["communityBG"]) && $_FILES["communityBG"]["error"] === 0) ? $_FILES["communityBG"] : null;
 
@@ -517,7 +554,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     // API for show nav in home
     if (isset($_GET["action"]) && $_GET["action"] === "showCommunityNav") {
         try {
-            $results = $community->get_community(null, null, null, 5);
+            $results = $community->get_community(null, null, null, 15);
 
             foreach ($results as $result) {
 
@@ -535,7 +572,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     // API for show nav recommendations
     if (isset($_GET["action"]) && $_GET["action"] === "showRecommendCommunityNav") {
         try {
-            $results = $community->get_community(null, null, true, 5);
+            $results = $community->get_community(null, null, true, 15);
 
             foreach ($results as $result) {
 
@@ -606,7 +643,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         try {
 
             $userID = $_SESSION["user"];
-            $results = $community->get_community(null, null, true);
+            $results = $community->get_community(null, null, false);
 
 
             foreach ($results as $result) {

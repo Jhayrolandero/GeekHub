@@ -13,6 +13,15 @@ $(document).ready(function () {
     );
   });
 
+  function nav_friend_page(action) {
+    $.get(
+      "app/controller/FriendController.php?action=" + action,
+      function (data) {
+        $("#friend-content").html(data);
+      }
+    );
+  }
+
   function render_friend_page() {
     $.get(
       "app/controller/FriendController.php?action=suggestion",
@@ -39,7 +48,8 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
-          render_friend_page();
+          nav_friend_page("suggestion");
+          // render_friend_page();
         } else {
           alert("Error! Try again");
         }
@@ -63,6 +73,7 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
+          // nav_friend_page("list");
         } else {
           alert("Error occurred! Try later again later");
         }
@@ -85,7 +96,7 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
-          render_friend_page();
+          nav_friend_page("pending");
         } else {
           alert("Error! Try again");
         }
@@ -109,7 +120,8 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
-          render_friend_page();
+          // render_friend_page();
+          nav_friend_page("list");
         } else {
           alert("Error! Try again");
         }

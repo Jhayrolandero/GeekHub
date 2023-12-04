@@ -27,6 +27,7 @@
                     <!-- Caption -->
                     <h4>Caption</h4>
                     <textarea class="form-control" name="" id="post-form" placeholder="Share your thoughts"></textarea>
+
                     <!-- Image -->
 
                     <label class="custom-file-upload w-100 mt-4">

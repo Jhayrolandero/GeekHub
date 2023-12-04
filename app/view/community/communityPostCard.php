@@ -28,7 +28,7 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                         </a>
                     </div>
                     <!-- Username and Community Name -->
-                    <div class="col-xxl-7 col-lg-8 col-md-8 col-sm-10 col-8 p-0">
+                    <div class="col-xxl-8 col-lg-8 col-md-8 col-sm-10 col-8 p-0">
                         <div class="row">
                             <div class="col-12">
                                 <a href="#group#<?= $groupID ?>" class="community-name">

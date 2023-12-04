@@ -310,16 +310,6 @@ $(document).ready(function () {
     var communityID = $(".community-id").val();
     var userID = $(".user-id").val();
 
-    // var valid = validateIMGType("image-input");
-
-    // // Validate first the image
-    // if (!valid) {
-    //   alert(
-    //     "Invalid file type. Please select a valid image file (JPG, JPEG, PNG, WEBP)."
-    //   );
-    //   return;
-    // }
-
     var formData = new FormData();
     formData.append("action", "createPostCommunity");
     formData.append("content", content);

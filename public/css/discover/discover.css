@@ -128,8 +128,14 @@ body {
 }
 
 #rightbar {
-  height: 100vh;
-  overflow-y: scroll;
+  height: 100vh; /* Set the height of your rightbar */
+  overflow-y: hidden; /* Hide the scrollbar by default */
+  position: fixed; /* Fixed positioning */
+  right: 0; /* Align to the right */
+}
+
+#rightbar:hover {
+  overflow-y: scroll; /* Show the scrollbar when hovering over the rightbar */
 }
 
 /* Media Query */

@@ -24,7 +24,7 @@ function template_post($name, $content, $date, $post_id, $like_count, $hasLiked,
                             ?>
                         </a>
                     </div>
-                    <div class="col-xxl-7 col-lg-8 col-md-7 col-sm-10 col-8 p-0">
+                    <div class="col-xxl-8 col-lg-8 col-md-7 col-sm-10 col-8 p-0">
                         <div class="col-12 username"><?= $name ?></div>
                         <div class="col-12 date"><?= $date ?></div>
                     </div>
