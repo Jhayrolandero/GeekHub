@@ -55,6 +55,7 @@ class Post extends Database
         $sql = "SELECT
         users.username,
         users.user_id,
+        users.user_profile,
         posts.content,
         posts.created_at,
         posts.post_id,

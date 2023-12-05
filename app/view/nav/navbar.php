@@ -19,11 +19,9 @@
               <span>GeekHub</span>
             </a>
           </div>
-          <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-              <span class="navbar-toggler-icon"></span>
-            </button> -->
+
           <div class="searchbar-container col-8">
-            <input type="text" placeholder="Search...." class="searchbar-input form-control" id="searchInput">
+            <input type="text" placeholder="Search...." class="searchbar-input form-control" id="searchInput" autocomplete="off">
             <div class="searchbar-content">
               <ul id="searchResults" class="nav"></ul>
             </div>
@@ -31,13 +29,13 @@
         </div>
       </div>
       <div id="right-section col-6">
-        <a class="navbar-brand" href="#friend">
+        <a class="navbar-brand btn m-0" href="#friend">
           <ion-icon name="person-add-outline"></ion-icon>
         </a>
         <div class="dropdown dropstart text-end">
           <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" id="nav-drop-btn">
             <ion-icon name="notifications"></ion-icon> </button>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu" id="notif">
             <div class="notif-header">
               <p>Notification</p>
             </div>
@@ -45,9 +43,19 @@
             </section>
           </div>
         </div>
-        <a class="navbar-brand" href="#">
-          <ion-icon name="chevron-down"></ion-icon>
-        </a>
+
+        <div class="dropdown dropstart text-end">
+          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" id="nav-drop-btn">
+            <ion-icon name="apps"></ion-icon> </button>
+          <div class="dropdown-menu" id="notif">
+            <ul>
+              <li><a href="#profile#<?= $_SESSION["user"] ?>">Profile</a></li>
+              <li><a href="#logout">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+
+
       </div>
     </div>
   </nav>

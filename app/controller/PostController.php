@@ -130,7 +130,33 @@ class PostController
 
         return $diff_str;
     }
+
+    // File validation
+    public static function file_validation($file)
+    {
+        // Check if the file input is set and not empty
+        if (isset($file["name"]) && !empty($file["name"])) {
+
+            // Get file information
+            $fileName = basename($file["name"]);
+            $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+
+            // Check if the file is an image
+            $isImage = getimagesize($file["tmp_name"]);
+
+            if ($isImage === false) {
+                return -1;
+            }
+
+            if ($file["size"] > 5000000) {
+                return 0;
+            }
+
+            return 1;
+        }
+    }
 }
+
 
 $post = new PostController();
 
@@ -140,17 +166,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST["action"]) && $_POST["action"] === "addPost") {
 
         try {
-            if (empty($_POST["content"])) {
+
+            if (empty($_POST["content"]) && empty($_FILES["image"])) {
                 echo 0;
                 die();
             }
 
             $content = $_POST["content"];
-            $image = (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) ? file_get_contents($_FILES['image']['tmp_name']) : null;
+
+            // Validate the image first
+            $image = (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) ? $_FILES["image"] : null;
+
+            if ($image) {
+                $result = $post::file_validation($image);
+
+                if ($result == -1) {
+
+                    die("Image is only allowed");
+                } else if ($result == 0) {
+
+                    die("Size is too large!");
+                } else if ($result == 1) {
+
+                    $image = file_get_contents($_FILES['image']['tmp_name']);
+                }
+            }
+
             $user_id = $_SESSION["user"];
-
-            // echo $image;
-
             $post->add_post($user_id, $content, $image);
 
             echo "Successfully Added!";
@@ -190,6 +232,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             throw new Exception($e);
         }
     }
+
+    // Picture validation
+    if (isset($_POST["action"]) && $_POST["action"] === "validate") {
+        try {
+            $image = (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) ? $_FILES["image"] : null;
+
+            if ($image) {
+                $result = $post::file_validation($image);
+
+                if ($result == -1) {
+
+                    die("Image is only allowed");
+                } else if ($result == 0) {
+
+                    die("Size is too large!");
+                } else if ($result == 1) {
+                    $image = file_get_contents($_FILES['image']['tmp_name']);
+                }
+            }
+
+            echo $image;
+        } catch (Exception $e) {
+            throw new Exception($e);
+        }
+    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
@@ -204,6 +271,16 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $result = $post->get_post($profileID);
         }
 
+        // Algo for rendering follow div
+        $min = 0;
+        $max = count($result);
+
+        $randomNumber = mt_rand($min * 50, $max * 50) / 100;
+
+        $recommendDivNumber = (int) $randomNumber;
+
+        echo $recommendDivNumber;
+        $count = 0;
 
         foreach ($result as $items) {
             $name = $items["username"];
@@ -217,8 +294,16 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $hasLiked = $post->has_liked($post_id, $user_id);
             $commentCount = $items["comment_count"];
             $userPost = $items["user_id"];
+            $profileImg = $items["user_profile"];
 
-            echo template_post($name, $content, $date, $post_id, $like_count, $hasLiked, $post_image, $commentCount, $userPost);
+            echo template_post($name, $content, $date, $post_id, $like_count, $hasLiked, $post_image, $commentCount, $userPost, $profileImg);
+
+            if ($count == $recommendDivNumber) {
+                echo "<div class='recommend-div'>
+                </div>";
+            }
+
+            $count++;
         }
 
         if (isset($_GET["id"])) {

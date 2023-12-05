@@ -1,5 +1,5 @@
 <?php
-function template_community_post_card($groupName, $author, $content, $date, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCount, $commentCounts)
+function template_community_post_card($groupName, $author, $content, $date, $image, $groupPostID, $authorID, $hasLiked, $groupID, $likeCount, $commentCounts, $profileImg, $isOwner = 0)
 {
 ?>
     <form action="" class="container community-post-card">
@@ -8,13 +8,27 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
             <div class="card-header p-2" id="card-header">
                 <div class="row">
                     <!-- Profile -->
-                    <div class="col-xl-1 col-lg-2 col-md-1 col-sm-1 col-2 p-0">
+                    <div class="col-xxl-1 col-lg-2 col-md-1 col-sm-1 col-2 p-0">
                         <a href="#group#<?= $groupID ?>" class="mx-auto">
-                            <img src="public/images/you.png" alt="" style="width:45px" class="rounded-pill">
+                            <?php
+                            if ($profileImg) {
+                                $base64Image = base64_encode($profileImg);
+                                $imageSrc = "data:image/jpeg;base64," . $base64Image;
+                            ?>
+                                <img src="<?= $imageSrc ?>" class="profile-img rounded-pill" style="width:45px;" alt="Profile Image">
+                            <?php
+                            } else {
+                            ?>
+                                <img src="public\images\you.png" class="profile-img rounded-pill" style="width:45px;" alt="Profile Image">
+
+                            <?php
+                            }
+                            ?>
+                            <!-- <img src="public/images/you.png" alt="" style="width:45px" class="rounded-pill"> -->
                         </a>
                     </div>
                     <!-- Username and Community Name -->
-                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-10 col-8 p-0">
+                    <div class="col-xxl-8 col-lg-8 col-md-8 col-sm-10 col-8 p-0">
                         <div class="row">
                             <div class="col-12">
                                 <a href="#group#<?= $groupID ?>" class="community-name">
@@ -31,18 +45,38 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                             <small>
                                 &#8226;
                             </small>
+                            <?php
+                            if ($isOwner > 0) {
+                            ?>
+                                <div class="owner">
+                                    <i class="gg-crown"></i>
+                                </div>
+                                <small>
+                                    &#8226;
+                                </small>
+                            <?php
+                            }
+                            ?>
                             <div class=" date"><?= $date ?></div>
                         </div>
                     </div>
                     <!-- Del and Update Dropdown -->
-                    <div class="col-xl-3 col-lg-2 col-md-3 col-sm-1 col-2 p-0 option-col text-end">
-                        <button data-bs-toggle="dropdown" class="option-btn">
-                            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-                        </button>
-                        <ul class="dropdown-menu post-menu">
-                            <li><button class="btn post-menu-delete">Delete Post</button></li>
-                            <li><button class="btn post-menu-update">Update Post</button></li>
-                        </ul>
+                    <div class="col-xxl-3 col-lg-2 col-md-3 col-sm-1 col-2 p-0 option-col text-end">
+                        <?php
+                        if ($authorID == $_SESSION["user"]) {
+                        ?>
+                            <button data-bs-toggle="dropdown" class="option-btn">
+                                <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                            </button>
+                            <ul class="dropdown-menu post-menu">
+                                <li><button class="btn post-menu-btn community-post-menu-delete">Delete Post</button></li>
+                                <li><button class="btn post-menu-btn community-post-menu-update">Update Post</button></li>
+                            </ul>
+                        <?php
+                        }
+
+                        ?>
+
                         <button type="button" class="p-0 hide-post" data-bs-dismiss="modal">&times;</button>
                     </div>
                 </div>

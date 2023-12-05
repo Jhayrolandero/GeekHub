@@ -7,12 +7,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="public/css/modal/modal.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
 
     <!-- The Modal -->
-    <div class="modal create-community-post-modal" id="myModal">
+    <div class="modal create-community-post-modal modal-lg" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content" id="content">
 
@@ -27,8 +28,19 @@
                     <!-- Caption -->
                     <textarea class="form-control" name="" id="post-form" cols="30" rows="10" placeholder="Share your thoughts"></textarea>
                     <!-- Image -->
-                    <input type="file" name="image" id="image-input" />
+                    <label class="custom-file-upload w-100 mt-4">
+                        <input type="file" name="image" id="image-input" class="w-100" onchange="preview_image()" />
+                        <div id="image-preview" class="d-flex flex-column justify-content-center align-items-center">
+
+                            <small><ion-icon name="images" size="large"></ion-icon></small>
+                            <p>Photos</p>
+
+                        </div>
+                    </label>
+
+                    <!-- <input type="file" name="image" id="image-input" /> -->
                 </div>
+
 
                 <!-- Modal footer -->
                 <div class="modal-footer" id="modal-footer">
@@ -38,6 +50,8 @@
             </div>
         </div>
     </div>
+
+    <script src="public/js/modal/modal.js"></script>
 </body>
 
 </html>

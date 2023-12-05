@@ -19,7 +19,7 @@ $(document).ready(function () {
     $.get(
       "app/controller/CommunityController.php",
       {
-        action: "showCommunityNav",
+        action: "showRecommendCommunityNav",
       },
       function (data, status) {
         if (status === "success") {
@@ -29,11 +29,81 @@ $(document).ready(function () {
     );
   }
 
+  function render_dicover_card() {
+    $.get(
+      "app/controller/CommunityController.php",
+      {
+        action: "showDiscoverCard",
+        groupID: null,
+      },
+      function (data, status) {
+        if (status === "success") {
+          // console.log(data);
+          $("#discover-post").html(data);
+        }
+      }
+    );
+  }
+
+  // Create a community
+  $("#create-community-btn").click(function () {
+    var groupName = $("#group-name").val();
+    var groupDesc = $("#group-desc").val();
+
+    // Create a FormData object
+    var formData = new FormData();
+
+    // Append the content and image to the FormData
+    formData.append("action", "createCommunity");
+    formData.append("groupName", groupName);
+    formData.append("groupProfile", $("#community-pic-input")[0].files[0]);
+    formData.append("groupBG", $("#community-bg-input")[0].files[0]);
+    formData.append("groupDesc", groupDesc);
+
+    // $.post(
+    //   "app/controller/CommunityController.php",
+    //   {
+    //     action: "createCommunity",
+    //     groupName: groupName,
+    //     groupDesc: groupDesc,
+    //   },
+    //   function (data, status) {
+    //     if (status === "success") {
+    //       render_dicover_page();
+    //     } else {
+    //       alert("Error!");
+    //     }
+    //   }
+    // );
+
+    $.ajax({
+      type: "POST",
+      url: "app/controller/CommunityController.php",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (data, status) {
+        if (status === "success") {
+          alert(data);
+
+          render_dicover_page();
+
+          // render_community(communityID);
+          // $(".update-community-modal").slideUp();
+        } else {
+          alert("Error occurred! Try again later.");
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(error);
+        alert("An error occurred while sending the data.");
+      },
+    });
+  });
+
   /* 
   =============
-  
   Like System
-
   =============
   */
 
@@ -43,11 +113,8 @@ $(document).ready(function () {
       .closest(".community-post-card")
       .find(".community-post-id")
       .val();
+
     var userID = $(this).closest(".community-post-card").find(".user-id").val();
-    // var communityID = $(this)
-    //   .closest(".community-post-card")
-    //   .find(".community-id")
-    //   .val();
 
     $.post(
       "app/controller/CommunityController.php",
@@ -148,12 +215,12 @@ $(document).ready(function () {
 
   // Comment
 
-  $("#add-comment-btn").click(function () {
+  $(".add-community-comment-btn").click(function () {
     var comment = $(".comment-input").val();
     var groupPostID = $(".comment-post-id").val();
     var userID = $(".comment-user-id").val();
-    // var groupID = $(".comment-community-id").val();
 
+    var groupID = $(".comment-community-id").val();
     $.post(
       "app/controller/CommunityController.php",
       {
@@ -166,9 +233,185 @@ $(document).ready(function () {
         if (status === "success") {
           // Update contents dynamically
           renderComment(groupPostID);
-          console.log(data);
+          render_dicover_page();
         } else {
           alert("Error! Try again");
+        }
+      }
+    );
+  });
+
+  /*
+  ================
+    POST SYSTEM
+  ================
+  */
+
+  // Delete Post
+  $("#discover-post").on(
+    "click",
+    ".community-post-menu-delete",
+    function (event) {
+      event.preventDefault();
+
+      var groupPostID = $(this)
+        .closest(".community-post-card")
+        .find(".community-post-id")
+        .val();
+
+      // alert(groupPostID);
+      $.post(
+        "app/controller/CommunityController.php",
+        {
+          action: "deleteCommunityPost",
+          groupPostID: groupPostID,
+        },
+        function (data, status) {
+          if (status === "success") {
+            alert(data);
+            var communityID = get_hash_community_id();
+
+            renderCommunityTimeline(communityID);
+            render_communtiy_stat(communityID);
+          } else {
+            alert("Error");
+          }
+        }
+      );
+    }
+  );
+
+  // Open Update Post
+  $("#discover-post").on(
+    "click",
+    ".community-post-menu-update",
+    function (event) {
+      event.preventDefault();
+
+      var groupPostID = $(this)
+        .closest(".community-post-card")
+        .find(".community-post-id")
+        .val();
+
+      var pervContent = $(this)
+        .closest(".community-post-card")
+        .find(".post-content")
+        .text()
+        .trim();
+
+      $("#update-community-post-id").val(groupPostID);
+      $("#update-community-post-form").val(pervContent);
+
+      // alert(groupPostID);
+      // alert(pervContent);
+
+      $(".update-community-post-modal").slideDown();
+    }
+  );
+
+  // Close update
+  $("#close-update-community-post").click(function () {
+    $(".update-community-post-modal").slideUp();
+  });
+
+  // Update post
+  $("#update-community-post-btn").click(function () {
+    var content = $("#update-community-post-form").val();
+    var groupPostID = $("#update-community-post-id").val();
+
+    $.post(
+      "app/controller/CommunityController.php",
+      {
+        action: "updateCommunityPost",
+        content: content,
+        groupPostID: groupPostID,
+      },
+      function (data, status) {
+        if (status === "success") {
+          var groupID = get_hash_community_id();
+
+          renderCommunityTimeline(groupID);
+          render_communtiy_stat(groupID);
+          // alert(data);
+        } else {
+          alert("Error!");
+        }
+      }
+    );
+  });
+
+  /*
+  =================
+  Create Community
+  ================
+  */
+
+  // Open community Modal
+  $("#community-btn").click(function (e) {
+    e.preventDefault();
+
+    $(".create-community-modal").slideDown();
+  });
+
+  // Close community post modal
+  $("#close-create-community").click(function () {
+    $(".create-community-modal").slideUp();
+  });
+
+  // Show discover community
+
+  $("#show-all-discover").click(function () {
+    render_dicover_card();
+  });
+
+  /*
+  ================
+      COMMUNITY
+  ================
+  */
+
+  // Join community
+  $("#discover-post").on("click", ".join-community-btn", function () {
+    var communityID = $(this)
+      .closest(".discover-card")
+      .find("#community-id")
+      .val();
+    var userID = $(this).closest(".discover-card").find(".user-id").val();
+
+    $.post(
+      "app/controller/CommunityController.php",
+      {
+        action: "joinCommunity",
+        userID: userID,
+        groupID: communityID,
+        role: "member",
+      },
+      function (data, status) {
+        if (status === "success") {
+          render_dicover_card();
+        }
+      }
+    );
+  });
+
+  // leave Community
+  $("#discover-post").on("click", ".leave-community-btn", function () {
+    var communityID = $(this)
+      .closest(".discover-card")
+      .find("#community-id")
+      .val();
+    var userID = $(this).closest(".discover-card").find(".user-id").val();
+
+    $.post(
+      "app/controller/CommunityController.php",
+      {
+        action: "leaveCommunity",
+        userID: userID,
+        groupID: communityID,
+      },
+      function (data, status) {
+        if (status === "success") {
+          render_dicover_card();
         }
       }
     );

@@ -46,22 +46,7 @@ session_start();
                                 <ion-icon name="compass-sharp"></ion-icon> Discover
                             </a>
                         </li>
-                        <li class="nav-item disable">
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" id="nav-drop-btn">
-                                    <ion-icon name="notifications"></ion-icon> Notifications</button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Link 1</a></li>
-                                    <li><a class="dropdown-item" href="#">Link 2</a></li>
-                                    <li><a class="dropdown-item" href="#">Link 3</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <ion-icon name="menu-sharp"></ion-icon> Menu
-                            </a>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link active" href="#logout">
                                 <ion-icon name="log-out"></ion-icon> Logout
@@ -73,13 +58,10 @@ session_start();
             </nav>
 
             <!-- Main Content -->
-            <main class="col-md-9 col-lg-8 main-content mx-auto" id="main-content">
+            <main class="col-xxl-5 col-md-9 col-lg-8 main-content mx-auto" id="main-content">
                 <!-- For posting -->
                 <div class="row p-3" id="post-bar">
-                    <div class="col-xl-1 col-lg-2 col-md-1 col-3 p-0">
-                        <img src="public/images/you.png" alt="" style="width: 40px;">
-                    </div>
-                    <div class="col-xl-11 col-lg-10 col-md-11 col-9 p-0">
+                    <div class="col-12 p-0">
                         <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myModal" id="add-post-btn">
                             What's on your mind?
                         </button>
@@ -94,7 +76,14 @@ session_start();
             <!-- FriendBar navigation -->
             <nav id="rightbar">
                 <nav id="friendbar">
-                    <p id="friend-bar-title">Buddies</p>
+                    <div class="row">
+                        <div class="col-6">
+                            <p id="friend-bar-title">Buddies</p>
+                        </div>
+                        <div class="col-5 text-end">
+                            <a href="#friend">See all</a>
+                        </div>
+                    </div>
                     <!-- Render friend side nav -->
                     <ul class="nav flex-column" id="friend-side-nav">
 
@@ -105,9 +94,9 @@ session_start();
                         <div class="col-6">
                             <p id="community-bar-title">Communities</p>
                         </div>
-                        <div class="col-6">
+                        <!-- <div class="col-6">
                             <button id="community-btn">Create +</button>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- For communities -->
                     <ul class="nav flex-column" id="community-side-nav">

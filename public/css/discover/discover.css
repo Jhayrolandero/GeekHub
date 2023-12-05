@@ -48,3 +48,107 @@ body {
   font-weight: 400;
   font-size: 0.875rem;
 }
+
+.meta-btn {
+  font-size: 0.875rem;
+}
+
+.community-header {
+  background-color: #282828;
+  color: white;
+  padding: 0.5em;
+}
+
+.community-header .bg-img img {
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.community-header .community-info {
+  padding: 0.5em;
+  margin: 0;
+}
+
+.community-info {
+  position: relative;
+}
+
+.community-img {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  position: absolute;
+  left: 10%;
+  transform: translate(-50%, -55%);
+  border-radius: 50%;
+}
+
+.community-post .row {
+  display: flex;
+  justify-content: center;
+  /* width: 100%; */
+}
+
+.community-post .col {
+  width: 100%;
+}
+
+/* Create COmmunity post BTN */
+
+#create-community-post,
+.community-btn:hover {
+  background-color: transparent;
+  color: var(--text-clr);
+  padding: 0.7em;
+  border: var(--text-clr) solid 1px;
+  border-radius: 10px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.community-btn {
+  background-color: white;
+  color: black;
+  font-weight: 500;
+  padding: 0.7em;
+  transition: all 0.3s ease;
+}
+
+#create-community-post:hover {
+  background-color: white;
+  color: black;
+  font-weight: 500;
+}
+
+.community-info a {
+  text-decoration: none;
+}
+
+#rightbar {
+  height: 100vh; /* Set the height of your rightbar */
+  overflow-y: hidden; /* Hide the scrollbar by default */
+  position: fixed; /* Fixed positioning */
+  right: 0; /* Align to the right */
+}
+
+#rightbar:hover {
+  overflow-y: scroll; /* Show the scrollbar when hovering over the rightbar */
+}
+
+/* Media Query */
+@media all and (max-width: 970px) {
+  #sidebar {
+    display: none;
+  }
+
+  #main-content {
+    width: 100%;
+  }
+
+  #rightbar {
+    display: none;
+  }
+}

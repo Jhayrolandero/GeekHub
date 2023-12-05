@@ -25,6 +25,11 @@ session_start();
     <!-- For comment to show -->
     <?php include "home/commentModal.php" ?>
 
+    <!-- Updating profile -->
+    <?php include "profile/updateProfileModal.php" ?>
+
+    <!-- Updating Post -->
+    <?php include "home/updateModalPost.php" ?>
 </body>
 
 </html>

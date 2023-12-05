@@ -21,6 +21,7 @@ class UserController
         }
     }
 
+    // Gettin User info
     public function get_user($id)
     {
         try {
@@ -30,26 +31,24 @@ class UserController
         }
     }
 
-    public function show_profile($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID)
+    // Template to render profile
+    public function show_profile($username, $userBio, $createdAt,  $userID, $profileImg, $profileBG)
     {
-        return profile_Template($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID);
+        return profile_Template($username, $userBio, $createdAt, $userID, $profileImg, $profileBG);
     }
 
+    // For bio
     public function add_bio($userID, $userBio)
     {
         return $this->model->add_bio($userID, $userBio);
     }
 
-    public function search_user($username)
+    // Update Profile
+    public function edit_profile($userID, $username, $profileImg, $profileBG)
     {
-        return $this->model->search_user($username);
+        return $this->model->edit_profile($userID, $username, $profileImg, $profileBG);
     }
 
-    // Show results
-    public function show_search_user($username, $userID)
-    {
-        return template_search($username, $userID);
-    }
 
     public static function month_day($date)
     {
@@ -62,11 +61,38 @@ class UserController
         // Output the result
         return $formattedDate;
     }
+
+    // File validation
+    public static function file_validation($file)
+    {
+        // Check if the file input is set and not empty
+        if (isset($file["name"]) && !empty($file["name"])) {
+
+            // Get file information
+            $fileName = basename($file["name"]);
+            $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+
+            // Check if the file is an image
+            $isImage = getimagesize($file["tmp_name"]);
+
+            if ($isImage === false) {
+                return -1;
+            }
+
+            if ($file["size"] > 5000000) {
+                return 0;
+            }
+
+            return 1;
+        }
+    }
 }
 
 $user = new UserController();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    // For Bio
     if (isset($_POST["action"]) && $_POST["action"] === "addBio") {
         try {
 
@@ -78,6 +104,56 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo "Error";
         }
     }
+
+    // For Update Profile
+    if (isset($_POST["action"]) && $_POST["action"] === "updateProfile") {
+        try {
+
+            $userID = $_POST["userID"];
+            $username = $_POST["username"];
+            // $image = (isset($_FILES["profilePic"]) && $_FILES["profilePic"]["error"] === 0) ? file_get_contents($_FILES['profilePic']['tmp_name']) : null;
+
+            // Validate the image first
+            $image = (isset($_FILES["profilePic"]) && $_FILES["profilePic"]["error"] === 0) ? $_FILES["profilePic"] : null;
+
+            if ($image) {
+                $result = $user::file_validation($image);
+
+                if ($result == -1) {
+
+                    die("Image is only allowed");
+                } else if ($result == 0) {
+
+                    die("Size is too large!");
+                } else if ($result == 1) {
+
+                    $image = file_get_contents($_FILES['profilePic']['tmp_name']);
+                }
+            }
+            // $imageBG = (isset($_FILES["profileBG"]) && $_FILES["profileBG"]["error"] === 0) ? file_get_contents($_FILES['profileBG']['tmp_name']) : null;
+            // Same with BG
+            $imageBG = (isset($_FILES["profileBG"]) && $_FILES["profileBG"]["error"] === 0) ? $_FILES["profileBG"] : null;
+
+            if ($imageBG) {
+                $result = $user::file_validation($imageBG);
+
+                if ($result == -1) {
+
+                    die("Image is only allowed");
+                } else if ($result == 0) {
+
+                    die("Size is too large!");
+                } else if ($result == 1) {
+
+                    $imageBG = file_get_contents($_FILES['profileBG']['tmp_name']);
+                }
+            }
+
+            echo $user->edit_profile($userID, $username, $image, $imageBG);
+        } catch (Exception $e) {
+            echo $e;
+        }
+    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["action"]) && $_GET["action"] === "getID") {
@@ -85,7 +161,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["action"]) && $_GET["act
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
-
     // Get profile
     if (isset($_GET["action"]) && $_GET["action"] === "getProfile" && $_GET["userProfile"]) {
         $id = $_GET["userProfile"];
@@ -100,18 +175,45 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $postCount = $result[0]["post_count"];
         $likeCount = $result[0]["like_count"];
         $userID = $result[0]["user_id"];
+        $profileImg = $result[0]["user_profile"];
+        $profileBG = $result[0]["profile_background"];
 
-        echo $user->show_profile($username, $userBio, $createdAt, $buddyCount, $postCount, $likeCount, $userID);
+        echo $user->show_profile($username, $userBio, $createdAt,  $userID, $profileImg, $profileBG);
     }
 
-    // Search User
-    if (isset($_GET["action"]) && $_GET["action"] === "searchUser") {
-        $username = $_GET["username"];
+    // // Search User
+    // if (isset($_GET["action"]) && $_GET["action"] === "searchUser") {
+    //     $username = $_GET["username"];
 
-        $results = $user->search_user($username);
+    //     $results = $user->search_user($username);
 
-        foreach ($results as $result) {
-            echo $user->show_search_user($result["username"], $result["user_id"]);
-        }
+    //     foreach ($results as $result) {
+    //         echo $user->show_search_user($result["username"], $result["user_id"]);
+    //     }
+    // }
+
+    // Get profile Stat
+    if (isset($_GET["action"]) && $_GET["action"] === "getStat") {
+
+        $userID = $_GET["userID"];
+        $result = $user->get_user($userID);
+
+        $buddyCount = $result[0]["buddy_count"];
+        $postCount = $result[0]["post_count"];
+        $likeCount = $result[0]["like_count"];
+
+        $stat = array(
+            "buddy_count" => $buddyCount,
+            "post_count" => $postCount,
+            "like_count" => $likeCount
+        );
+
+        $statJSON = json_encode($stat);
+
+        // Set the Content-Type header to application/json
+        header('Content-Type: application/json');
+
+        // Send the JSON response
+        echo $statJSON;
     }
 }

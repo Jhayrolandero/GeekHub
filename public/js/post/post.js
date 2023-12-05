@@ -1,12 +1,76 @@
 $(document).ready(function () {
   $(".image-modal").hide();
 
-  // Post System
+  // Render the newsfeed
+  $.get(
+    "app/controller/PostController.php?action=getPost",
+    function (data, status) {
+      if (status === "success") {
+        try {
+          $(".post-container").html(data).fadeIn();
+          render_recommend();
+        } catch (error) {
+          alert(error);
+        }
+      }
+    }
+  );
+
+  function render_recommend() {
+    $.get(
+      "app/controller/FriendController.php?action=getRecommend",
+      function (data, status) {
+        if (status === "success") {
+          try {
+            $(".recommend-div").html(data);
+          } catch (error) {
+            alert(error);
+          }
+        }
+      }
+    );
+  }
+
+  // Function for validating Picture
+  function validateIMGType(fileID) {
+    // Get the file input element
+    var fileInput = document.getElementById(fileID);
+
+    // Get the selected file
+    var file = fileInput.files[0];
+
+    // Check if a file is selected
+    if (file) {
+      // Get the file extension
+      var extension = file.name.split(".").pop().toLowerCase();
+
+      // Array of allowed image file extensions
+      var allowedExtensions = ["jpg", "jpeg", "png", "webp"];
+
+      // Check if the file extension is in the allowed extensions array
+      if (allowedExtensions.indexOf(extension) === -1) {
+        fileInput.value = "";
+
+        return false;
+      } else {
+        return true;
+      }
+    }
+    return true;
+  }
+
+  /*
+  =====================
+      POST SYSTEM
+  =====================
+  */
 
   // Make a post
   $("#post-btn").click(function (event) {
     event.preventDefault(); // Prevent the default form submission
     var content = $("#post-form").val();
+    var userID = $("#user-id-post").val();
+
     // Create a FormData object
     var formData = new FormData();
 
@@ -22,12 +86,12 @@ $(document).ready(function () {
       contentType: false,
       processData: false,
       success: function (data, status) {
-        alert(data);
         if (status === "success") {
           if (data == 0) {
             alert("No Empty Homie!");
           }
 
+          alert(data);
           $.get(
             "app/controller/PostController.php?action=getPost",
             function (data, status) {
@@ -102,6 +166,7 @@ $(document).ready(function () {
     });
   });
 
+  // Delete Post
   $(".post-container").on("click", ".post .post-menu-delete", function (event) {
     event.preventDefault();
 

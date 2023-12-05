@@ -1,6 +1,6 @@
 :root {
   --dark-color: #282828;
-  --text-color: $fff;
+  --text-color: #fff;
 }
 
 #navbar {
@@ -165,4 +165,58 @@
 /* Show the searchbar content when the input is focused */
 .searchbar-container:focus-within .searchbar-content {
   display: block;
+}
+
+#notif {
+  background-color: #282828;
+  color: #fff;
+  width: max-content;
+}
+
+.notif-container {
+  max-height: 30rem; /* Set the maximum height as needed */
+  overflow-y: auto;
+}
+
+/* Define the scrollbar styles for WebKit browsers (Chrome, Safari) */
+.notif-container::-webkit-scrollbar {
+  width: 10px; /* Set the width of the scrollbar */
+}
+
+/* Define the scrollbar track */
+.notif-container::-webkit-scrollbar-track,
+.searchbar-content::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Set the color of the track */
+}
+
+/* Define the scrollbar handle */
+.notif-container::-webkit-scrollbar-thumb,
+.searchbar-content::-webkit-scrollbar-track {
+  background-color: #888; /* Set the color of the handle */
+  border-radius: 3px; /* Set the border radius of the handle */
+}
+
+/* Define the scrollbar handle on hover */
+.notif-container::-webkit-scrollbar-thumb:hover,
+.searchbar-content::-webkit-scrollbar-track {
+  background-color: #555; /* Set the color of the handle on hover */
+}
+
+.searchbar-content {
+  max-height: 40rem; /* Set the maximum height as needed */
+  overflow-y: auto;
+}
+
+.result-name {
+  text-decoration: none;
+  color: var(--text-color);
+  list-style: none;
+}
+
+.nav-item a {
+  text-decoration: none;
+}
+
+.menu-btn button {
+  color: var(--text-color);
 }

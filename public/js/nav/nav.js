@@ -1,4 +1,9 @@
 $(document).ready(function () {
+  /*
+  ===================
+  Notification
+  ===================
+  */
   $.get(
     "app/controller/NotificationController.php?action=getNotif",
     function (data, status) {
@@ -12,9 +17,10 @@ $(document).ready(function () {
   $("#searchInput").on("input", function () {
     var query = $(this).val().trim();
 
+    // console.log(query);
     // Send an AJAX request to the server for search results
     $.get(
-      "app/controller/UserController.php",
+      "app/controller/SeachbarController.php",
       {
         action: "searchUser",
         username: query,
