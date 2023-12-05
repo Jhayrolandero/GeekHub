@@ -84,7 +84,7 @@ function profile_Template($username, $userBio, $createdAt, $userID, $profileImg,
         </header>
 
         <main class="row p-3 content-section  mx-auto">
-            <div class="col-md-3 col-sm-12  mt-3">
+            <div class="col-md-3 col-sm-12 right-bar">
                 <section class="bio-section">
                     <div class="row">
                         <div class="col-6">

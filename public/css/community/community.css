@@ -1,7 +1,8 @@
 :root {
   --text-clr: #f5fefd;
   --black-color1: #141414;
-  --black-color2: #282828;
+  --black-color2: rgb(22, 24, 24);
+  --border: rgba(220, 220, 220, 0.5) solid 1px;
 }
 
 #community-container {
@@ -10,13 +11,15 @@
 }
 
 .community-post-card {
-  background-color: #282828;
-  margin-top: 1rem;
+  border: var(--border);
+  background-color: transparent;
   min-width: min-content;
 }
 
 .community-header {
-  background-color: #282828;
+  background-color: var(--black-color2);
+  border: var(--border);
+  border-radius: 10px;
   color: white;
   padding: 0.5em;
 }
@@ -88,7 +91,7 @@
 /* Description Container */
 
 .desc-container {
-  background-color: #282828;
+  background-color: var(--black-color2);
   padding: 1.2em;
   border-radius: 10px;
 }
@@ -131,7 +134,7 @@
 }
 
 #community-nav {
-  background-color: #282828;
+  background-color: var(--black-color2);
   padding: 1.2em;
   border-radius: 10px;
   color: var(--text-clr);
@@ -209,4 +212,12 @@
 
 #top-members-nav .nav-item:hover {
   font-weight: 500;
+}
+
+#community-container .right-bar {
+  padding-bottom: 3em;
+  position: sticky;
+  top: 4rem; /* Adjust this value based on your design */
+  height: 100vh; /* Adjust this value based on your design */
+  overflow-y: scroll; /* Allow the content to scroll if it exceeds the height */
 }

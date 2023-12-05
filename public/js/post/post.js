@@ -9,11 +9,8 @@ $(document).ready(function () {
       async (data, status) => {
         if (status === "success") {
           try {
-            $(".post-container").html(data).fadeIn();
-
-            alert("Hello");
-            const recommendations = await render_recommend();
-            $(".recommend-div").empty().html(recommendations);
+            $(".post-container").html(data);
+            render_recommend();
           } catch (error) {
             alert(error);
           }
@@ -24,40 +21,22 @@ $(document).ready(function () {
     );
   }
 
-  // function render_recommend() {
-  //   $.get(
-  //     "app/controller/FriendController.php?action=getRecommend",
-  //     function (data, status) {
-  //       if (status === "success") {
-  //         try {
-  //           // Return the contents
-  //           return data;
-  //           // $(".recommend-div").html(data);
-  //         } catch (error) {
-  //           alert("Error in rendering recommendations: " + error);
-  //         }
-  //       }
-  //     }
-  //     );
-  //   }
 
   function render_recommend() {
-    return new Promise((resolve, reject) => {
       $.get(
         "app/controller/FriendController.php?action=getRecommend",
         (data, status) => {
           if (status === "success") {
             try {
-              resolve(data);
+              $(".recommend-div").html(data);
             } catch (error) {
-              reject("Error in rendering recommendations: " + error);
+              alert("Error in rendering recommendations: " + error);
             }
           } else {
-            reject(`Error: ${status}`);
+            alert(`Error: ${status}`);
           }
         }
       );
-    });
   }
 
   render_newsfeed();
@@ -228,19 +207,7 @@ $(document).ready(function () {
     $(".update-post-modal").slideUp();
   });
 
-  // Render the newsfeed
-  $.get(
-    "app/controller/PostController.php?action=getPost",
-    function (data, status) {
-      if (status === "success") {
-        try {
-          $(".post-container").html(data).fadeIn();
-        } catch (error) {
-          alert(error);
-        }
-      }
-    }
-  );
+
 
   // Like system
 

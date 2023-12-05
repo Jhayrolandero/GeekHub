@@ -60,7 +60,7 @@ session_start();
             <!-- Main Content -->
             <main class="col-xxl-5 col-md-9 col-lg-8 main-content mx-auto" id="main-content">
                 <!-- For posting -->
-                <div class="row p-3" id="post-bar">
+                <div class="row " id="post-bar">
                     <div class="col-12 p-0">
                         <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myModal" id="add-post-btn">
                             What's on your mind?

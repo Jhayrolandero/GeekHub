@@ -125,7 +125,7 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
                         </section>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-3 right-bar">
                     <section class="desc-container ">
                         <h4>Description</h4>
                         <textarea name="" class="form-control" id="bio-form" readonly><?= $desc ?></textarea>

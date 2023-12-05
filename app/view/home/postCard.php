@@ -48,19 +48,20 @@ function template_post($name, $content, $date, $post_id, $like_count, $hasLiked,
             </div>
             <div class="card-body p-0" id="card-body">
                 <div class="row content">
-                    <div class="col-12 pb-2 post-content">
-                        <?= $content ?>
-                    </div>
-                    <?php
-                    if (isset($post_image)) {
-                    ?>
-                        <div class="col-12 text-center pb-2">
-                            <img src="data:image/jpeg;base64,<?= base64_encode($post_image) ?>" class="image-container"></img>
+                    <div class="col-xxl-10 col-lg-8 p-1 mx-auto">
+                        <div class="col-12 pb-2 post-content">
+                            <?= $content ?>
                         </div>
-                    <?php
-                    }
-
-                    ?>
+                        <?php
+                        if (isset($post_image)) {
+                        ?>
+                            <div class="col-12 text-center pb-2">
+                                <img src="data:image/jpeg;base64,<?= base64_encode($post_image) ?>" class="image-container"></img>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
                 </div>
                 <input name="post_id" value="<?= $post_id ?>" class="post_id" hidden></input>
                 <input name="user_id" value="<?= $_SESSION["user"] ?>" class="user_id" hidden></input>
@@ -73,13 +74,13 @@ function template_post($name, $content, $date, $post_id, $like_count, $hasLiked,
                         if ($hasLiked) {
                         ?>
                             <button class="w-100 meta-btn btn unlike-btn">
-                                <ion-icon name="thumbs-down"></ion-icon> Unlike (<?= $like_count ?>)
+                                <ion-icon name="thumbs-down"></ion-icon> <?= $like_count ?>
                             </button>
                         <?php
                         } else {
                         ?>
                             <button class="w-100 meta-btn btn like-btn">
-                                <ion-icon name="thumbs-up"></ion-icon> like (<?= $like_count ?>)
+                                <ion-icon name="thumbs-up"></ion-icon> <?= $like_count ?>
                             </button>
                         <?php
                         }
@@ -87,7 +88,7 @@ function template_post($name, $content, $date, $post_id, $like_count, $hasLiked,
                     </div>
                     <div class="col-6 text-center">
                         <button type="button" class="w-100 meta-btn btn comment-btn">
-                            <ion-icon name="chatbox-ellipses"></ion-icon> Comment (<?= $commentCount ?>)
+                            <ion-icon name="chatbox-ellipses"></ion-icon> <?= $commentCount ?>
                         </button>
                     </div>
                 </div>

@@ -112,9 +112,9 @@ class FriendController
     }
 
     // Show Recommend
-    public function show_recommend()
+    public function show_recommend($results)
     {
-        return show_template_recommend();
+        return show_template_recommend($results);
     }
 }
 
@@ -251,7 +251,10 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
                 break;
 
             case "getRecommend":
-                echo $friend->show_recommend();
+
+                $results = $friend->get_Users($_SESSION["user"]);
+
+                echo $friend->show_recommend($results);
                 break;
         }
     }

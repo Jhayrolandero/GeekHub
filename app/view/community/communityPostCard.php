@@ -84,18 +84,20 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
             <!-- Post Content -->
             <div class="card-body p-0" id="card-body">
                 <div class="row content">
-                    <div class="col-12 pb-2 post-content">
-                        <?= $content ?>
-                    </div>
-                    <?php
-                    if (isset($image)) {
-                    ?>
-                        <div class="col-12 text-center pb-2">
-                            <img src="data:image/jpeg;base64,<?= base64_encode($image) ?>" class="image-container"></img>
+                    <div class="col-xxl-10 col-lg-8 p-1 mx-auto">
+                        <div class="col-12 pb-2 post-content">
+                            <?= $content ?>
                         </div>
-                    <?php
-                    }
-                    ?>
+                        <?php
+                        if (isset($image)) {
+                        ?>
+                            <div class="col-12 text-center pb-2">
+                                <img src="data:image/jpeg;base64,<?= base64_encode($image) ?>" class="image-container"></img>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
                 </div>
                 <input name="post_id" value="<?= $groupPostID ?>" class="community-post-id" hidden></input>
                 <input name="post_id" value="<?= $groupID ?>" class="community-id" hidden></input>
@@ -112,13 +114,13 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                         if ($hasLiked) {
                         ?>
                             <button type="button" class="w-100 meta-btn btn unlike-btn">
-                                <ion-icon name="thumbs-down"></ion-icon> Unlike (<?= $likeCount ?>)
+                                <ion-icon name="thumbs-down"></ion-icon> <?= $likeCount ?>
                             </button>
                         <?php
                         } else {
                         ?>
                             <button type="button" class="w-100 meta-btn btn like-btn">
-                                <ion-icon name="thumbs-up"></ion-icon> like (<?= $likeCount ?>)
+                                <ion-icon name="thumbs-up"></ion-icon> <?= $likeCount ?>
                             </button>
                         <?php
                         }
@@ -126,7 +128,7 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                     </div>
                     <div class="col-6 text-center">
                         <button type="button" class="w-100 meta-btn btn comment-btn">
-                            <ion-icon name="chatbox-ellipses"></ion-icon> Comment (<?= $commentCounts ?>)
+                            <ion-icon name="chatbox-ellipses"></ion-icon> <?= $commentCounts ?>
                         </button>
                     </div>
                 </div>

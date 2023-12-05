@@ -1,7 +1,8 @@
 :root {
   --bg-color: #141414;
-  --bg-color1: #282828;
+  --bg-color1: rgb(22, 24, 24);
   --text-color: #fff;
+  --border: rgba(220, 220, 220, 0.5) solid 1px;
 }
 body {
   background-color: #141414;
@@ -14,7 +15,8 @@ body {
 }
 
 .profile-header {
-  background-color: #282828;
+  background-color: var(--bg-color1);
+  border: var(--border);
   height: fit-content;
   border-radius: 10px;
   padding: 0.5em;
@@ -49,11 +51,13 @@ body {
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
+  position: relative;
 }
 
 #bio-form {
   background-color: var(--bg-color);
   color: var(--text-color);
+  border: var(--border);
 }
 
 .bio-section h4 {
@@ -74,8 +78,8 @@ body {
 
 .profile-stat {
   color: var(--text-color);
-  border-top: rgba(255, 255, 255, 0.5) solid 1px;
-  border-bottom: rgba(255, 255, 255, 0.5) solid 1px;
+  border-top: var(--border);
+  border-bottom: var(--border);
   padding-top: 1em;
   padding-bottom: 1em;
 }
@@ -87,7 +91,7 @@ body {
 
 #open-post-btn {
   background-color: transparent;
-  border: white solid 1px;
+  border: var(--border);
   padding: 0.7em;
   border-radius: 10px;
   color: var(--text-color);
@@ -118,4 +122,16 @@ body {
 #community-nav .nav-item a {
   color: var(--text-color);
   text-decoration: none;
+}
+
+#profile-container .recommend-div {
+  display: none;
+}
+
+#profile-container .right-bar {
+  padding-bottom: 3em;
+  position: sticky;
+  top: 4rem; /* Adjust this value based on your design */
+  height: 100vh; /* Adjust this value based on your design */
+  overflow-y: scroll; /* Allow the content to scroll if it exceeds the height */
 }

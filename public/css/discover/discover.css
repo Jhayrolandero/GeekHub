@@ -2,6 +2,7 @@
   --black-secondary: #282828;
   --black-primary: #141414;
   --text-clr: #f5fefd;
+  --border: rgba(220, 220, 220, 0.5) solid 1px;
 }
 
 body {
@@ -12,9 +13,9 @@ body {
 }
 
 .community-post-card {
-  background-color: var(--black-secondary);
-  margin-top: 1rem;
+  background-color: transparent;
   min-width: min-content;
+  border: var(--border);
 }
 
 #discover-post {
@@ -33,6 +34,7 @@ body {
 
 .card {
   border: none !important;
+  background-color: transparent;
 }
 
 #card-footer button {

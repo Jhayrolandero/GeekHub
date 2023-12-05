@@ -271,15 +271,17 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $result = $post->get_post($profileID);
         }
 
-        // Algo for rendering follow div
+        // Algo for rendering Recommended div
         $min = 0;
         $max = count($result);
 
-        $randomNumber = mt_rand($min * 50, $max * 50) / 100;
+        // Between percent of post you want the recommend to appear
+        $percentile = 75;
 
+        $randomNumber = mt_rand($min * $percentile, $max * $percentile) / 100;
+        // $recommendDivNumber = (int) $randomNumber;
         $recommendDivNumber = 0;
 
-        echo $recommendDivNumber;
         $count = 0;
 
         foreach ($result as $items) {

@@ -18,6 +18,7 @@ if (empty($_SESSION["user"])) {
     <!-- <script src="public/js/home/home.js"></script>
     <script src="public/js/post/post.js"></script> -->
     <!-- <script src="public/js/post/friend.js"></script> -->
+
     <script src="index.js"></script>
     <link rel="stylesheet" href="public/css/home/home.css">
     <link rel="stylesheet" href="public/css/postCard/postCard.css">

@@ -1,7 +1,8 @@
 <?php
 
-function show_template_recommend()
+function show_template_recommend($results)
 {
+
 ?>
 
     <div class="row">
@@ -10,62 +11,77 @@ function show_template_recommend()
                 <h4>Suggested for you</h4>
             </div>
             <div class="row">
-                <div class="col-6">
-                    <div class="row">
-                        <p>Buddies</p>
-                    </div>
+                <div class="col-12">
 
                     <!-- Render the Buddies Here -->
                     <div class="row">
 
                         <!-- Recommend Card -->
-                        <div class="col-12 bg-warning">
+                        <div class="col-12 recommend-card">
                             <div class="row">
-                                <div class="col-3">
-                                    PNG
-                                </div>
-                                <div class="col-9">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            name
-                                        </div>
-                                        <div class="col-6">
-                                            Check
-                                        </div>
+                                <!-- Carousel -->
+                                <div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+                                    <!-- Indicators/dots -->
+                                    <div class="carousel-indicators">
+                                        <?php
+                                        $numberOfButtons = count($results);
+                                        for ($i = 0; $i <= $numberOfButtons; $i++) {
+                                            $isActive = ($i == 0) ? 'active' : ''; // Add 'active' class to the first button
+                                            echo '<button type="button" data-bs-target="#demo" data-bs-slide-to="' . $i . '" class="' . $isActive . '"></button>';
+                                        }
+                                        ?>
                                     </div>
+
+                                    <!-- The slideshow/carousel -->
+                                    <div class="carousel-inner text-center recommend-content">
+                                        <?php
+                                        // Set the first div to active
+                                        $active = true;
+
+                                        foreach ($results as $result) {
+
+                                            if ($active) {
+                                        ?>
+                                                <div class="carousel-item active ">
+                                                    <a href="#profile#<?= $result["user_id"] ?>">
+                                                        <img src="public\images\zed.jpg" alt="Los Angeles">
+                                                        <div class="recommend-info text-start">
+                                                            <h4><?= $result["username"] ?></h4>
+                                                            <p><?= $result["user_bio"] ?></p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            <?php
+                                                $active = false;
+                                            }
+                                            ?>
+
+                                            <div class="carousel-item  ">
+                                                <a href="#profile#<?= $result["user_id"] ?>">
+                                                    <img src="public\images\zed.jpg" alt="Los Angeles">
+                                                    <div class="recommend-info text-start">
+                                                        <h4><?= $result["username"] ?></h4>
+                                                        <p><? isset($result["user_bio"]) ?  $result["user_bio"] : "Nothing to see." ?></p>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
+                                    </div>
+
+                                    <!-- Left and right controls/icons -->
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon"></span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon"></span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
-                    </div>
-                </div>
-
-                <div class="col-6">
-
-                    <div class="row">
-                        <p>Communities</p>
-                    </div>
-
-                    <!-- Render the Communities Here -->
-                    <div class="row">
-                        <!-- Recommend Card -->
-                        <div class="col-12 bg-primary">
-                            <div class="row">
-                                <div class="col-3">
-                                    PNG
-                                </div>
-                                <div class="col-9">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            name
-                                        </div>
-                                        <div class="col-6">
-                                            Check
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
