@@ -277,7 +277,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
         $randomNumber = mt_rand($min * 50, $max * 50) / 100;
 
-        $recommendDivNumber = (int) $randomNumber;
+        $recommendDivNumber = 0;
 
         echo $recommendDivNumber;
         $count = 0;

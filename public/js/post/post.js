@@ -2,36 +2,66 @@ $(document).ready(function () {
   $(".image-modal").hide();
 
   // Render the newsfeed
-  $.get(
-    "app/controller/PostController.php?action=getPost",
-    function (data, status) {
-      if (status === "success") {
-        try {
-          $(".post-container").html(data).fadeIn();
-          render_recommend();
-        } catch (error) {
-          alert(error);
-        }
-      }
-    }
-  );
 
-  function render_recommend() {
+  function render_newsfeed() {
     $.get(
-      "app/controller/FriendController.php?action=getRecommend",
-      function (data, status) {
+      "app/controller/PostController.php?action=getPost",
+      async (data, status) => {
         if (status === "success") {
           try {
-            $(".recommend-div").html(data);
+            $(".post-container").html(data).fadeIn();
+
+            alert("Hello");
+            const recommendations = await render_recommend();
+            $(".recommend-div").empty().html(recommendations);
           } catch (error) {
             alert(error);
           }
+        } else {
+          alert(`Error: ${status}`);
         }
       }
     );
   }
 
-  // Function for validating Picture
+  // function render_recommend() {
+  //   $.get(
+  //     "app/controller/FriendController.php?action=getRecommend",
+  //     function (data, status) {
+  //       if (status === "success") {
+  //         try {
+  //           // Return the contents
+  //           return data;
+  //           // $(".recommend-div").html(data);
+  //         } catch (error) {
+  //           alert("Error in rendering recommendations: " + error);
+  //         }
+  //       }
+  //     }
+  //     );
+  //   }
+
+  function render_recommend() {
+    return new Promise((resolve, reject) => {
+      $.get(
+        "app/controller/FriendController.php?action=getRecommend",
+        (data, status) => {
+          if (status === "success") {
+            try {
+              resolve(data);
+            } catch (error) {
+              reject("Error in rendering recommendations: " + error);
+            }
+          } else {
+            reject(`Error: ${status}`);
+          }
+        }
+      );
+    });
+  }
+
+  render_newsfeed();
+
   function validateIMGType(fileID) {
     // Get the file input element
     var fileInput = document.getElementById(fileID);
