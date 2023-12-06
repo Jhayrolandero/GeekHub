@@ -165,7 +165,6 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
-          alert(data);
           render_community(communityID);
         }
       }
@@ -187,7 +186,8 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
-          alert(data);
+          render_community(communityID);
+          $(".update-community-modal").slideUp();
         } else {
           alert("Error");
         }
@@ -243,8 +243,6 @@ $(document).ready(function () {
       processData: false,
       success: function (data, status) {
         if (status === "success") {
-          alert(data);
-
           render_community(communityID);
           $(".update-community-modal").slideUp();
         } else {
@@ -328,8 +326,6 @@ $(document).ready(function () {
           alert("No Empty Homie!");
         }
 
-        alert(data);
-
         renderCommunityTimeline(communityID);
         render_communtiy_stat(communityID);
         render_top_members(communityID);
@@ -361,7 +357,6 @@ $(document).ready(function () {
         },
         function (data, status) {
           if (status === "success") {
-            alert(data);
             var communityID = get_hash_community_id();
 
             renderCommunityTimeline(communityID);

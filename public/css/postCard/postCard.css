@@ -33,6 +33,12 @@ body {
   /* background-color: #282828; */
 }
 
+#card-footer .like-btn,
+#card-footer .unlike-btn,
+#card-footer .comment-btn {
+  border-radius: 0;
+}
+
 #card-footer .like-btn:hover,
 #card-footer .unlike-btn:hover,
 #card-footer .comment-btn:hover {

@@ -117,7 +117,6 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
-          alert(data);
         } else {
           alert("Error");
         }
@@ -478,9 +477,8 @@ $(document).ready(function () {
       processData: false,
       success: function (data, status) {
         if (status === "success") {
-          alert(data);
-
           render_user_profile(userID);
+          $(".update-profile-modal").slideUp();
         } else {
           alert("Error occurred! Try again later.");
         }

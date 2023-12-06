@@ -114,13 +114,13 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                         if ($hasLiked) {
                         ?>
                             <button type="button" class="w-100 meta-btn btn unlike-btn">
-                                <ion-icon name="thumbs-down"></ion-icon> <?= $likeCount ?>
+                                <ion-icon name="thumbs-down-outline"></ion-icon> <?= $likeCount ?>
                             </button>
                         <?php
                         } else {
                         ?>
                             <button type="button" class="w-100 meta-btn btn like-btn">
-                                <ion-icon name="thumbs-up"></ion-icon> <?= $likeCount ?>
+                                <ion-icon name="thumbs-up-outline"></ion-icon> <?= $likeCount ?>
                             </button>
                         <?php
                         }
@@ -128,7 +128,7 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                     </div>
                     <div class="col-6 text-center">
                         <button type="button" class="w-100 meta-btn btn comment-btn">
-                            <ion-icon name="chatbox-ellipses"></ion-icon> <?= $commentCounts ?>
+                            <ion-icon name="chatbox-ellipses-outline"></ion-icon> <?= $commentCounts ?>
                         </button>
                     </div>
                 </div>

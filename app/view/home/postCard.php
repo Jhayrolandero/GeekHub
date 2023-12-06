@@ -74,13 +74,13 @@ function template_post($name, $content, $date, $post_id, $like_count, $hasLiked,
                         if ($hasLiked) {
                         ?>
                             <button class="w-100 meta-btn btn unlike-btn">
-                                <ion-icon name="thumbs-down"></ion-icon> <?= $like_count ?>
+                                <ion-icon name="thumbs-down-outline"></ion-icon> <?= $like_count ?>
                             </button>
                         <?php
                         } else {
                         ?>
                             <button class="w-100 meta-btn btn like-btn">
-                                <ion-icon name="thumbs-up"></ion-icon> <?= $like_count ?>
+                                <ion-icon name="thumbs-up-outline"></ion-icon> <?= $like_count ?>
                             </button>
                         <?php
                         }
@@ -88,7 +88,7 @@ function template_post($name, $content, $date, $post_id, $like_count, $hasLiked,
                     </div>
                     <div class="col-6 text-center">
                         <button type="button" class="w-100 meta-btn btn comment-btn">
-                            <ion-icon name="chatbox-ellipses"></ion-icon> <?= $commentCount ?>
+                            <ion-icon name="chatbox-ellipses-outline"></ion-icon> <?= $commentCount ?>
                         </button>
                     </div>
                 </div>

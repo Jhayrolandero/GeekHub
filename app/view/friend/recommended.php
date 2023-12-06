@@ -45,8 +45,20 @@ function show_template_recommend($results)
                                         ?>
                                                 <div class="carousel-item active ">
                                                     <a href="#profile#<?= $result["user_id"] ?>">
-                                                        <img src="public\images\zed.jpg" alt="Los Angeles">
-                                                        <div class="recommend-info text-start">
+                                                        <?php
+                                                        if ($result["user_profile"]) {
+                                                            $base64Image = base64_encode($result["user_profile"]);
+                                                            $imageSrc = "data:image/jpeg;base64," . $base64Image;
+                                                        ?>
+                                                            <img src="<?= $imageSrc ?>" alt="Profile Image">
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <img src="public\images\you.png" alt="Profile Image">
+
+                                                        <?php
+                                                        }
+                                                        ?> <div class="recommend-info text-start">
                                                             <h4><?= $result["username"] ?></h4>
                                                             <p><?= $result["user_bio"] ?></p>
                                                         </div>
@@ -59,7 +71,23 @@ function show_template_recommend($results)
 
                                             <div class="carousel-item  ">
                                                 <a href="#profile#<?= $result["user_id"] ?>">
-                                                    <img src="public\images\zed.jpg" alt="Los Angeles">
+                                                    <?php
+                                                    if ($result["user_profile"]) {
+                                                        $base64Image = base64_encode($result["user_profile"]);
+                                                        $imageSrc = "data:image/jpeg;base64," . $base64Image;
+                                                    ?>
+                                                        <img src="<?= $imageSrc ?>" alt="Profile Image">
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <img src="public\images\you.png" alt="Profile Image">
+
+                                                    <?php
+                                                    }
+                                                    ?> <div class="recommend-info text-start">
+                                                        <h4><?= $result["username"] ?></h4>
+                                                        <p><?= $result["user_bio"] ?></p>
+                                                    </div>
                                                     <div class="recommend-info text-start">
                                                         <h4><?= $result["username"] ?></h4>
                                                         <p><? isset($result["user_bio"]) ?  $result["user_bio"] : "Nothing to see." ?></p>

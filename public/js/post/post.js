@@ -21,22 +21,21 @@ $(document).ready(function () {
     );
   }
 
-
   function render_recommend() {
-      $.get(
-        "app/controller/FriendController.php?action=getRecommend",
-        (data, status) => {
-          if (status === "success") {
-            try {
-              $(".recommend-div").html(data);
-            } catch (error) {
-              alert("Error in rendering recommendations: " + error);
-            }
-          } else {
-            alert(`Error: ${status}`);
+    $.get(
+      "app/controller/FriendController.php?action=getRecommend",
+      (data, status) => {
+        if (status === "success") {
+          try {
+            $(".recommend-div").html(data);
+          } catch (error) {
+            alert("Error in rendering recommendations: " + error);
           }
+        } else {
+          alert(`Error: ${status}`);
         }
-      );
+      }
+    );
   }
 
   render_newsfeed();
@@ -99,14 +98,7 @@ $(document).ready(function () {
           if (data == 0) {
             alert("No Empty Homie!");
           }
-
-          alert(data);
-          $.get(
-            "app/controller/PostController.php?action=getPost",
-            function (data, status) {
-              $(".post-container").html(data);
-            }
-          );
+          render_newsfeed();
         } else {
           alert("Error occurred! Try again later.");
         }
@@ -158,12 +150,7 @@ $(document).ready(function () {
             alert("No Empty Homie!");
           }
 
-          $.get(
-            "app/controller/PostController.php?action=getPost",
-            function (data, status) {
-              $(".post-container").html(data);
-            }
-          );
+          render_newsfeed();
         } else {
           alert("Error occurred! Try again later.");
         }
@@ -189,12 +176,7 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
-          $.get(
-            "app/controller/PostController.php?action=getPost",
-            function (data, status) {
-              $(".post-container").html(data);
-            }
-          );
+          render_newsfeed();
         } else {
           alert("Error");
         }
@@ -206,8 +188,6 @@ $(document).ready(function () {
   $("#close-update-post").click(function () {
     $(".update-post-modal").slideUp();
   });
-
-
 
   // Like system
 
@@ -228,12 +208,7 @@ $(document).ready(function () {
       function (data, status) {
         if (status === "success") {
           // Dynamically update the content
-          $.get(
-            "app/controller/PostController.php?action=getPost",
-            function (data, status) {
-              $(".post-container").html(data);
-            }
-          );
+          render_newsfeed();
         } else {
           alert("Error occurred! Try later again later");
         }
@@ -275,12 +250,7 @@ $(document).ready(function () {
       `app/controller/LikeController.php?action=unlike&post_id=${post_id}&user_id=${user_id}`,
       function (data, status) {
         if (status === "success") {
-          $.get(
-            "app/controller/PostController.php?action=getPost",
-            function (data, status) {
-              $(".post-container").html(data);
-            }
-          );
+          render_newsfeed();
         } else {
           alert("Error occurred! Try later again later");
         }

@@ -221,3 +221,12 @@
   height: 100vh; /* Adjust this value based on your design */
   overflow-y: scroll; /* Allow the content to scroll if it exceeds the height */
 }
+
+#community-container .right-bar::-webkit-scrollbar {
+  width: 5px; /* Set the width of the scrollbar */
+}
+
+/* Define the scrollbar track */
+#community-container .right-bar::-webkit-scrollbar-track {
+  display: none;
+}
