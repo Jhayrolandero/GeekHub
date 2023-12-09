@@ -5,7 +5,7 @@ class Friend extends Database
 {
 
     // Get the user
-    public function get_Users($userID)
+    public function get_Users($userID, $limit = null)
     {
         try {
             $sql = "SELECT users.*
@@ -20,9 +20,14 @@ class Friend extends Database
                         WHERE ( friendships.friend_id = :user_id ) AND ( friendships.status = 'accepted' OR friendships.status = 'pending' ) ) 
                         AND users.user_id != :user_id";
 
+            if ($limit != null) {
+                $sql .= " LIMIT :limit";
+            }
+
 
             $stmt = $this->connect()->prepare($sql);
             $stmt->bindParam(':user_id', $userID, PDO::PARAM_INT);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->execute();
 
             return $stmt->fetchAll();

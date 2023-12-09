@@ -47,10 +47,14 @@
         <div class="dropdown dropstart text-end">
           <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" id="nav-drop-btn">
             <ion-icon name="apps"></ion-icon> </button>
-          <div class="dropdown-menu" id="notif">
+          <div class="dropdown-menu" id="menu">
             <ul>
-              <li><a href="#profile#<?= $_SESSION["user"] ?>">Profile</a></li>
-              <li><a href="#logout">Logout</a></li>
+              <a href="#profile#<?= $_SESSION["user"] ?>">
+                <li>Profile</li>
+              </a>
+              <a href="#logout">
+                <li>Logout</li>
+              </a>
             </ul>
           </div>
         </div>

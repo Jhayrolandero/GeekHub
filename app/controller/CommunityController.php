@@ -284,7 +284,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST["action"]) && $_POST["action"] === "createCommunity") {
         try {
 
+            if (empty($_POST["groupName"])) {
+                die("empty");
+            }
             $groupName = $_POST["groupName"];
+
             $groupDesc = $_POST["groupDesc"];
 
             // $groupProfile = $_POST['groupProfile'];

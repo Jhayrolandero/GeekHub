@@ -1,5 +1,6 @@
 :root {
   --dark-color: rgb(22, 24, 24);
+  --dark-text-color: rgb(22, 24, 24);
   --text-color: #fff;
   --border: rgba(220, 220, 220, 0.5) solid 1px;
 }
@@ -220,5 +221,31 @@
 }
 
 .menu-btn button {
+  color: var(--text-color);
+}
+
+#menu {
+  background-color: var(--dark-color);
+}
+
+#menu ul {
+  padding: 0;
+}
+
+#menu ul li {
+  list-style: none;
+  padding: 0.4em 1.5em;
+  transition: all 0.3s ease;
+  margin: 0.3rem;
+}
+
+#menu ul li:hover {
+  background-color: #ddd;
+  color: var(--dark-text-color);
+}
+
+#menu ul a {
+  /* pointer-events: none; */
+  text-decoration: none;
   color: var(--text-color);
 }

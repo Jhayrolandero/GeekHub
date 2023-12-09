@@ -34,9 +34,9 @@ class FriendController
     }
 
     // Get all users' info
-    public function get_Users($userID)
+    public function get_Users($userID, $limit = null)
     {
-        return $this->model->get_Users($userID);
+        return $this->model->get_Users($userID, $limit);
     }
 
     // Add a friend request
@@ -252,7 +252,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
             case "getRecommend":
 
-                $results = $friend->get_Users($_SESSION["user"]);
+                $results = $friend->get_Users($_SESSION["user"], 5);
 
                 echo $friend->show_recommend($results);
                 break;

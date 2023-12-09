@@ -8,7 +8,7 @@ function show_template_recommend($results)
     <div class="row">
         <div class="col-12">
             <div class="row">
-                <h4>Suggested for you</h4>
+                <h4 class="p-4">Suggested for you</h4>
             </div>
             <div class="row">
                 <div class="col-12">
@@ -59,7 +59,7 @@ function show_template_recommend($results)
                                                         <?php
                                                         }
                                                         ?> <div class="recommend-info text-start">
-                                                            <h4><?= $result["username"] ?></h4>
+                                                            <h4 class="p-4"><?= $result["username"] ?></h4>
                                                             <p><?= $result["user_bio"] ?></p>
                                                         </div>
                                                     </a>
@@ -84,12 +84,9 @@ function show_template_recommend($results)
 
                                                     <?php
                                                     }
-                                                    ?> <div class="recommend-info text-start">
-                                                        <h4><?= $result["username"] ?></h4>
-                                                        <p><?= $result["user_bio"] ?></p>
-                                                    </div>
+                                                    ?>
                                                     <div class="recommend-info text-start">
-                                                        <h4><?= $result["username"] ?></h4>
+                                                        <h4 class="p-4"><?= $result["username"] ?></h4>
                                                         <p><? isset($result["user_bio"]) ?  $result["user_bio"] : "Nothing to see." ?></p>
                                                     </div>
                                                 </a>

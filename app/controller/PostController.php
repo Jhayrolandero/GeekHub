@@ -280,7 +280,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
         $randomNumber = mt_rand($min * $percentile, $max * $percentile) / 100;
         // $recommendDivNumber = (int) $randomNumber;
-        $recommendDivNumber = 0;
+        $recommendDivNumber = (int) $randomNumber;
 
         $count = 0;
 
