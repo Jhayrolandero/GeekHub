@@ -1,12 +1,12 @@
 :root {
   --text-color: #f5fefd;
-  --black-color1: #141414;
+  --black-color1: #090909;
   --black-color2: #282828;
   --border: rgba(220, 220, 220, 0.5) solid 1px;
 }
 
 body {
-  background-color: #141414;
+  background-color: var(--black-color1);
   margin: 0;
   padding: 0;
   box-sizing: border-box;

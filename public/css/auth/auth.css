@@ -1,3 +1,12 @@
+:root {
+  --dark-bg: #090909;
+  --black-clr: rgb(22, 22, 22);
+  --text-clr: #ffffff;
+  --border: rgba(220, 220, 220, 0.5) solid 1px;
+  --blue-color: #0ba4eb;
+  --blue-border: var(--blue-color) solid 1px;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -8,7 +17,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   color: white;
-  background-color: #141414;
+  background-color: var(--dark-bg);
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -39,30 +48,35 @@ svg .wave:nth-child(2) {
 }
 
 svg .wave:nth-child(3) {
-  animation-delay: 3s
+  animation-delay: 3s;
 }
 
 svg .wave:nth-child(4) {
   animation-play-state: paused;
 }
 
-.login-container {
+.login-container,
+.register-container {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
   position: relative;
+  /* background-color: var(--black-clr); */
+  /* border: white solid 1px; */
 }
 
-.login-form-container {
+.login-form-container,
+.register-form-container {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.login-form-container .forms-field {
-  position: absolute;
+.login-form-container .forms-field,
+.register-form-container .forms-field {
+  /* position: absolute; */
   width: 20em;
   text-align: center;
   z-index: 2;
@@ -78,7 +92,7 @@ svg .wave:nth-child(4) {
   /* Ensure the SVG is below the input */
 }
 
-@keyframes pathAnim {
+/* @keyframes pathAnim {
   0% {
       d: path("M0 368L16.7 363.3C33.3 358.7 66.7 349.3 100 352.2C133.3 355 166.7 370 200 377C233.3 384 266.7 383 300 377.8C333.3 372.7 366.7 363.3 400 359.5C433.3 355.7 466.7 357.3 500 361.3C533.3 365.3 566.7 371.7 600 375.8C633.3 380 666.7 382 700 383.8C733.3 385.7 766.7 387.3 800 381.5C833.3 375.7 866.7 362.3 883.3 355.7L900 349L900 451L883.3 451C866.7 451 833.3 451 800 451C766.7 451 733.3 451 700 451C666.7 451 633.3 451 600 451C566.7 451 533.3 451 500 451C466.7 451 433.3 451 400 451C366.7 451 333.3 451 300 451C266.7 451 233.3 451 200 451C166.7 451 133.3 451 100 451C66.7 451 33.3 451 16.7 451L0 451Z");
   }
@@ -103,13 +117,13 @@ svg .wave:nth-child(4) {
       d: path("M0 368L16.7 363.3C33.3 358.7 66.7 349.3 100 352.2C133.3 355 166.7 370 200 377C233.3 384 266.7 383 300 377.8C333.3 372.7 366.7 363.3 400 359.5C433.3 355.7 466.7 357.3 500 361.3C533.3 365.3 566.7 371.7 600 375.8C633.3 380 666.7 382 700 383.8C733.3 385.7 766.7 387.3 800 381.5C833.3 375.7 866.7 362.3 883.3 355.7L900 349L900 451L883.3 451C866.7 451 833.3 451 800 451C766.7 451 733.3 451 700 451C666.7 451 633.3 451 600 451C566.7 451 533.3 451 500 451C466.7 451 433.3 451 400 451C366.7 451 333.3 451 300 451C266.7 451 233.3 451 200 451C166.7 451 133.3 451 100 451C66.7 451 33.3 451 16.7 451L0 451Z");
   }
 
-}
+} */
 
-svg .blob {
+/* svg .blob {
   animation: blobAnim 3s linear infinite alternate;
-}
+} */
 
-@keyframes blobAnim {
+/* @keyframes blobAnim {
   0% {
       d: path("M49.4,-52.9C57.5,-41.2,53.3,-20.6,52.8,-0.6C52.2,19.5,55.3,38.9,47.1,52.3C38.9,65.7,19.5,73,-0.2,73.2C-19.8,73.4,-39.7,66.5,-52.7,53.1C-65.8,39.7,-72,19.8,-72.5,-0.5C-73,-20.8,-67.7,-41.6,-54.7,-53.3C-41.6,-65.1,-20.8,-67.7,-0.1,-67.6C20.6,-67.5,41.2,-64.6,49.4,-52.9Z");
   }
@@ -129,15 +143,18 @@ svg .blob {
   100% {
       d: path("M49.4,-52.9C57.5,-41.2,53.3,-20.6,52.8,-0.6C52.2,19.5,55.3,38.9,47.1,52.3C38.9,65.7,19.5,73,-0.2,73.2C-19.8,73.4,-39.7,66.5,-52.7,53.1C-65.8,39.7,-72,19.8,-72.5,-0.5C-73,-20.8,-67.7,-41.6,-54.7,-53.3C-41.6,-65.1,-20.8,-67.7,-0.1,-67.6C20.6,-67.5,41.2,-64.6,49.4,-52.9Z");
   }
-}
+} */
 svg .blob:nth-child(2) {
   animation-delay: 1s;
 }
 
 .title-container {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
+/* 
 .title-card {
   position: absolute;
   top: 20%;
@@ -146,18 +163,17 @@ svg .blob:nth-child(2) {
   flex-direction: column;
   align-items: flex-start;
   padding: 2em;
-}
+} */
 
 .title-card h1 {
-  font-size: 4.5rem;
+  font-size: 8em;
   font-weight: bolder;
-  line-height: .5em;
+  line-height: 0.5em;
 }
 
 .title-card p {
-  font-size: 1.8rem;
+  font-size: 1.8em;
 }
-
 
 .navbar {
   position: fixed;
@@ -167,15 +183,65 @@ svg .blob:nth-child(2) {
   z-index: 3;
 }
 
-.nav-container{
+.nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: .5em .8em;
+  padding: 0.5em 0.8em;
 }
 
 #register-section {
-display: flex;
-flex-direction: row-reverse;
+  /* padding-top: 4rem; */
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.auth-form {
+  background-color: var(--dark-bg);
+  color: var(--text-clr);
+  padding: 0.5em 1em;
+  border: var(--border);
+  width: 100%;
+  border-radius: 20px;
+}
+
+.login-container .login-btn {
+  font-weight: bold;
+
+  font-size: 1em;
+  width: 100%;
+  background-color: var(--text-clr);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.login-container .login-btn:hover {
+  background-color: var(--dark-bg);
+  color: var(--text-clr);
+  border: var(--border);
+}
+
+.login-container .register-btn {
+  font-weight: bold;
+  font-size: 1em;
+  width: 100%;
+  color: var(--blue-color);
+  background-color: var(--dark-bg);
+  border: var(--blue-border);
+  border-radius: 20px;
+  transition: all ease 0.3s;
+}
+
+.login-container .register-btn:hover {
+  color: var(--dark-bg);
+  background-color: var(--blue-color);
+}
+
+.terms {
+  font-size: 0.69em;
+}
+
+.terms span {
+  color: var(--blue-color);
 }
