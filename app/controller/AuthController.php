@@ -1,12 +1,21 @@
 <?php
 session_start();
 include "../model/AuthModel.php";
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require '../../vendor/autoload.php';
 class Auth
 {
     private $model;
+    private static $mail;
+    private static $OTP;
     public function __construct()
     {
         $this->model = new AuthModel();
+        self::$mail  = new PHPMailer(true);
     }
     public function show_auth_page()
     {
@@ -50,6 +59,48 @@ class Auth
         $user_id = password_verify($password, $user_password) ? $user_id : false;
         return $user_id;
     }
+
+    // Sending OTP for emial verification
+    public static function sendOTP($email = null)
+    {
+
+        // Send random 4 digit number
+        $OTP = rand(1000, 9999);
+
+        try {
+            // Server settings
+            self::$mail->isSMTP();
+            self::$mail->Host       = 'smtp.gmail.com';
+            self::$mail->SMTPAuth   = true;
+            self::$mail->Username   = 'xjaylandero@gmail.com';
+            self::$mail->Password   = 'gabrblnyalrhmimv';
+            self::$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            self::$mail->Port       = 465;
+
+            //Recipients
+            self::$mail->setFrom('xjaylandero@gmail.com', 'Mailer');
+            self::$mail->addAddress("xjaylandero@gmail.com", 'Lul');
+
+
+            //Content
+            self::$mail->isHTML(true);
+            self::$mail->Subject = 'Verify your account GeekHub';
+            self::$mail->Body    = "Your OTP is <b>$OTP</b>, make sure to verify your account";
+
+            self::$mail->send();
+
+            return $OTP;
+        } catch (Exception $e) {
+            $error = self::$mail->ErrorInfo;
+            echo "Message could not be sent. Mailer Error: {$error}";
+        }
+    }
+
+    public static function validateOTP($userOTP)
+    {
+
+        return $userOTP === self::$OTP;
+    }
 }
 
 $auth = new Auth();
@@ -64,6 +115,19 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["action"]) && $_GET["act
 if (empty($_SESSION["user"]) && $_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["action"]) && $_GET["action"] === "login") {
     $auth->show_auth_page();
     die();
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["request"]) && $_POST["request"] === "otp") {
+
+    if ($auth->check_email($_POST["email"])) {
+        echo "Email already Exist!";
+        die();
+    }
+
+    $email = $_POST["email"];
+    $otp = $auth::sendOTP($email);
+
+    echo $otp;
 }
 
 // Adding user
@@ -83,7 +147,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["request"]) && $_POST[
     $email = $_POST["email"];
     $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-    $auth->add_user($username, $email, $password);
+    // $auth->add_user($username, $email, $password);
+    $auth::sendOTP($email);
 }
 
 // Loggin in user
