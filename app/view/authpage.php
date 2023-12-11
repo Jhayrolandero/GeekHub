@@ -16,13 +16,13 @@
 
         <!-- Login -->
         <section class="row" id="login-section">
-            <div class="col-sm-12 col-xxl-6 title-container">
+            <div class="col-sm-12 col-lg-6 col-xxl-6 title-container">
                 <div class="title-card">
                     <p class="">Welcome to the world of</p>
                     <h1 id="geekhub-title" class="">GeekHub</h1>
                 </div>
             </div>
-            <div class="col-sm-12 col-xxl-6 login-container">
+            <div class="col-sm-12 col-lg-6 col-xxl-6 login-container">
                 <section class="text-center login-form-container">
                     <div class="row forms-field">
                         <form action="">
@@ -80,8 +80,8 @@
                             <div class="col-12 row sign-up-form mx-auto" id="otp">
                                 <label for="" class="form-label">OTP</label>
                                 <div class="col-8 p-0">
-                                    <input type="text" id="given-otp" hidden>
-                                    <input type="password" class="register-form" autocomplete="off" placeholder="OTP" id="r-otp">
+                                    <input type="text" id="given-otp">
+                                    <input type="text" class="register-form" autocomplete="off" placeholder="OTP" id="r-otp">
                                 </div>
                                 <div class="col-4 p-0">
                                     <button class="otp-btn" class="btn" type="button">Send me OTP</button>

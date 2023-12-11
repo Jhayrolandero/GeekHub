@@ -55,6 +55,8 @@ $(document).ready(function () {
         username: username,
         email: email,
         password: password,
+        otp: OTP,
+        givenOTP: givenOTP,
       },
       function (data, status) {
         if (status === "success") {

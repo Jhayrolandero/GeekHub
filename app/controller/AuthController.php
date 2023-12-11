@@ -63,7 +63,6 @@ class Auth
     // Sending OTP for emial verification
     public static function sendOTP($email = null)
     {
-
         // Send random 4 digit number
         $OTP = rand(1000, 9999);
 
@@ -117,6 +116,7 @@ if (empty($_SESSION["user"]) && $_SERVER["REQUEST_METHOD"] === "GET" && isset($_
     die();
 }
 
+// Give OTP
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["request"]) && $_POST["request"] === "otp") {
 
     if ($auth->check_email($_POST["email"])) {
@@ -138,17 +138,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["request"]) && $_POST[
         die();
     }
 
+    // CHeck if email exixts
     if ($auth->check_email($_POST["email"])) {
         echo "Email already Exist!";
         die();
     }
+
+    $OTP = (int) $_POST["otp"];
+    $givenOTP = (int) $_POST["givenOTP"];
+
+    if ($OTP != $givenOTP) {
+        echo "OTP: " . $OTP . "Given: " . $givenOTP;
+        die("Given OTP doesn't match");
+    }
+
 
     $username = $_POST["username"];
     $email = $_POST["email"];
     $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
     // $auth->add_user($username, $email, $password);
-    $auth::sendOTP($email);
+    // $auth::sendOTP($email);
 }
 
 // Loggin in user
