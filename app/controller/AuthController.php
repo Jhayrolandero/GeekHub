@@ -61,28 +61,28 @@ class Auth
     }
 
     // Sending OTP for emial verification
-    public static function sendOTP($email = null)
+    public static function sendOTP($email)
     {
         // Send random 4 digit number
         $OTP = rand(1000, 9999);
 
         try {
+
             // Server settings
-            self::$mail->isSMTP();
-            self::$mail->Host       = 'smtp.gmail.com';
-            self::$mail->SMTPAuth   = true;
-            self::$mail->Username   = 'xjaylandero@gmail.com';
-            self::$mail->Password   = 'gabrblnyalrhmimv';
+            self::$mail->isSMTP();                                            // Send using SMTP
+            self::$mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+            self::$mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            self::$mail->Username   = 'xjaylandero@gmail.com';                     // SMTP username
+            self::$mail->Password   = 'gabrblnyalrhmimv';                               // SMTP password
             self::$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             self::$mail->Port       = 465;
 
-            //Recipients
+            // Recipients
             self::$mail->setFrom('xjaylandero@gmail.com', 'Mailer');
-            self::$mail->addAddress("xjaylandero@gmail.com", 'Lul');
+            self::$mail->addAddress($email, 'Joe User');     // Add a recipient
 
-
-            //Content
-            self::$mail->isHTML(true);
+            // Content
+            self::$mail->isHTML(true);                                  // Set email format to HTML
             self::$mail->Subject = 'Verify your account GeekHub';
             self::$mail->Body    = "Your OTP is <b>$OTP</b>, make sure to verify your account";
 
@@ -90,14 +90,12 @@ class Auth
 
             return $OTP;
         } catch (Exception $e) {
-            $error = self::$mail->ErrorInfo;
-            echo "Message could not be sent. Mailer Error: {$error}";
+            echo "Message could not be sent. Mailer Error: {$e}";
         }
     }
 
     public static function validateOTP($userOTP)
     {
-
         return $userOTP === self::$OTP;
     }
 }
@@ -148,7 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["request"]) && $_POST[
     $givenOTP = (int) $_POST["givenOTP"];
 
     if ($OTP != $givenOTP) {
-        echo "OTP: " . $OTP . "Given: " . $givenOTP;
+        // echo "OTP: " . $OTP . "Given: " . $givenOTP;
         die("Given OTP doesn't match");
     }
 
@@ -157,7 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["request"]) && $_POST[
     $email = $_POST["email"];
     $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-    // $auth->add_user($username, $email, $password);
+    $auth->add_user($username, $email, $password);
     // $auth::sendOTP($email);
 }
 

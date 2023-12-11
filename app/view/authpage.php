@@ -69,7 +69,7 @@
                             </div>
                             <div class="username-error error"></div>
                             <div class="col-12 sign-up-form">
-                                <input type="email" class="register-form" autocomplete="off" placeholder="Email" id="r-email">
+                                <input type="email" class="register-form email-form" autocomplete="off" placeholder="Email" id="r-email">
                             </div>
                             <div class="email-error error"></div>
                             <div class="col-12 sign-up-form">
@@ -77,17 +77,22 @@
                             </div>
                             <div class="password-error error"></div>
 
-                            <div class="col-12 row sign-up-form mx-auto" id="otp">
+                            <div class="col-12 row sign-up-form mx-auto disable" id="otp">
                                 <label for="" class="form-label">OTP</label>
                                 <div class="col-8 p-0">
-                                    <input type="text" id="given-otp">
+                                    <input type="text" id="given-otp" value=null hidden>
                                     <input type="text" class="register-form" autocomplete="off" placeholder="OTP" id="r-otp">
                                 </div>
                                 <div class="col-4 p-0">
                                     <button class="otp-btn" class="btn" type="button">Send me OTP</button>
+                                    <div class="loading text-center" style="display: none;">
+                                        <span class="spinner-border text-info spinner-border-sm"></span>
+                                        <span>Sending...</span>
+                                    </div>
                                 </div>
                                 <p class="otp-p"><span>Check your email, enter the given OTP to verify your account</span></p>
                             </div>
+                            <div class="otp-error error disable"></div>
 
                             <div class="col-12 sign-up-form">
                                 <label for="" class="form-label">Date of birth</label>

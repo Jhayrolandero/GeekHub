@@ -1,5 +1,4 @@
 // AJAX requests
-
 $(document).ready(function () {
   // Logging in
   $("#login").click(function (event) {
@@ -79,10 +78,12 @@ $(document).ready(function () {
     let usernameLen = $("#username").val().length;
     let rEmail = $("#r-email").val();
     let rPassword = $("#r-password").val().length;
+    let rOTP = $("#r-otp").val();
 
     let userError = true;
     let emailError = true;
     let pwError = true;
+    let otpError = true;
 
     if (usernameLen <= 0) {
       $(".username-error").html("<p>Empty Username!</p>");
@@ -106,11 +107,23 @@ $(document).ready(function () {
       $(".password-error").empty();
       pwError = false;
     }
-    console.log("Username len: " + usernameLen);
-    console.log("rEmail len: " + rEmail);
-    console.log("rPassword len: " + rPassword);
+
+    if (!isOTPValid(rOTP)) {
+      $(".otp-error").html("<p>Invalid OTP!</p>");
+    } else {
+      $(".otp-error").empty();
+      otpError = false;
+    }
 
     if (!userError && !emailError && !pwError) {
+      $("#otp").removeClass("disable");
+      $(".otp-error").removeClass("disable");
+    } else {
+      $("#otp").addClass("disable");
+      $(".otp-error").addClass("disable");
+    }
+
+    if (!userError && !emailError && !pwError && !otpError) {
       $(".disable-register-btn")
         .removeClass("disable-register-btn")
         .addClass("enable-register-btn");
@@ -121,14 +134,27 @@ $(document).ready(function () {
     }
   });
 
+  $(".email-form").on("keyup", function () {
+    // Reset the OTP every time event
+    $("#given-otp").val("");
+    // $("#r-otp").val("");
+  });
+
   $(".register-form").on("click", ".otp-btn", function () {
+    let rEmail = $("#r-email").val();
+
+    $(".otp-btn").hide();
+    $(".loading").show();
     $.post(
       "/socmed/app/controller/AuthController.php",
       {
         request: "otp",
-        email: "xjaylandero",
+        email: rEmail,
       },
       function (data, status) {
+        $(".loading").hide();
+        $(".otp-btn").show();
+
         if (status === "success") {
           $("#given-otp").val(data);
         } else {
@@ -146,4 +172,9 @@ function isValidEmail(email) {
 
 function passwordLength(password) {
   return password < 8;
+}
+
+function isOTPValid(otp) {
+  const otpRegex = /^\d{4}$/;
+  return otpRegex.test(otp);
 }

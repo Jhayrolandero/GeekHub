@@ -242,9 +242,9 @@ svg .wave:nth-child(4) {
   font-size: 0.7em;
 }
 
-#otp {
-  /* display: none; */
-}
+/* #otp {
+  display: none;
+} */
 
 .otp-btn {
   font-weight: bold;
@@ -260,4 +260,13 @@ svg .wave:nth-child(4) {
 .otp-p {
   margin: 0;
   font-size: 0.69em;
+}
+
+.disable {
+  display: none;
+}
+
+.loading {
+  display: none;
+  color: var(--blue-color);
 }
