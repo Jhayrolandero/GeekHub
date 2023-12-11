@@ -195,6 +195,7 @@ svg .wave:nth-child(4) {
   background-color: rgba(22, 24, 24, 0.3);
 }
 .register-form {
+  color: var(--text-clr);
   background-color: var(--black-clr);
   padding-right: 6em;
   padding-left: 6em;
@@ -248,7 +249,7 @@ svg .wave:nth-child(4) {
 
 .otp-btn {
   font-weight: bold;
-  font-size: 1em;
+  font-size: 0.8em;
   width: 100%;
   color: var(--blue-color);
   background-color: var(--dark-bg);
@@ -269,4 +270,11 @@ svg .wave:nth-child(4) {
 .loading {
   display: none;
   color: var(--blue-color);
+}
+
+.register-form:focus {
+  background-color: var(--dark-bg);
+  border: var(--border);
+  box-shadow: none;
+  color: var(--text-clr);
 }

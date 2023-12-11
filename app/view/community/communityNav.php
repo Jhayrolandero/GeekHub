@@ -34,5 +34,6 @@ function template_community_nav($communityName, $community_id, $groupPic)
         </a>
     </li>
 
+
 <?php
 }

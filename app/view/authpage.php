@@ -64,40 +64,39 @@
                     </div>
                     <div class="modal-body">
                         <form action="">
-                            <div class="col-12 sign-up-form">
-                                <input type="text" class="register-form" autocomplete="off" placeholder="Username" id="username">
+                            <div class="col-12 form-floating sign-up-form">
+                                <input type="text" class="form-control register-form" autocomplete="off" id="username" placeholder="name@example.com">
+                                <label class="register-label">Username</label>
                             </div>
                             <div class="username-error error"></div>
-                            <div class="col-12 sign-up-form">
-                                <input type="email" class="register-form email-form" autocomplete="off" placeholder="Email" id="r-email">
+                            <div class="col-12 form-floating sign-up-form">
+                                <input type="email" class="form-control register-form email-form" autocomplete="off" id="r-email" placeholder="password">
+                                <label class="register-label">Email</label>
                             </div>
                             <div class="email-error error"></div>
-                            <div class="col-12 sign-up-form">
-                                <input type="password" class="register-form" autocomplete="off" placeholder="Password" id="r-password">
+                            <div class="col-12 form-floating sign-up-form">
+                                <input type="password" class="form-control register-form" autocomplete="off" id="r-password" placeholder="email">
+                                <label class="register-label">Password</label>
                             </div>
                             <div class="password-error error"></div>
 
-                            <div class="col-12 row sign-up-form mx-auto disable" id="otp">
+                            <div class="col-12 row sign-up-form mx-auto disable m-0 p-0" id="otp">
                                 <label for="" class="form-label">OTP</label>
-                                <div class="col-8 p-0">
+                                <div class="col-9 p-0">
                                     <input type="text" id="given-otp" value=null hidden>
                                     <input type="text" class="register-form" autocomplete="off" placeholder="OTP" id="r-otp">
                                 </div>
-                                <div class="col-4 p-0">
+                                <div class="col-3 p-0">
                                     <button class="otp-btn" class="btn" type="button">Send me OTP</button>
                                     <div class="loading text-center" style="display: none;">
                                         <span class="spinner-border text-info spinner-border-sm"></span>
                                         <span>Sending...</span>
                                     </div>
                                 </div>
-                                <p class="otp-p"><span>Check your email, enter the given OTP to verify your account</span></p>
+                                <p class="otp-p p-0"><span>Check your email, enter the given OTP to verify your account</span></p>
                             </div>
                             <div class="otp-error error disable"></div>
 
-                            <div class="col-12 sign-up-form">
-                                <label for="" class="form-label">Date of birth</label>
-                                <input type="date" class="register-form" autocomplete="off" placeholder="Password" id="r-password">
-                            </div>
 
                             <div class="col-12 sign-up-form">
                                 <button class="btn disable-register-btn" type="button" id="register">Sign Up</button>

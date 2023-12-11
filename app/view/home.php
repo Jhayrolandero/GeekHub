@@ -9,11 +9,11 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="public/css/home/home.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="public/js/home/home.js"></script>
     <script src="public/js/post/post.js"></script>
     <script src="public/js/comment/comment.js"></script>
+    <link rel="stylesheet" href="public/css/home/home.css">
     <link rel="stylesheet" href="public/css/postCard/postCard.css">
 
 </head>
@@ -21,90 +21,33 @@ session_start();
 <body>
     <div class="container-fluid">
         <div class="row">
+            <div class="col-xxl-3 col-2 position-relative">
+                <div class="position-sticky top-0 end-0">
+                    <?php require '../components/sideNav.php' ?>
+                </div>
+            </div>
+            <div class="col-xxl-9 col-10 ">
+                <div class="row ">
+                    <div class="col-lg-7 col-6 ">
+                        <!-- For posting -->
+                        <div class="row " id="post-bar">
+                            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myModal" id="add-post-btn">
+                                What's on your mind?
+                            </button>
+                        </div>
 
-            <!-- Sidebar Navigation-->
-            <nav id="sidebar">
-                <section class="shortcut-nav">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#home" id="you">
-                                <ion-icon name="home-sharp"></ion-icon> Home
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#profile#<?= $_SESSION["user"] ?>" id="you">
-                                <ion-icon name="person-sharp"></ion-icon> Profile
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#friend">
-                                <ion-icon name="people-sharp"></ion-icon> Buddies
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#discover">
-                                <ion-icon name="compass-sharp"></ion-icon> Discover
-                            </a>
-                        </li>
+                        <!-- Main Post diplay -->
+                        <div class="post-container row" id="post-container">
+                        </div>
+                    </div>
 
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#logout">
-                                <ion-icon name="log-out"></ion-icon> Logout
-                            </a>
-                        </li>
-
-                    </ul>
-                </section>
-            </nav>
-
-            <!-- Main Content -->
-            <main class="col-xxl-5 col-md-9 col-lg-8 main-content mx-auto" id="main-content">
-                <!-- For posting -->
-                <div class="row " id="post-bar">
-                    <div class="col-12 p-0">
-                        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myModal" id="add-post-btn">
-                            What's on your mind?
-                        </button>
+                    <div class="col-lg-5 col-6 ps-3">
+                        <div class="position-sticky top-0 start-0">
+                            <?php require '../components/rightNav.php' ?>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Main Post diplay -->
-                <div class="post-container row" id="post-container">
-                </div>
-            </main>
-
-            <!-- FriendBar navigation -->
-            <nav id="rightbar">
-                <nav id="friendbar">
-                    <div class="row">
-                        <div class="col-6">
-                            <p id="friend-bar-title">Buddies</p>
-                        </div>
-                        <div class="col-5 text-end">
-                            <a href="#friend">See all</a>
-                        </div>
-                    </div>
-                    <!-- Render friend side nav -->
-                    <ul class="nav flex-column" id="friend-side-nav">
-
-                    </ul>
-                </nav>
-                <nav id="communitybar">
-                    <div class="row">
-                        <div class="col-6">
-                            <p id="community-bar-title">Communities</p>
-                        </div>
-                        <!-- <div class="col-6">
-                            <button id="community-btn">Create +</button>
-                        </div> -->
-                    </div>
-                    <!-- For communities -->
-                    <ul class="nav flex-column" id="community-side-nav">
-
-                    </ul>
-                </nav>
-            </nav>
-
+            </div>
         </div>
 
         <!-- Include the modal for posting -->

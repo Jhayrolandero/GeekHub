@@ -18,11 +18,6 @@ body {
   border: var(--border);
 }
 
-#discover-post {
-  position: relative;
-  top: 3.5em;
-}
-
 .post-author-date {
   display: flex;
   align-items: center;
