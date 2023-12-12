@@ -42,4 +42,9 @@ $(document).ready(function () {
       resultsContainer.append("<p>" + results + "</p>");
     }
   }
+
+  $("#clearSearch").click(function () {
+    $("#searchInput").val("");
+    $("#searchResults").empty();
+  });
 });

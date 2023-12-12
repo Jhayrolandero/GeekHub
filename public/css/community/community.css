@@ -5,9 +5,8 @@
   --border: rgba(220, 220, 220, 0.5) solid 1px;
 }
 
-#community-container {
-  position: relative;
-  top: 4em;
+body {
+  background-color: var(--black-color1);
 }
 
 .community-post-card {

@@ -23,7 +23,7 @@ if (empty($_SESSION["user"])) {
     <!-- <link rel="stylesheet" href="public/css/home/home.css">
     <link rel="stylesheet" href="public/css/postCard/postCard.css">
     <link rel="stylesheet" href="public/css/comment/comment.css"> -->
-    <!-- <link href='https://unpkg.com/css.gg@2.0.0/icons/css/crown.css' rel='stylesheet'> -->
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/crown.css' rel='stylesheet'>
 
 
 </head>

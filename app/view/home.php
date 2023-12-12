@@ -26,7 +26,7 @@ session_start();
                     <?php require '../components/sideNav.php' ?>
                 </div>
             </div>
-            <div class="col-xxl-9 col-10 ">
+            <div class="col-xxl-9 col-10 position-relative">
                 <div class="row ">
                     <div class="col-lg-7 col-6 ">
                         <!-- For posting -->
@@ -41,8 +41,11 @@ session_start();
                         </div>
                     </div>
 
-                    <div class="col-lg-5 col-6 ps-3">
-                        <div class="position-sticky top-0 start-0">
+                    <div class="col-lg-5 col-6 ps-3 position-relative">
+                        <div class="position-sticky top-0 searchbar ">
+                            <?php require '../components/searchBar.php' ?>
+                        </div>
+                        <div>
                             <?php require '../components/rightNav.php' ?>
                         </div>
                     </div>

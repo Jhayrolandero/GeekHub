@@ -1,15 +1,9 @@
 <nav id="rightbar" class="w-75">
-    <nav id="communitybar" class="p-3">
+    <nav id="communitybar" class="p-4">
         <div class="row">
-            <div class="col-5">
-                <p id="community-bar-title">Recommended</p>
-            </div>
-            <div class="col-7">
-                <div class="row text-end">
-
+            <p class="p-0"><span class="fs-5 me-2">Recommended</span><span>
                     <button id="community-btn">Create +</button>
-                </div>
-            </div>
+                </span></p>
         </div>
         <!-- For communities -->
         <ul class="nav flex-column" id="community-side-nav">
@@ -33,8 +27,8 @@
     #friendbar,
     #communitybar {
         background-color: rgb(20, 23, 26);
-        max-width: 960px;
-        min-width: 400px;
+        /* max-width: 960px;
+        min-width: 400px; */
         border-radius: 20px;
     }
 
@@ -46,6 +40,11 @@
     #communitybar #community-btn {
         background-color: transparent;
         color: var(--text-color);
+        border: none;
+    }
+
+    #show-all-discover {
+        background-color: transparent;
         border: none;
     }
 </style>

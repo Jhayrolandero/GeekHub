@@ -11,17 +11,12 @@ session_start();
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="public/css/discover/discover.css"> -->
+    <link rel="stylesheet" href="public/css/discover/discover.css">
     <link rel="stylesheet" href="public/css/postCard/postCard.css">
     <link rel="stylesheet" href="public\css\community\community.css">
 
     <script src="public/js/discover/discover.js"></script>
 
-    <style>
-        body {
-            background-color: #090909;
-        }
-    </style>
 </head>
 
 <body>
@@ -40,8 +35,11 @@ session_start();
                         </div>
                     </div>
 
-                    <div class="col-lg-5 col-6 ps-3">
-                        <div class="position-sticky top-0 start-0">
+                    <div class="col-lg-5 col-6 ps-3 position-relative">
+                        <div class="position-sticky top-0 searchbar z-1 w-100">
+                            <?php require '../components/searchBar.php' ?>
+                        </div>
+                        <div>
                             <?php require '../components/discover/rightNav.php' ?>
                         </div>
                     </div>

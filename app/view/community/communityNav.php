@@ -4,10 +4,10 @@ function template_community_nav($communityName, $community_id, $groupPic)
 ?>
     <li class="nav-item">
         <a href="#group#<?= $community_id ?>">
-            <div class="row">
+            <div class="row p-2">
 
                 <div class="row mb-2">
-                    <div class="col-lg-2 col-md-3 p-1  text-center p-0">
+                    <div class="col-lg-2 col-md-3 p-1 text-center p-0">
                         <?php
                         if ($groupPic) {
                             $base64Image = base64_encode($groupPic);

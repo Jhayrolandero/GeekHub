@@ -8,6 +8,7 @@ body {
   background-color: #141414;
   color: #fff;
   top: 0 !important;
+  overflow-x: hidden;
 }
 
 .profile-header {
@@ -48,6 +49,7 @@ body {
   align-items: flex-start;
   justify-content: center;
   position: relative;
+  overflow-x: hidden;
 }
 
 #bio-form {
@@ -127,7 +129,6 @@ body {
 #profile-container .right-bar {
   padding-bottom: 3em;
   position: sticky;
-  top: 4rem; /* Adjust this value based on your design */
   height: 100vh; /* Adjust this value based on your design */
   overflow-y: scroll; /* Allow the content to scroll if it exceeds the height */
 }

@@ -108,7 +108,7 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
 
         <main class="community-post p-3">
             <div class="row">
-                <div class="col-5 ">
+                <div class="col-lg-6 col-5 ">
                     <?php
                     if ($hasJoined == 1) {
                     ?>
@@ -125,7 +125,7 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
                         </section>
                     </div>
                 </div>
-                <div class="col-3 right-bar">
+                <div class="col-lg-4 col-3 right-bar">
                     <section class="desc-container ">
                         <h4>Description</h4>
                         <textarea name="" class="form-control" id="bio-form" readonly><?= $desc ?></textarea>

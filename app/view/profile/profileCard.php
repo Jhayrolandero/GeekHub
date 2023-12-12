@@ -83,8 +83,8 @@ function profile_Template($username, $userBio, $createdAt, $userID, $profileImg,
             </div>
         </header>
 
-        <main class="row p-3 content-section  mx-auto">
-            <div class="col-md-3 col-sm-12 right-bar">
+        <main class="row p-3 content-section ">
+            <div class="col-md-4 col-sm-12 right-bar">
                 <section class="bio-section">
                     <div class="row">
                         <div class="col-6">
@@ -139,7 +139,7 @@ function profile_Template($username, $userBio, $createdAt, $userID, $profileImg,
                 </section>
 
             </div>
-            <div class="col-md-5 col-sm-12 ms-2">
+            <div class="col-md-6 col-sm-12 ms-2">
                 <?php
                 if ($_SESSION["user"] == $userID) {
                 ?>

@@ -8,7 +8,7 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
             <div class="card-header p-2" id="card-header">
                 <div class="row">
                     <!-- Profile -->
-                    <div class="col-xxl-1 col-lg-2 col-md-1 col-sm-1 col-2 p-0">
+                    <div class="col-xxl-1 col-lg-1 col-md-1 col-sm-1 col-2 p-0">
                         <a href="#group#<?= $groupID ?>" class="mx-auto">
                             <?php
                             if ($profileImg) {
@@ -28,7 +28,7 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                         </a>
                     </div>
                     <!-- Username and Community Name -->
-                    <div class="col-xxl-8 col-lg-8 col-md-8 col-sm-10 col-8 p-0">
+                    <div class="col-xxl-8 col-lg-9 col-md-8 col-sm-10 col-8 p-0">
                         <div class="row">
                             <div class="col-12">
                                 <a href="#group#<?= $groupID ?>" class="community-name">
@@ -76,28 +76,24 @@ function template_community_post_card($groupName, $author, $content, $date, $ima
                         }
 
                         ?>
-
-                        <button type="button" class="p-0 hide-post" data-bs-dismiss="modal">&times;</button>
                     </div>
                 </div>
             </div>
             <!-- Post Content -->
             <div class="card-body p-0" id="card-body">
                 <div class="row content">
-                    <div class="col-xxl-10 col-lg-8 p-1 mx-auto">
-                        <div class="col-12 pb-2 post-content">
-                            <?= $content ?>
-                        </div>
-                        <?php
-                        if (isset($image)) {
-                        ?>
-                            <div class="col-12 text-center pb-2">
-                                <img src="data:image/jpeg;base64,<?= base64_encode($image) ?>" class="image-container"></img>
-                            </div>
-                        <?php
-                        }
-                        ?>
+                    <div class="col-12 pb-2 post-content">
+                        <?= $content ?>
                     </div>
+                    <?php
+                    if (isset($image)) {
+                    ?>
+                        <div class="col-12 text-center pb-2">
+                            <img src="data:image/jpeg;base64,<?= base64_encode($image) ?>" class="image-container"></img>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </div>
                 <input name="post_id" value="<?= $groupPostID ?>" class="community-post-id" hidden></input>
                 <input name="post_id" value="<?= $groupID ?>" class="community-id" hidden></input>

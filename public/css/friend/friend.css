@@ -9,11 +9,6 @@ body {
   color: var(--text-clr);
 }
 
-#friend-sidebar,
-#main-content {
-  padding-top: 4rem;
-}
-
 #friend-sidebar {
   position: fixed;
   max-width: 15%;
