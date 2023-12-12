@@ -1,37 +1,3 @@
-<style>
-    :root {
-        --blue-bg: rgba(29, 161, 242, 0.2);
-        --blue-txt: rgb(29, 161, 242);
-        --green-bg: rgba(37, 211, 102, 0.2);
-        --green-txt: rgb(37, 211, 102);
-        --red-bg: rgba(255, 0, 0, 0.2);
-        --red-txt: rgb(255, 0, 0);
-
-    }
-
-    .like:hover,
-    .comment:hover,
-    .unlike:hover {
-        padding: 0.3em;
-        border-radius: 50%;
-    }
-
-    .like:hover {
-        background-color: var(--blue-bg);
-        color: var(--blue-txt);
-    }
-
-    .comment:hover {
-        background-color: var(--green-bg);
-        color: var(--green-txt);
-    }
-
-    .unlike:hover {
-        background-color: var(--red-bg);
-        color: var(--red-txt);
-    }
-</style>
-
 <?php
 function template_post($name, $content, $date, $post_id, $like_count, $hasLiked, $post_image, $commentCount, $userID, $profileImg)
 {
@@ -66,12 +32,12 @@ function template_post($name, $content, $date, $post_id, $like_count, $hasLiked,
                         <?php
                         if ($_SESSION["user"] === $userID) {
                         ?>
-                            <button data-bs-toggle="dropdown" class="option-btn">
+                            <button type="button" class="option-btn">
                                 <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                             </button>
-                            <ul class="dropdown-menu post-menu">
-                                <li><button class="btn post-menu-delete">Delete Post</button></li>
-                                <li><button class="btn post-menu-update">Update Post</button></li>
+                            <ul class="post-menu p-0">
+                                <li><button class="btn post-menu-delete text-light">Delete Post</button></li>
+                                <li><button class="btn post-menu-update text-light">Update Post</button></li>
                             </ul>
                         <?php
                         }
@@ -137,3 +103,72 @@ function template_post($name, $content, $date, $post_id, $like_count, $hasLiked,
 <?php
 }
 ?>
+
+<script>
+    $(document).ready(function() {
+        $(".post").on("click", ".option-btn", function() {
+            $(this).siblings(".post-menu").toggle();
+        });
+    });
+</script>
+
+
+<style>
+    :root {
+        --dark-bg: #090909;
+        --black-clr: rgb(22, 22, 22);
+        --text-clr: #ffffff;
+        --border: rgba(220, 220, 220, 0.5) solid 1px;
+        --blue-color: #0ba4eb;
+        --blue-border: var(--blue-color) solid 1px;
+        --red-color: #f51919;
+        --red-border: var(--red-color) solid 1px;
+        --blue-bg: rgba(29, 161, 242, 0.2);
+        --blue-txt: rgb(29, 161, 242);
+        --green-bg: rgba(37, 211, 102, 0.2);
+        --green-txt: rgb(37, 211, 102);
+        --red-bg: rgba(255, 0, 0, 0.2);
+        --red-txt: rgb(255, 0, 0);
+
+    }
+
+    .like,
+    .comment,
+    .unlike {
+        transition: all ease 0.3s;
+    }
+
+    .like:hover,
+    .comment:hover,
+    .unlike:hover {
+        padding: 0.3em;
+        border-radius: 50%;
+    }
+
+    .like:hover {
+        background-color: var(--blue-bg);
+        color: var(--blue-txt);
+    }
+
+    .comment:hover {
+        background-color: var(--green-bg);
+        color: var(--green-txt);
+    }
+
+    .unlike:hover {
+        background-color: var(--red-bg);
+        color: var(--red-txt);
+    }
+
+    .post-menu {
+        display: none;
+        border: var(--blue-border);
+        color: var(--text-clr);
+        list-style: none;
+        border-radius: 20px;
+    }
+
+    .post-menu ul li button {
+        color: var(--text-clr);
+    }
+</style>

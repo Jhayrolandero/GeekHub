@@ -11,6 +11,8 @@ session_start();
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="public/js/profile/profile.js"></script>
+    <!-- <script src="public/js/comment/comment.js"></script> -->
+
     <link rel="stylesheet" href="public/css/profile/profile.css">
     <link rel="stylesheet" href="public/css/postCard/postCard.css">
 
@@ -18,9 +20,8 @@ session_start();
 </head>
 
 <body>
-    <div id="profile-container">
 
-    </div>
+    <div id="profile-container"></div>
 
     <?php include "home/modalPost.php" ?>
 
@@ -32,6 +33,10 @@ session_start();
 
     <!-- Updating Post -->
     <?php include "home/updateModalPost.php" ?>
+
+    <div class="position-fixed bottom-0 end-0 me-3 mb-3">
+        <?php require "../components/backToHome.php" ?>
+    </div>
 </body>
 
 </html>

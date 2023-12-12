@@ -1,8 +1,9 @@
 :root {
   --text-color: #f5fefd;
-  --black-color1: #090909;
+  --black-color1: rgb(9, 9, 9);
   --black-color2: #282828;
   --border: rgba(220, 220, 220, 0.5) solid 1px;
+  --blue-color: #0ba4eb;
 }
 
 body {
@@ -14,4 +15,20 @@ body {
 
 .searchbar {
   background-color: var(--black-color1);
+}
+
+.for-you {
+  background-color: rgba(9, 9, 9, 0.5);
+}
+
+#add-post-btn {
+  background-color: var(--black-primary);
+  border: var(--border);
+  color: var(--text-color);
+  transition: all ease 0.3s;
+}
+
+#add-post-btn:hover {
+  background-color: var(--text-color);
+  color: var(--black-color1);
 }

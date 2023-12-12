@@ -11,7 +11,7 @@
 
 <body>
   <div class="modal comment-modal" id="myModal">
-    <div class="modal-dialog modal-lg bg-dark">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
         <!-- Modal Header -->
@@ -31,15 +31,9 @@
         </div>
 
         <!-- Modal footer -->
-        <div class="modal-footer">
-          <div class="row w-100">
-            <div class="col-11">
-              <input type="text" class="form-control comment-input" placeholder="Say Something" id="comment-form">
-            </div>
-            <div class="col-1">
-              <button type="button" class="btn btn-success" id="add-comment-btn">Send</button>
-            </div>
-          </div>
+        <div class="modal-footer position-relative">
+          <input type="text" class="form-control comment-input" placeholder="Say Something" id="comment-form">
+          <button type="button" class="position-absolute" id="add-comment-btn"><ion-icon name="navigate-outline"></ion-icon></button>
         </div>
 
       </div>

@@ -2,11 +2,13 @@
   --text-clr: #f5fefd;
   --black-color1: #090909;
   --black-color2: #090909;
+  --black-color3: rgb(20, 23, 26);
   --border: rgba(220, 220, 220, 0.5) solid 1px;
 }
 
 body {
   background-color: var(--black-color1);
+  overflow-x: hidden;
 }
 
 .community-post-card {
@@ -90,7 +92,7 @@ body {
 /* Description Container */
 
 .desc-container {
-  background-color: var(--black-color2);
+  background-color: var(--black-color3);
   padding: 1.2em;
   border-radius: 10px;
 }
@@ -133,7 +135,7 @@ body {
 }
 
 #community-nav {
-  background-color: var(--black-color2);
+  background-color: var(--black-color3);
   padding: 1.2em;
   border-radius: 10px;
   color: var(--text-clr);
@@ -199,7 +201,7 @@ body {
 }
 
 #top-members-nav {
-  background-color: var(--black-color2);
+  background-color: var(--black-color3);
   padding: 1.2em;
   border-radius: 10px;
 }

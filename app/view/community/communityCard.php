@@ -7,7 +7,7 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
 
     <body>
         <!-- Header -->
-        <header class="community-header container pb-4">
+        <header class="community-header container-fluid pb-4">
             <input type="text" class="form-control" id="community-id" value="<?= $groupID ?>" hidden>
             <div class="row">
                 <div class="bg-img">
@@ -200,3 +200,7 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
 <?php
 }
 ?>
+
+<script>
+
+</script>

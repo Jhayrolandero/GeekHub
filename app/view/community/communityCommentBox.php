@@ -51,7 +51,6 @@ function template_commentBox($username, $time, $content, $userID, $commentID, $p
                         <?php
                         }
                         ?>
-                        <button type="button" class="p-0 hide-comment" data-bs-dismiss="modal">&times;</button>
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -65,3 +64,8 @@ function template_commentBox($username, $time, $content, $userID, $commentID, $p
 <?php
 }
 ?>
+
+<script>
+
+
+</script>

@@ -502,6 +502,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Api for Commenting
     if (isset($_POST["action"]) && $_POST["action"] === "addCommentCommmunityPost") {
+        if (empty($_POST["comment"])) {
+            die("Say Something");
+        }
         try {
 
             $groupPostID = $_POST["groupPostID"];

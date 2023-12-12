@@ -428,6 +428,53 @@ $(document).ready(function () {
       }
     );
   });
+
+  // Delete Comment
+  $(".comment-modal").on(
+    "click",
+    ".comment-card .comment-menu-delete",
+    function () {
+      var commentID = $(this)
+        .closest(".comment-card")
+        .find(".comment-id")
+        .val();
+      var postID = $(this)
+        .closest(".comment-card")
+        .find(".comment-post-id")
+        .val();
+
+      $.post(
+        "app/controller/CommentController.php",
+        {
+          action: "deleteComment",
+          commentID: commentID,
+        },
+        function (data, status) {
+          if (status === "success") {
+            $.get(
+              `app/controller/CommentController.php?action=showComment&postID=${postID}`,
+              function (data, status) {
+                if (status === "success") {
+                  $("#comment-list").html(data);
+                } else {
+                  alert("Error!");
+                }
+              }
+            );
+
+            $.get(
+              "app/controller/PostController.php?action=getPost",
+              function (data, status) {
+                $(".post-container").html(data);
+              }
+            );
+          } else {
+            alert("Error!");
+          }
+        }
+      );
+    }
+  );
   /*
     ================
     Profile Options

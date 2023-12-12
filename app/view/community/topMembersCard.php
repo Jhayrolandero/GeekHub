@@ -4,9 +4,9 @@ function template_top_members($username, $userID, $profilePic, $postCount)
 ?>
     <li class="nav-item">
         <a href="#profile#<?= $userID ?>">
-            <div class="row">
+            <div class="row p-2">
 
-                <div class="row mb-2">
+                <div class="row mb-2 p-0">
                     <div class="col-lg-2 col-md-3 p-1  text-center p-0">
                         <?php
                         if ($profilePic) {

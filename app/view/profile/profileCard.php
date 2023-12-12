@@ -5,7 +5,7 @@ function profile_Template($username, $userBio, $createdAt, $userID, $profileImg,
 
     <body>
 
-        <header class="container profile-header pb-5">
+        <header class="container-fluid profile-header pb-5">
             <input type="text" value="<?= $_SESSION["user"] ?>" id="userID" hidden>
 
             <div class="row">
@@ -22,7 +22,6 @@ function profile_Template($username, $userBio, $createdAt, $userID, $profileImg,
 
                     ?>
                         <img src="<?= $imageSrc ?>" alt="background-image">
-                        <!-- <img src="public\images\you.png" alt="Profile Image"> -->
 
                     <?php
                     }

@@ -25,7 +25,6 @@ function template_commentBox($username, $time, $content, $userID, $commentID, $p
                     }
                     ?>
                 </a>
-                <!-- <img src="public\images\you.png" alt="" style="width: 50px"> -->
             </div>
             <div class="col-11 comment-paragraph p-0 ps-3">
                 <div class="row comment-info">
@@ -48,12 +47,11 @@ function template_commentBox($username, $time, $content, $userID, $commentID, $p
                                 <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                             </button>
                             <ul class="dropdown-menu post-menu">
-                                <li><button class="btn comment-menu-delete">Delete Comment</button></li>
+                                <li class="text-center"><button class="btn comment-menu-delete text-light p-0">Delete Comment</button></li>
                             </ul>
                         <?php
                         }
                         ?>
-                        <button type="button" class="p-0 hide-comment" data-bs-dismiss="modal">&times;</button>
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -67,3 +65,13 @@ function template_commentBox($username, $time, $content, $userID, $commentID, $p
 <?php
 }
 ?>
+
+<style>
+    :root {
+        --dark-bg: #090909;
+    }
+
+    .post-menu {
+        background-color: var(--dark-bg);
+    }
+</style>

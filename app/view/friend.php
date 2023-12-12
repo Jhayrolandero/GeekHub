@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid position-relative">
         <div class="row">
             <!-- Sidebar Navigation-->
             <div class="col-xxl-2 col-lg-12" id="friend-sidebar">
@@ -34,7 +34,9 @@
                 <div class="row" id="friend-content"></div>
             </div>
 
-
+        </div>
+        <div class="position-fixed bottom-0 end-0 me-3 mb-3">
+            <?php require "../components/backToHome.php" ?>
         </div>
     </div>
 </body>

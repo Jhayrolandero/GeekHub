@@ -1,5 +1,10 @@
 :root {
-  --text-color: #fff;
+  --dark-bg: #090909;
+  --black-clr: rgb(22, 22, 22);
+  --text-clr: #ffffff;
+  --border: rgba(220, 220, 220, 0.5) solid 1px;
+  --blue-color: #0ba4eb;
+  --blue-border: var(--blue-color) solid 1px;
 }
 
 #content {
@@ -10,7 +15,7 @@
 
 #modal-header,
 #modal-footer {
-  background-color: #282828;
+  background-color: var(--dark-bg);
 }
 
 #modal-header {
@@ -27,12 +32,14 @@
 
 #post-btn,
 #update-post-btn {
-  background-color: white;
+  background-color: var(--dark-bg);
+  border: var(--blue-border);
+  color: var(--blue-color);
 }
 
 #post-form,
 #update-post-form {
-  background-color: #141414;
+  background-color: var(--dark-bg);
   color: white;
 }
 
@@ -73,4 +80,25 @@ input[type="file"] {
   color: var(--text-color);
   background-color: transparent;
   border: white solid 1px;
+}
+
+#update-community-post-form {
+  background-color: var(--dark-bg);
+  border: var(--border);
+  color: var(--text-clr);
+}
+
+#update-community-post-btn {
+  color: var(--blue-color);
+  border: var(--blue-border);
+}
+
+#update-profile-btn {
+  color: var(--blue-color);
+  border: var(--blue-border);
+}
+
+#update-community-btn {
+  color: var(--blue-color);
+  border: var(--blue-border);
 }

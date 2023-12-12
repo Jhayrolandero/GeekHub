@@ -73,7 +73,7 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer" id="modal-footer">
-                    <button type="button" class="btn w-100" data-bs-dismiss="modal" id="update-community-btn">Post</button>
+                    <button type="button" class="btn w-100" data-bs-dismiss="modal" id="update-community-btn">Update</button>
                 </div>
 
             </div>

@@ -1,5 +1,6 @@
 $(document).ready(function () {
   render_dicover_page();
+  render_recommend_nav();
 
   function render_dicover_page() {
     $.get(
@@ -14,8 +15,9 @@ $(document).ready(function () {
         }
       }
     );
+  }
 
-    // Rendercommunity Nav
+  function render_recommend_nav() {
     $.get(
       "app/controller/CommunityController.php",
       {
@@ -212,11 +214,7 @@ $(document).ready(function () {
         },
         function (data, status) {
           if (status === "success") {
-            alert(data);
-            var communityID = get_hash_community_id();
-
-            renderCommunityTimeline(communityID);
-            render_communtiy_stat(communityID);
+            render_dicover_page();
           } else {
             alert("Error");
           }
@@ -246,9 +244,6 @@ $(document).ready(function () {
       $("#update-community-post-id").val(groupPostID);
       $("#update-community-post-form").val(pervContent);
 
-      // alert(groupPostID);
-      // alert(pervContent);
-
       $(".update-community-post-modal").slideDown();
     }
   );
@@ -272,11 +267,7 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
-          var groupID = get_hash_community_id();
-
-          renderCommunityTimeline(groupID);
-          render_communtiy_stat(groupID);
-          // alert(data);
+          render_dicover_page();
         } else {
           alert("Error!");
         }

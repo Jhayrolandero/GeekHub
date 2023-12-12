@@ -13,7 +13,6 @@ session_start();
     <link rel="stylesheet" href="public\css\community\community.css">
     <script src="public\js\community\community.js"></script>
     <link rel="stylesheet" href="public/css/postCard/postCard.css">
-
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
 </head>
@@ -33,6 +32,10 @@ session_start();
 
     <!-- Update Community Post Modal -->
     <?php include "community/updateCommunitypostModal.php" ?>
+
+    <div class="position-fixed bottom-0 end-0 me-3 mb-3">
+        <?php require "../components/backToHome.php" ?>
+    </div>
 </body>
 
 </html>

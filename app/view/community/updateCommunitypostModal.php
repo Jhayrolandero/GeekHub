@@ -12,7 +12,7 @@
 <body>
 
     <!-- The Modal -->
-    <div class="modal update-community-post-modal" id="myModal">
+    <div class="modal update-community-post-modal modal-lg" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content" id="content">
 
@@ -31,7 +31,7 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer" id="modal-footer">
-                    <button type="button" class="btn w-100" data-bs-dismiss="modal" id="update-community-post-btn">Post</button>
+                    <button type="button" class="btn w-100" data-bs-dismiss="modal" id="update-community-post-btn">Update</button>
                 </div>
 
             </div>

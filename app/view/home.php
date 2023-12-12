@@ -27,11 +27,15 @@ session_start();
                 </div>
             </div>
             <div class="col-xxl-9 col-10 position-relative">
+
                 <div class="row ">
                     <div class="col-lg-7 col-6 ">
+                        <div class="row position-sticky top-0 z-1 for-you p-1">
+                            <p class="text-center fs-5"><span class="underline">For You</span></p>
+                        </div>
                         <!-- For posting -->
                         <div class="row " id="post-bar">
-                            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myModal" id="add-post-btn">
+                            <button type="button" class="w-100 p-2" data-bs-toggle="modal" data-bs-target="#myModal" id="add-post-btn">
                                 What's on your mind?
                             </button>
                         </div>
@@ -67,6 +71,11 @@ session_start();
 
         <!-- For creating Community -->
         <?php include "home/communityModal.php" ?>
+
+        <!-- Notif -->
+        <div class="position-fixed bottom-0 end-0 me-3 mb-3">
+            <?php require '../components/notification.php' ?>
+        </div>
     </div>
 </body>
 

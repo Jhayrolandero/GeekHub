@@ -14,6 +14,7 @@ session_start();
     <link rel="stylesheet" href="public/css/discover/discover.css">
     <link rel="stylesheet" href="public/css/postCard/postCard.css">
     <link rel="stylesheet" href="public\css\community\community.css">
+    <!-- <script src="public/js/comment/comment.js"></script> -->
 
     <script src="public/js/discover/discover.js"></script>
 
@@ -29,7 +30,11 @@ session_start();
             </div>
             <div class="col-xxl-9 col-10 ">
                 <div class="row ">
+
                     <div class="col-lg-7 col-6 ">
+                        <div class="row position-sticky top-0 z-1 for-you p-1">
+                            <p class="text-center fs-5"><span class="underline">For You</span></p>
+                        </div>
                         <!-- Main Post diplay -->
                         <div class="main-content row" id="discover-post">
                         </div>
@@ -56,6 +61,7 @@ session_start();
 
     <!-- For creating Community -->
     <?php include "home/communityModal.php" ?>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
