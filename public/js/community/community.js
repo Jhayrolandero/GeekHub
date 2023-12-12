@@ -105,7 +105,7 @@ $(document).ready(function () {
     $.get(
       "app/controller/CommunityController.php",
       {
-        action: "getCommunityStat",
+        action: "getCommunityStats",
         groupID: communityID,
       },
       function (data, status) {
@@ -118,12 +118,11 @@ $(document).ready(function () {
           $("#post-count").text(postCount);
           $("#like-count").text(likeCount);
         } else {
-          alert("error");
+          alert("Error");
         }
       }
     );
   }
-
   /*
   ================
       COMMUNITY
@@ -165,6 +164,9 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
+          if (data == -1) {
+            alert("You cannot leave the community");
+          }
           render_community(communityID);
         }
       }
@@ -603,4 +605,8 @@ $(document).ready(function () {
       );
     }
   );
+
+  $(document).on("click", ".option-btn", function () {
+    $(this).siblings(".post-menu").toggle();
+  });
 });

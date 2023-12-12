@@ -430,7 +430,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $status =  $community->leave_community($userID, $groupID);
 
             if ($status == -1) {
-                echo "You cannot leave the community!";
+                echo -1;
             }
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -737,7 +737,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     }
 
     // Get community stat
-    if (isset($_GET["action"]) && $_GET["action"] === "getCommunityStat") {
+    if (isset($_GET["action"]) && $_GET["action"] === "getCommunityStats") {
         try {
             $groupID = $_GET["groupID"];
             $result = $community->get_community($groupID);
@@ -764,7 +764,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         }
     }
 
-    // Get community stat
+    // Get community top members
     if (isset($_GET["action"]) && $_GET["action"] === "getTopMembers") {
         try {
             $groupID = $_GET["groupID"];

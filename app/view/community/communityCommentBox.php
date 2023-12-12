@@ -42,12 +42,9 @@ function template_commentBox($username, $time, $content, $userID, $commentID, $p
                         <?php
                         if ($_SESSION["user"] === $userID) {
                         ?>
-                            <button data-bs-toggle="dropdown" class="option-btn">
-                                <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-                            </button>
-                            <ul class="dropdown-menu post-menu">
-                                <li><button class="btn comment-menu-delete">Delete Comment</button></li>
-                            </ul>
+                            <button class="btn comment-menu-delete"><span class="delete ">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                </span></button>
                         <?php
                         }
                         ?>
@@ -65,7 +62,20 @@ function template_commentBox($username, $time, $content, $userID, $commentID, $p
 }
 ?>
 
-<script>
+<style>
+    :root {
+        --dark-bg: #090909;
+        --red-bg: rgba(255, 0, 0, 0.2);
+        --red-txt: rgb(255, 0, 0);
+    }
 
+    .delete {
+        transition: all ease 0.3s;
 
-</script>
+    }
+
+    .delete:hover {
+        background-color: var(--red-bg);
+        color: var(--red-txt);
+    }
+</style>

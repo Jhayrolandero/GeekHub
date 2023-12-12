@@ -118,8 +118,7 @@ if (empty($_SESSION["user"]) && $_SERVER["REQUEST_METHOD"] === "GET" && isset($_
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["request"]) && $_POST["request"] === "otp") {
 
     if ($auth->check_email($_POST["email"])) {
-        echo "Email already Exist!";
-        die();
+        die("errorExist");
     }
 
     $email = $_POST["email"];

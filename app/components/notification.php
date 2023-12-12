@@ -4,7 +4,7 @@
     </button>
     <div class="dropdown-menu" id="notif">
         <div class="notif-header">
-            <p>Notification</p>
+            <p class="fs-4 ms-2">Notification</p>
         </div>
         <section class="notif-container">
         </section>

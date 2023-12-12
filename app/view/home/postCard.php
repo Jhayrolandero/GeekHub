@@ -24,24 +24,9 @@ function template_post($name, $content, $date, $post_id, $like_count, $hasLiked,
                             ?>
                         </a>
                     </div>
-                    <div class="col-xxl-8 col-lg-9 col-md-7 col-sm-10 col-8 p-0">
+                    <div class="col-xxl-11 col-lg-11 col-md-7 col-sm-10 col-8 p-0">
                         <div class="col-12 username"><?= $name ?></div>
                         <div class="col-12 date"><?= $date ?></div>
-                    </div>
-                    <div class="col-xxl-3 col-lg-2 col-md-3 col-sm-1 col-2 p-0 option-col text-end">
-                        <?php
-                        if ($_SESSION["user"] === $userID) {
-                        ?>
-                            <button type="button" class="option-btn">
-                                <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-                            </button>
-                            <ul class="post-menu p-0">
-                                <li><button class="btn post-menu-delete text-light">Delete Post</button></li>
-                                <li><button class="btn post-menu-update text-light">Update Post</button></li>
-                            </ul>
-                        <?php
-                        }
-                        ?>
                     </div>
                 </div>
             </div>
@@ -66,7 +51,7 @@ function template_post($name, $content, $date, $post_id, $like_count, $hasLiked,
             </div>
             <div class="card-footer" id="card-footer">
                 <div class="row">
-                    <div class="col-6 text-center">
+                    <div class="col text-center">
                         <?php
                         if ($hasLiked) {
                         ?>
@@ -87,13 +72,29 @@ function template_post($name, $content, $date, $post_id, $like_count, $hasLiked,
                         }
                         ?>
                     </div>
-                    <div class="col-6 text-center">
+                    <div class="col text-center">
                         <button type="button" class="w-100 meta-btn  comment-btn">
                             <span class="comment">
                                 <ion-icon name="chatbox-ellipses-outline"></ion-icon> <?= $commentCount ?>
                             </span>
                         </button>
                     </div>
+                    <?php
+                    if ($_SESSION["user"] === $userID) {
+                    ?>
+                        <div class="col">
+                            <button class="btn p-0 post-menu-delete text-light"><span class="delete">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                </span></button>
+                        </div>
+                        <div class="col">
+                            <button class="btn p-0 post-menu-update text-light"><span class="edit">
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </span></button>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -129,18 +130,24 @@ function template_post($name, $content, $date, $post_id, $like_count, $hasLiked,
         --green-txt: rgb(37, 211, 102);
         --red-bg: rgba(255, 0, 0, 0.2);
         --red-txt: rgb(255, 0, 0);
+        --yellow-bg: rgba(255, 252, 0, 0.2);
+        --yellow-text: rgb(255, 252, 0);
 
     }
 
     .like,
     .comment,
-    .unlike {
+    .unlike,
+    .delete,
+    .edit {
         transition: all ease 0.3s;
     }
 
     .like:hover,
     .comment:hover,
-    .unlike:hover {
+    .unlike:hover,
+    .delete:hover,
+    .edit:hover {
         padding: 0.3em;
         border-radius: 50%;
     }
@@ -160,8 +167,17 @@ function template_post($name, $content, $date, $post_id, $like_count, $hasLiked,
         color: var(--red-txt);
     }
 
+    .delete:hover {
+        background-color: var(--red-bg);
+        color: var(--red-txt);
+    }
+
+    .edit:hover {
+        background-color: var(--yellow-bg);
+        color: var(--yellow-txt);
+    }
+
     .post-menu {
-        display: none;
         border: var(--blue-border);
         color: var(--text-clr);
         list-style: none;
@@ -170,5 +186,9 @@ function template_post($name, $content, $date, $post_id, $like_count, $hasLiked,
 
     .post-menu ul li button {
         color: var(--text-clr);
+    }
+
+    .options {
+        display: flex;
     }
 </style>

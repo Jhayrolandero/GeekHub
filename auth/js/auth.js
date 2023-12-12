@@ -156,6 +156,9 @@ $(document).ready(function () {
         $(".otp-btn").show();
 
         if (status === "success") {
+          if (data === "errorExist") {
+            $(".otp-error").html("<p>Email Exist!</p>");
+          }
           $("#given-otp").val(data);
         } else {
           alert("Error occurred: Unable to fetch data from the server.");

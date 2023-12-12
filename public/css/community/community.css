@@ -4,6 +4,22 @@
   --black-color2: #090909;
   --black-color3: rgb(20, 23, 26);
   --border: rgba(220, 220, 220, 0.5) solid 1px;
+  --dark-bg: #090909;
+  --black-clr: rgb(22, 22, 22);
+  --text-clr: #ffffff;
+  --border: rgba(220, 220, 220, 0.5) solid 1px;
+  --blue-color: #0ba4eb;
+  --blue-border: var(--blue-color) solid 1px;
+  --red-color: #f51919;
+  --red-border: var(--red-color) solid 1px;
+  --blue-bg: rgba(29, 161, 242, 0.2);
+  --blue-txt: rgb(29, 161, 242);
+  --green-bg: rgba(37, 211, 102, 0.2);
+  --green-txt: rgb(37, 211, 102);
+  --red-bg: rgba(255, 0, 0, 0.2);
+  --red-txt: rgb(255, 0, 0);
+  --yellow-bg: rgba(255, 252, 0, 0.2);
+  --yellow-text: rgb(255, 252, 0);
 }
 
 body {
@@ -230,4 +246,62 @@ body {
 /* Define the scrollbar track */
 #community-container .right-bar::-webkit-scrollbar-track {
   display: none;
+}
+
+.like,
+.comment,
+.unlike,
+.delete,
+.edit {
+  transition: all ease 0.3s;
+}
+
+.like:hover,
+.comment:hover,
+.unlike:hover,
+.delete:hover,
+.edit:hover {
+  padding: 0.3em;
+  border-radius: 50%;
+}
+
+.like:hover {
+  background-color: var(--blue-bg);
+  color: var(--blue-txt);
+}
+
+.comment:hover {
+  background-color: var(--green-bg);
+  color: var(--green-txt);
+}
+
+.unlike:hover {
+  background-color: var(--red-bg);
+  color: var(--red-txt);
+}
+
+.delete:hover {
+  background-color: var(--red-bg);
+  color: var(--red-txt);
+}
+
+.edit:hover {
+  background-color: var(--yellow-bg);
+  color: var(--yellow-txt);
+}
+
+.post-menu {
+  display: none;
+  border: var(--blue-border);
+  color: var(--text-clr);
+  list-style: none;
+  border-radius: 20px;
+}
+
+.post-menu ul li button {
+  color: var(--text-clr);
+}
+
+.options {
+  display: flex;
 }

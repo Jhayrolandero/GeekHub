@@ -187,6 +187,38 @@ $(document).ready(function () {
     );
   });
 
+  // Delete Comment
+  $(".community-comment-modal").on(
+    "click",
+    ".comment-card .comment-menu-delete",
+    function () {
+      var commentID = $(this)
+        .closest(".comment-card")
+        .find(".comment-id")
+        .val();
+      var groupPostID = $(this)
+        .closest(".comment-card")
+        .find(".comment-post-id")
+        .val();
+      $.post(
+        "app/controller/CommunityController.php",
+        {
+          action: "deleteCommentCommunity",
+          commentID: commentID,
+        },
+        function (data, status) {
+          if (status === "success") {
+            // Render the new comment list
+            renderComment(groupPostID);
+            render_dicover_page();
+          } else {
+            alert("Error!");
+          }
+        }
+      );
+    }
+  );
+
   /*
   ================
     POST SYSTEM
@@ -389,6 +421,10 @@ $(document).ready(function () {
       },
       function (data, status) {
         if (status === "success") {
+          if (data == -1) {
+            alert("You cannot leave the community");
+          }
+
           render_dicover_card();
         }
       }

@@ -200,7 +200,3 @@ function template_community($groupName, $desc, $hasJoined, $createdAt, $groupID,
 <?php
 }
 ?>
-
-<script>
-
-</script>

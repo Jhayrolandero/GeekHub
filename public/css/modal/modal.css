@@ -102,3 +102,20 @@ input[type="file"] {
   color: var(--blue-color);
   border: var(--blue-border);
 }
+
+#group-name {
+  background-color: var(--dark-bg);
+  border: var(--border);
+  color: var(--text-clr);
+}
+
+#group-desc {
+  background-color: var(--dark-bg);
+  border: var(--border);
+  color: var(--text-clr);
+}
+
+#create-community-btn {
+  color: var(--blue-color);
+  border: var(--blue-border);
+}
