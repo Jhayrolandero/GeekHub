@@ -155,6 +155,22 @@ class PostController
             return 1;
         }
     }
+
+    public static function get_random_suggestion($result)
+    {
+        // Algo for rendering Recommended div
+        $min = 0;
+        $max = count($result);
+
+        // Between percent of post you want the recommend to appear
+        $percentile = 75;
+
+        $randomNumber = mt_rand($min * $percentile, $max * $percentile) / 100;
+        // $recommendDivNumber = (int) $randomNumber;
+        $recommendDivNumber = (int) $randomNumber;
+
+        return $recommendDivNumber;
+    }
 }
 
 
@@ -271,16 +287,14 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $result = $post->get_post($profileID);
         }
 
-        // Algo for rendering Recommended div
-        $min = 0;
-        $max = count($result);
+        // FOR SUGGESTION DIV
+        if (empty($_SESSION["recommendDivNum"])) {
+            $_SESSION["recommendDivNum"] = $post::get_random_suggestion($result);
+            $recommendDivNumber = $_SESSION["recommendDivNum"];
+        } else {
+            $recommendDivNumber = $_SESSION["recommendDivNum"];
+        }
 
-        // Between percent of post you want the recommend to appear
-        $percentile = 75;
-
-        $randomNumber = mt_rand($min * $percentile, $max * $percentile) / 100;
-        // $recommendDivNumber = (int) $randomNumber;
-        $recommendDivNumber = (int) $randomNumber;
 
         $count = 0;
 

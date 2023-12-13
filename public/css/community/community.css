@@ -231,14 +231,6 @@ body {
   font-weight: 500;
 }
 
-#community-container .right-bar {
-  padding-bottom: 3em;
-  position: sticky;
-  top: 4rem; /* Adjust this value based on your design */
-  height: 100vh; /* Adjust this value based on your design */
-  overflow-y: scroll; /* Allow the content to scroll if it exceeds the height */
-}
-
 #community-container .right-bar::-webkit-scrollbar {
   width: 5px; /* Set the width of the scrollbar */
 }
@@ -304,4 +296,13 @@ body {
 
 .options {
   display: flex;
+}
+
+.delete {
+  transition: all ease 0.3s;
+}
+
+.delete:hover {
+  background-color: var(--red-bg);
+  color: var(--red-txt);
 }

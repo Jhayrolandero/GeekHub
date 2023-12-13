@@ -5,7 +5,7 @@ class Friend extends Database
 {
 
     // Get the user
-    public function get_Users($userID, $limit = null)
+    public function get_Users($userID, $limit = null, $random = false)
     {
         try {
             $sql = "SELECT users.*
@@ -19,6 +19,10 @@ class Friend extends Database
                         LEFT JOIN users ON friendships.user_id = users.user_id 
                         WHERE ( friendships.friend_id = :user_id ) AND ( friendships.status = 'accepted' OR friendships.status = 'pending' ) ) 
                         AND users.user_id != :user_id";
+
+            if ($random) {
+                $sql .= " ORDER BY RAND()";
+            }
 
             if ($limit != null) {
                 $sql .= " LIMIT :limit";

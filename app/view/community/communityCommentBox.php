@@ -61,21 +61,3 @@ function template_commentBox($username, $time, $content, $userID, $commentID, $p
 <?php
 }
 ?>
-
-<style>
-    :root {
-        --dark-bg: #090909;
-        --red-bg: rgba(255, 0, 0, 0.2);
-        --red-txt: rgb(255, 0, 0);
-    }
-
-    .delete {
-        transition: all ease 0.3s;
-
-    }
-
-    .delete:hover {
-        background-color: var(--red-bg);
-        color: var(--red-txt);
-    }
-</style>
